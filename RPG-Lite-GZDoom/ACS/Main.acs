@@ -4,7 +4,6 @@
 
 #define atkbase 0.02
 #define Defbase 0.0045
-Int MaxLevel;
 int Playerloaded;
 str StatArray[5] =
 {
@@ -70,20 +69,21 @@ Script "Levelupcheck" (int EXPA)
   
  int EXP = CheckInventory("Expereince"),
  Lvl = CheckInventory("Playerlevel"),
- EXPMULT = GetCvar("MRPG_EXPMULT"),
  EXPBase = GetCvar("MRPG_EXPBase"),
- Statincrease = GetCvar("MRPG_statsperlevel");
- MaxLevel = GetCvar("MRPG_EXPBase");
+ EXPMULT = GetCvar("MRPG_EXPMULT"),
+ Statincrease = GetCvar("MRPG_statsperlevel"),
+ Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16),
+ MaxLevel = GetCvar("MRPG_LevelCap");
 
 GiveInventory("Expereince", EXPA);
-SetAmmoCapacity("Expereince", (EXPBASE * (EXPMULT * lvl) >> 16) +1);
+SetAmmoCapacity("Expereince", Nextlevel);
  
-   if(CheckInventory("Expereince") >= (EXPBASE * (EXPMULT * lvl) >> 16) && LVL <= Maxlevel)
+   if(CheckInventory("Expereince") >= Nextlevel && LVL <= Maxlevel)
    {
       GiveInventory("Playerlevel", 1);
-      TakeInventory("Expereince",EXPBASE * (EXPMULT * lvl));
+      TakeInventory("Expereince",Nextlevel);
       ACS_NamedExecuteAlways("UpdateStats",0);
-      SetAmmoCapacity("Expereince", (EXPBASE * (EXPMULT * lvl) >> 16) +1);
+      SetAmmoCapacity("Expereince", Nextlevel);
 	  GiveInventory("StatPoints",Statincrease);
    }
 }

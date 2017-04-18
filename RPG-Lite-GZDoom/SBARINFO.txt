@@ -41,9 +41,9 @@ statusbar fullscreen, forcescaled, fullscreenoffsets
 	DrawSelectedInventory SMALLFONT, 128, -36;  
 
     //Essence
-    DrawNumber 5, SMALLFONT, GREEN,"Expereince", 81, -52;
+    DrawNumber 6, SMALLFONT, GREEN,"Expereince", 78, -52;
 	DrawBar "HUDXP", "HUDXPB", ammo("Expereince"),Horizontal,4, -56;
-	DrawNumber 2, SMALLFONT, White,"PlayerLevel", 34, -52;
+	DrawNumber 3, SMALLFONT, White,"PlayerLevel", 26, -52;
 	
 	//Stats
 	DrawNumber 3, SMALLFONT, Red, "StatVit",alignment(left),18,-111;
