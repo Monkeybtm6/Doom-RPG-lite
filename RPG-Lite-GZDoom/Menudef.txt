@@ -1,0 +1,37 @@
+OptionMenu "OptionsMenu"
+{
+	Title "OPTIONS"
+	Submenu "RPG Options",     "MRPGOpt"
+	StaticText " " // [TP]
+	Submenu "Customize Controls",		"CustomizeControls"
+	Submenu "Mouse options",			"MouseOptions"
+	Submenu "Joystick options",			"JoystickOptions"
+	StaticText " "
+	Submenu "Player Setup",				"PlayerMenu"
+	Submenu "Gameplay Options",			"GameplayOptions"
+	Submenu "Compatibility Options",	"CompatibilityOptions"
+	Submenu "Automap Options",			"AutomapOptions"
+	Submenu "HUD Options",				"HUDOptions"
+	Submenu "Miscellaneous Options",	"MiscOptions"
+	Submenu "Sound Options",			"SoundOptions"
+	Submenu "Display Options",			"VideoOptions"
+	Submenu "Set video mode",			"VideoModeMenu"
+	StaticText " "
+	SafeCommand "Reset to defaults",	"reset2defaults"
+	SafeCommand	"Reset to last saved",	"reset2saved"
+	Command "Go to console",			"menuconsole"
+}
+
+OptionMenu "MRPGOpt"
+{
+	Title "RPG Options"
+	StaticText " "
+	StaticText "Player Growth Settings."
+	Slider "Base Experience Rate", "MRPG_EXPBase", 000, 200, 5.0, 0
+	Slider "Experience Multiplier", "MRPG_EXPMult", 1.0, 5.0, 0.1, 1
+	Slider "Stat points per level", "MRPG_StatsPerLevel", 1, 20, 1.0, 0
+	StaticText " "
+	StaticText "Character Saving"
+	StaticText " "
+	Option "Character autosave", "MRPG_Saveenabled", "OnOff"
+}

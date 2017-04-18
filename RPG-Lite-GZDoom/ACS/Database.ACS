@@ -1,0 +1,47 @@
+#library "Database"
+#include "zcommon.acs"
+#define PLAYER_TID_START 1000
+
+script "savescript" Unloading
+{
+	if (getcvar("MRPG_SaveEnabled") == False)
+	{Terminate;}
+	
+	for(int i = 0; i < PlayerCount(); i++)
+	{
+		SetUserCVar(i,"MRPG_StatLevel",CheckActorInventory(PLAYER_TID_START + i,"Playerlevel"));
+		SetUserCVar(i,"MRPG_StatPoints",CheckActorInventory(PLAYER_TID_START + i,"Statpoints"));
+		SetUserCVar(i,"MRPG_StatEXP",CheckActorInventory(PLAYER_TID_START + i,"Expereince"));
+		SetUserCVar(i,"MRPG_StatVIT",CheckActorInventory(PLAYER_TID_START + i,"StatVIT"));
+		SetUserCVar(i,"MRPG_StatATK",CheckActorInventory(PLAYER_TID_START + i,"StatATK"));
+		SetUserCVar(i,"MRPG_StatINT",CheckActorInventory(PLAYER_TID_START + i,"StatINT"));
+		SetUserCVar(i,"MRPG_StatSTR",CheckActorInventory(PLAYER_TID_START + i,"StatSTR"));
+		SetUserCVar(i,"MRPG_StatDEF",CheckActorInventory(PLAYER_TID_START + i,"StatDEF"));
+	}
+}
+
+script "Loadscript" Enter
+{
+	if (getcvar("MRPG_SaveEnabled") == False)
+	{Terminate;}
+	delay(1);
+	
+	TakeInventory("Playerlevel",GetUserCVar(PlayerNumber(),"MRPG_StatLevel"));
+	TakeInventory("StatPoints",GetUserCVar(PlayerNumber(),"MRPG_StatPoints"));
+	TakeInventory("Expereince",GetUserCVar(PlayerNumber(),"MRPG_StatEXP"));
+	TakeInventory("StatVIT",GetUserCVar(PlayerNumber(),"MRPG_StatVIT"));
+	TakeInventory("StatATK",GetUserCVar(PlayerNumber(),"MRPG_StatATK"));
+	TakeInventory("StatINT",GetUserCVar(PlayerNumber(),"MRPG_StatINT"));
+	TakeInventory("StatSTR",GetUserCVar(PlayerNumber(),"MRPG_StatSTR"));
+	TakeInventory("StatDEF",GetUserCVar(PlayerNumber(),"MRPG_StatDEF"));
+	
+	GiveInventory("Playerlevel",GetUserCVar(PlayerNumber(),"MRPG_StatLevel"));
+	GiveInventory("StatPoints",GetUserCVar(PlayerNumber(),"MRPG_StatPoints"));
+	GiveInventory("Expereince",GetUserCVar(PlayerNumber(),"MRPG_StatEXP"));
+	GiveInventory("StatVIT",GetUserCVar(PlayerNumber(),"MRPG_StatVIT"));
+	GiveInventory("StatATK",GetUserCVar(PlayerNumber(),"MRPG_StatATK"));
+	GiveInventory("StatINT",GetUserCVar(PlayerNumber(),"MRPG_StatINT"));
+	GiveInventory("StatSTR",GetUserCVar(PlayerNumber(),"MRPG_StatSTR"));
+	GiveInventory("StatDEF",GetUserCVar(PlayerNumber(),"MRPG_StatDEF"));
+	
+}

@@ -1,0 +1,15 @@
+Server Int MRPG_EXPBase = 100;
+Server Float MRPG_EXPMult = 1.0;
+Server Int MRPG_StatsPerLevel = 10;
+
+Server bool MRPG_SaveEnabled = true;
+
+User int MRPG_StatLevel = 1;
+User int MRPG_StatEXP = 0;
+User int MRPG_StatPoints = 0;
+
+User int MRPG_Statvit = 0;
+User int MRPG_Statatk = 0;
+User int MRPG_Statint = 0;
+User int MRPG_Statstr = 0;
+User int MRPG_Statdef = 0;
