@@ -1,4 +1,0 @@
-gameinfo
-{
-    ForceKillScripts = True
-}

@@ -4,8 +4,7 @@
 
 #define atkbase 0.02
 #define Defbase 0.0045
-#define MaxLevel 99
-int LevelNext[MaxLevel];
+Int MaxLevel;
 int Playerloaded;
 str StatArray[5] =
 {
@@ -74,6 +73,7 @@ Script "Levelupcheck" (int EXPA)
  EXPMULT = GetCvar("MRPG_EXPMULT"),
  EXPBase = GetCvar("MRPG_EXPBase"),
  Statincrease = GetCvar("MRPG_statsperlevel");
+ MaxLevel = GetCvar("MRPG_EXPBase");
 
 GiveInventory("Expereince", EXPA);
 SetAmmoCapacity("Expereince", (EXPBASE * (EXPMULT * lvl) >> 16) +1);
