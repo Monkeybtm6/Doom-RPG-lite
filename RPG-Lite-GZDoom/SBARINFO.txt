@@ -5,29 +5,20 @@ InterpolateHealth true;
 
 statusbar fullscreen, forcescaled, fullscreenoffsets
 {
-    //Hud Boxes
-	//drawimage "HUDBOX2", -69, -33;
-	//drawimage "HUDLONG3", 2, -67;
+	drawimage "HUDLONG3", 2, -67;
 	
 	//health
-    //drawimage "HUDH", 2, -49;
     DrawBar "HUDBHPSM", "HUDBSM",health,horizontal,4,-38;
 	drawnumber 4, SMALLFONT, White, health, drawshadow,alignment(left) , 6, -34;
 
     //Mana
-    //drawimage "HUDM", 2, -33;
     DrawBar "HUDBMPSM", "HUDBSM",ammo("Mana"),horizontal,4,-26;
 	drawnumber 3, SMALLFONT, White,ammo("Mana"), drawshadow,alignment(left) , 6, -22;
 	
 	//armor
-    //drawimage "HUDA", 2, -17;
     DrawBar "HUDBAPSM", "HUDBSM",armor,horizontal,4,-14;
 	drawnumber 3, SMALLFONT, White, armor, drawshadow,alignment(left) , 6, -10;
 
-
-    //ammo
-    //drawimage ammoicon1, -12, -8, centerbottom;
-    //drawnumber 1, SMALLFONT, untranslated, "Selected spell", drawshadow, -8, -69;
 
     usesSecondaryammo not
 	{
@@ -47,85 +38,7 @@ statusbar fullscreen, forcescaled, fullscreenoffsets
     }
 
     //inventory
-    //drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, BIGFONT, 127, -16, 156, -25, untranslated;
 	DrawSelectedInventory SMALLFONT, 128, -36;  
-
-    //Essence
-    DrawNumber 5, SMALLFONT, GREEN,"Expereince", 75, -52;
-	DrawBar "HUDXP", "HUDXPB", ammo("Expereince"),Horizontal,4, -56;
-	DrawNumber 2, SMALLFONT, White,"PlayerLevel", 26, -52;
-	
-	//Stats
-	DrawNumber 3, SMALLFONT, Red, "StatVit",alignment(left),18,-111;
-	drawimage "HUDVit", 4, -114;
-	DrawNumber 3, SMALLFONT, White, "StatATK",alignment(left),18,-100;
-	drawimage "HUDatk", 4, -103;
-	DrawNumber 3, SMALLFONT, Blue, "StatINT",alignment(left),18,-89;
-	drawimage "HUDInt", 4, -92;
-	DrawNumber 3, SMALLFONT, DarkRed, "StatSTR",alignment(left),18,-78;
-	drawimage "HUDSTR", 4, -81;
-	DrawNumber 3, SMALLFONT, Green, "StatDEF",alignment(left),18,-67;
-    drawimage "HUDDEF", 4, -70;
-	
-	drawkeybar 6, horizontal, auto, 84, -55, 0, 3, auto;
-	
-    gamemode deathmatch
-    {
-        drawnumber 2, CONFONT, untranslated, frags, drawshadow, -3, 1;
-    }
-}
-
-height 48;
-Resolution 640,400;
-
-statusbar normal, forcescaled, fullscreenoffsets
-{
-    //Hud Boxes
-	//drawimage "HUDBOX", 2, -33;
-	//drawimage "HUDBOX2", 101, -33;
-	drawimage "StatBar", 0, -58;
-	drawimage "HUDLONG3", 4, -56;
-	
-	//health
-    //drawimage "HUDH", 2, -49;
-    DrawBar "HUDBHPSM", "HUDBSM",health,horizontal,4,-38;
-	drawnumber 4, SMALLFONT, White, health, drawshadow,alignment(left) , 6, -34;
-
-    //Mana
-    //drawimage "HUDM", 2, -33;
-    DrawBar "HUDBMPSM", "HUDBSM",ammo("Mana"),horizontal,4,-26;
-	drawnumber 3, SMALLFONT, White,ammo("Mana"), drawshadow,alignment(left) , 6, -22;
-	
-	//armor
-    //drawimage "HUDA", 2, -17;
-    DrawBar "HUDBAPSM", "HUDBSM",armor,horizontal,4,-14;
-	drawnumber 3, SMALLFONT, White, armor, drawshadow,alignment(left) , 6, -10;
-
-
-    //ammo
-    //drawimage ammoicon1, -12, -8, centerbottom;
-    //drawnumber 1, SMALLFONT, untranslated, "Selected spell", drawshadow, -8, -69;
-
-    usesSecondaryammo not
-	{
-		DrawString SMALLFONT, White, Weapontag, -16, -32;
-		DrawBar "HUDAMSM", "HUDBSM", ammo1,horizontal,reverse,-134,-14;
-		drawnumber 4, SMALLFONT, White, ammo1, drawshadow, alignment(right), -8, -10;
-	}
-	//secondary ammo
-    usessecondaryammo
-    {
-        DrawString SMALLFONT, White, Weapontag, -16, -44;
-        DrawBar "HUDAMSM", "HUDBSM", ammo2,horizontal,reverse,-134,-14;
-		drawnumber 4, SMALLFONT, White, ammo2, drawshadow, -8, -10;
-		DrawBar "HUDAMSM", "HUDBSM", ammo1,horizontal,reverse,-146,-22;
-		drawnumber 4, SMALLFONT, White, ammo1, drawshadow, alignment(right), -20, -20;
-
-    }
-
-    //inventory
-    //drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, BIGFONT, 127, -16, 156, -25, untranslated;
-	DrawSelectedInventory SMALLFONT, 128, -36; 
 
     //Essence
     DrawNumber 5, SMALLFONT, GREEN,"Expereince", 75, -52;
