@@ -18,8 +18,8 @@ str StatArray[5] =
 
 Function int ThisLevel (void)
 {
- int SkillMult = 5 * GameSkill(),
- leveladd = playercount() * 5,
+ int SkillMult = 1 * GameSkill(),
+ leveladd = playercount() * 1,
  levelSet = 0,
  i = 0,
  levelav = 1;

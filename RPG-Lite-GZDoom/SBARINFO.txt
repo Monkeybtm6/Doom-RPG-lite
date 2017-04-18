@@ -1,4 +1,3 @@
-Base Doom;
 
 height 0;
 Resolution 640,400;

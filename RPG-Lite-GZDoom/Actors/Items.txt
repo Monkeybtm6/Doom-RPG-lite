@@ -36,7 +36,7 @@ ACTOR BlurUpgrade : CustomInventory
   }
 }
 
-ACTOR BackpackReplacer : CustomInventory Replaces Backpack
+/*ACTOR BackpackReplacer : CustomInventory Replaces Backpack
 {
   +COUNTITEM
   +INVENTORY.AUTOACTIVATE
@@ -57,7 +57,7 @@ ACTOR BackpackReplacer : CustomInventory Replaces Backpack
 	stop
   
   }
-}
+}*/
 
 ACTOR RPGHealthBonus : HealthBonus replaces HealthBonus
 {
