@@ -2,7 +2,7 @@
 #include "zcommon.acs"
 #define PLAYER_TID_START 1000
 
-#define atkbase 0.02
+#define atkbase 0.01
 #define Defbase 0.0045
 int Playerloaded;
 str StatArray[5] =
@@ -214,8 +214,7 @@ script "MonsterLoop" (Void)
 	delay(5);
 	int MonLevel = ThisLevel(),
 	MonHealth = (getactorproperty(0, APROP_Health)),
-	MonHealthmult = 0.04 * MonLevel,
-	DamageBoost = 0.04 * MonLevel,
+	DamageBoost = 0.01 * MonLevel,
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 10;
 	
 	SetActorProperty(0, APROP_SpawnHealth, (MonHealth * (1.0 + MonHealthmult))>> 16 );
