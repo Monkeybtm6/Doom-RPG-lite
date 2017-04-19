@@ -214,6 +214,7 @@ script "MonsterLoop" (Void)
 	delay(5);
 	int MonLevel = ThisLevel(),
 	MonHealth = (getactorproperty(0, APROP_Health)),
+	MonHealthmult = 0.02 * MonLevel,
 	DamageBoost = 0.01 * MonLevel,
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 10;
 	
