@@ -200,9 +200,12 @@ script "MonsterLoop" (Void)
 	DamageBoost = 0.01 * MonLevel,
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 10;
 	
-	SetActorProperty(0, APROP_SpawnHealth, (MonHealth * (1.0 + MonHealthmult))>> 16 );
-	SetActorProperty(0, APROP_Health, (MonHealth * (1.0 + MonHealthmult))>> 16 );
-	SetActorProperty(0, APROP_DamageMultiplier, 1.0 + DamageBoost);
+	if(getcvar("MRPG_Monsterscaling") == true)
+	{
+		SetActorProperty(0, APROP_SpawnHealth, (MonHealth * (1.0 + MonHealthmult))>> 16 );
+		SetActorProperty(0, APROP_Health, (MonHealth * (1.0 + MonHealthmult))>> 16 );
+		SetActorProperty(0, APROP_DamageMultiplier, 1.0 + DamageBoost);
+	}
 	
 	//Living loop
 	While (getactorproperty(0, APROP_Health) > 0)

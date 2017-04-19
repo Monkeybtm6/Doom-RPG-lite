@@ -2,7 +2,7 @@ Actor StatVit : Inventory
 {          
   Inventory.PickupMessage "Vitality Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 1000
+  Inventory.MaxAmount 500
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -17,7 +17,7 @@ Actor StatATK : Inventory
 {          
   Inventory.PickupMessage "Attack Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 1000
+  Inventory.MaxAmount 500
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -32,7 +32,7 @@ Actor StatINT : Inventory
 {          
   Inventory.PickupMessage "Defense Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 1000
+  Inventory.MaxAmount 500
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
