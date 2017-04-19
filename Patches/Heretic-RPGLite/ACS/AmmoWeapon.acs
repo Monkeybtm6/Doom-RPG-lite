@@ -1,6 +1,6 @@
-#library "MainHeretic"
-#import "Main.acs"
+#library "Ammoweaponlib"
 #include "zcommon.acs"
+#define PLAYER_TID_START 1000
 
 Script "SetAmmoCap" (void)
 {
