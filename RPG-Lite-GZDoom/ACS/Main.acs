@@ -16,136 +16,140 @@ str StatArray[5] =
 
 Function int ThisLevel (void)
 {
- int SkillMult = 1 * GameSkill(),
- leveladd = playercount() * 1,
- levelSet = 0,
- i = 0,
- levelav = 1;
+	int SkillMult = 1 * GameSkill(),
+	leveladd = playercount() * 1,
+	levelSet = 0,
+	i = 0,
+	levelav = 1;
 	
-  for (i = 0; i < playercount(); i++) 
+	for (i = 0; i < playercount(); i++) 
 	{
-	levelav +=  CheckActorInventory(PLAYER_TID_START + i,"Playerlevel");
+		levelav +=  CheckActorInventory(PLAYER_TID_START + i,"Playerlevel");
 	}
-  LevelSet = (levelav / playercount());
+	LevelSet = (levelav / playercount());
  
- if( Levelset <= 0)
- {Levelset = 1;}
+	if( Levelset <= 0)
+	{
+		Levelset = 1;
+	}
  
- Return (Leveladd + LevelSet) + SkillMult;
+	Return (Leveladd + LevelSet) + SkillMult;
 }
 
 script 90 ENTER
 {
-  Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
-  delay(2);
-  ACS_NamedExecuteAlways("UpdateStats",0);
-   if(CheckInventory("Playerlevel") <= 0)
-  {
-    GiveInventory("Playerlevel",1);
-  }
-  ACS_NamedExecuteAlways("Manaregen",0);
-  Int EXPMULT = GetCvar("MRPG_EXPMULT"),
-  Lvl = CheckInventory("Playerlevel"),
-  EXPBase = GetCvar("MRPG_EXPBase");
-  SetAmmoCapacity("Expereince", EXPBASE * (EXPMULT * lvl) >> 16);
+	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
+	delay(2);
+	ACS_NamedExecuteAlways("UpdateStats",0);
+	if(CheckInventory("Playerlevel") <= 0)
+	{
+		GiveInventory("Playerlevel",1);
+	}
+	ACS_NamedExecuteAlways("Manaregen",0);
+	Int EXPMULT = GetCvar("MRPG_EXPMULT"),
+	Lvl = CheckInventory("Playerlevel"),
+	EXPBase = GetCvar("MRPG_EXPBase");
+	SetAmmoCapacity("Expereince", EXPBASE * (EXPMULT * lvl) >> 16);
+	delay(1);
+	SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
 }
 
 script 91 RESPAWN
 {
-  Thing_ChangeTID(PLAYER_TID_START+PlayerNumber(),0);
-  Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
-  delay(1);
-  ACS_NamedExecuteAlways("UpdateStats",0);
+	Thing_ChangeTID(PLAYER_TID_START+PlayerNumber(),0);
+	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
+	delay(1);
+	ACS_NamedExecuteAlways("UpdateStats",0);
 }
 
 
 Script "Levelupcheck" (int EXPA)
 {
-  SetActivatorToTarget(0);
-  if(ClassifyActor(0) & ACTOR_MONSTER)
-  { 
-  Terminate; 
-  }
+	SetActivatorToTarget(0);
+	if(ClassifyActor(0) & ACTOR_MONSTER)
+	{ 
+		Terminate; 
+	}
   
- int EXP = CheckInventory("Expereince"),
- Lvl = CheckInventory("Playerlevel"),
- EXPBase = GetCvar("MRPG_EXPBase"),
- EXPMULT = GetCvar("MRPG_EXPMULT"),
- Statincrease = GetCvar("MRPG_statsperlevel"),
- Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16),
- MaxLevel = GetCvar("MRPG_LevelCap");
+	int EXP = CheckInventory("Expereince"),
+	Lvl = CheckInventory("Playerlevel"),
+	EXPBase = GetCvar("MRPG_EXPBase"),
+	EXPMULT = GetCvar("MRPG_EXPMULT"),
+	Statincrease = GetCvar("MRPG_statsperlevel"),
+	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16),
+	MaxLevel = GetCvar("MRPG_LevelCap");
 
-GiveInventory("Expereince", EXPA);
-SetAmmoCapacity("Expereince", Nextlevel);
+	GiveInventory("Expereince", EXPA);
+	SetAmmoCapacity("Expereince", Nextlevel);
  
-   if(CheckInventory("Expereince") >= Nextlevel && LVL <= Maxlevel)
-   {
-      GiveInventory("Playerlevel", 1);
-      TakeInventory("Expereince",Nextlevel);
-      ACS_NamedExecuteAlways("UpdateStats",0);
-      SetAmmoCapacity("Expereince", Nextlevel);
-	  GiveInventory("StatPoints",Statincrease);
-   }
+	if(CheckInventory("Expereince") >= Nextlevel && LVL <= Maxlevel)
+	{
+		GiveInventory("Playerlevel", 1);
+		TakeInventory("Expereince",Nextlevel);
+		ACS_NamedExecuteAlways("UpdateStats",0);
+		SetAmmoCapacity("Expereince", Nextlevel);
+		GiveInventory("StatPoints",Statincrease);
+	}
 }
 
 Script "UpdateStats" (void)
 {
-  if(!(ClassifyActor(0) & ACTOR_PLAYER))
-  { 
-  Terminate; 
-  }
+	if(!(ClassifyActor(0) & ACTOR_PLAYER))
+	{ 
+		Terminate; 
+	}
   
-  int StartHealth = 100,
-  Player_Max_Health_in = CheckInventory("StatVIT") * 2,
-  Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
-  MyInt = CheckInventory("StatINT"),
-  Damagereduction = defbase * CheckInventory("StatDEF"),
-  DamageBoost = atkbase * CheckInventory("StatATK");
+	int StartHealth = 100,
+	Player_Max_Health_in = CheckInventory("StatVIT") * 2,
+	Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
+	MyInt = CheckInventory("StatINT"),
+	Damagereduction = defbase * CheckInventory("StatDEF"),
+	DamageBoost = atkbase * CheckInventory("StatATK");
   
-  SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_SPAWNHEALTH, Player_Max_Health_Out);
-  SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
-  SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageMultiplier, 1.0 + DamageBoost);
-  SetAmmoCapacity("Mana", 50 + MyInt); 
-  ACS_NamedExecuteAlways("SetAmmoCap",0);
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_SPAWNHEALTH, Player_Max_Health_Out);
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageMultiplier, 1.0 + DamageBoost);
+	SetAmmoCapacity("Mana", 50 + MyInt); 
+	ACS_NamedExecuteAlways("SetAmmoCap",0);
 }
 
 Script "ManaRegen" (void)
 {
-if (! (CheckInventory("SpellActive") == 1))
-{
-Giveinventory("Mana",1);
-}
-Delay(18);
-Restart;
+	if (! (CheckInventory("SpellActive") == 1))
+	{
+		Giveinventory("Mana",1);
+	}
+	Delay(18);
+	Restart;
 }
 
 script "LevelendGrowth" UNLOADING
 {
-int ExpKillbonus = getlevelinfo(LEVELINFO_KILLED_MONSTERS),
-ExpSecretBonus = getlevelinfo(LEVELINFO_FOUND_SECRETS);
+	int ExpKillbonus = getlevelinfo(LEVELINFO_KILLED_MONSTERS),
+	ExpSecretBonus = getlevelinfo(LEVELINFO_FOUND_SECRETS);
 
-for (int i = 0; i < playercount(); i++) 
-    {
-	 GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPKillBonus);
-	 GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPSecretBonus * 10);
+	for (int i = 0; i < playercount(); i++) 
+	{
+		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPKillBonus);
+		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPSecretBonus * 10);
 	}
 }
 
 Script "SpellActive" (int spelldur)
 {
 
-  if((checkinventory("mana") >= 1) && (checkinventory("SpellActive") == 1))
-  {
-   delay(spelldur);
-   TakeInventory("Mana",1);
-   restart;
-  }
-  TakeInventory("SpellActive",1);
-  TakeInventory ("PowerIronFeet",1);
-  TakeInventory ("PowerInvisibility",1);
-  TakeInventory ("PowerDoubleFiringSpeed",1);
-  TakeInventory ("PowerSpeed",1);
-  GiveInventory("RadsuitEffectend",1);
+	if((checkinventory("mana") >= 1) && (checkinventory("SpellActive") == 1))
+	{
+		delay(spelldur);
+		TakeInventory("Mana",1);
+		restart;
+	}
+	TakeInventory("SpellActive",1);
+	TakeInventory ("PowerIronFeet",1);
+	TakeInventory ("PowerInvisibility",1);
+	TakeInventory ("PowerDoubleFiringSpeed",1);
+	TakeInventory ("PowerSpeed",1);
+	GiveInventory("RadsuitEffectend",1);
 }
 
 script "DAMAGESCR" (int indamage, int Isproj)
@@ -198,7 +202,7 @@ script "MonsterLoop" (Void)
 	MonHealth = (getactorproperty(0, APROP_Health)),
 	MonHealthmult = 0.02 * MonLevel,
 	DamageBoost = 0.01 * MonLevel,
-	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 10;
+	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
 	
 	if(getcvar("MRPG_Monsterscaling") == true)
 	{
