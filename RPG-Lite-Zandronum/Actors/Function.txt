@@ -1,0 +1,29 @@
+Actor MenuOpen : Inventory
+{          
+  Inventory.PickupMessage "Defense Increased"
+  Inventory.Amount 1
+  Inventory.MaxAmount 1
+  +INVENTORY.ALWAYSPICKUP
+  +NOGRAVITY
+  States
+  {
+  Spawn:
+    ESES A -1 
+    loop
+  }
+}
+
+Actor MenuSelection : Inventory
+{          
+  Inventory.PickupMessage "Defense Increased"
+  Inventory.Amount 1
+  Inventory.MaxAmount 5
+  +INVENTORY.ALWAYSPICKUP
+  +NOGRAVITY
+  States
+  {
+  Spawn:
+    ESES A -1 
+    loop
+  }
+}

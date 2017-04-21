@@ -1,0 +1,21 @@
+#library "Ammoweaponlib"
+#include "zcommon.acs"
+#define PLAYER_TID_START 1000
+
+Script "SetAmmoCap" (void)
+{
+  if( CheckInventory("Backpack") == 1)
+  {
+    SetAmmoCapacity("Clip", (4 * CheckInventory("StatSTR")) + 400);
+    SetAmmoCapacity("Shell", (1 * CheckInventory("StatSTR")) + 100);
+    SetAmmoCapacity("RocketAmmo", (1 * CheckInventory("StatSTR")) + 100);
+    SetAmmoCapacity("Cell", (6 * CheckInventory("StatSTR")) + 600);
+  }
+    else
+  {
+    SetAmmoCapacity("Clip", (2 * CheckInventory("StatSTR")) + 200);
+    SetAmmoCapacity("Shell", (0.5 * CheckInventory("StatSTR") >> 16) + 50);
+    SetAmmoCapacity("RocketAmmo", (0.5 * CheckInventory("StatSTR") >> 16) + 50);
+    SetAmmoCapacity("Cell", (3 * CheckInventory("StatSTR")) + 300);
+  }
+}

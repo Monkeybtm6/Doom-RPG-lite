@@ -1,0 +1,163 @@
+//Doom
+
+ACTOR RPGZombieMan: Zombieman Replaces Zombieman
+{
+  states
+  {
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+		Goto Super::Spawn
+  }
+}
+
+ACTOR RPGShotgunGuy : ShotgunGuy Replaces ShotgunGuy
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGImp : DoomImp replaces DoomImp
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGDemon : Demon Replaces Demon
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGCacodemon : Cacodemon replaces Cacodemon
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGLostSoul : LostSoul replaces LostSoul
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGBaronOfHell : BaronOfHell replaces BaronOfHell
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGCyberdemon : Cyberdemon replaces Cyberdemon
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGSpiderMastermind : SpiderMastermind replaces SpiderMastermind
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+//Doom 2
+
+ACTOR RPGChaingunGuy : ChaingunGuy Replaces ChaingunGuy
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGHellKnight : HellKnight Replaces HellKnight
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+	}
+}
+
+ACTOR RPGArachnotron : Arachnotron Replaces Arachnotron
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGRevenant : Revenant Replaces Revenant 
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGFatso : Fatso Replaces Fatso
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGPainElemental : PainElemental Replaces PainElemental
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
+
+ACTOR RPGArchvile : Archvile Replaces Archvile
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterLoop")
+	Goto Super::Spawn
+  }
+}
