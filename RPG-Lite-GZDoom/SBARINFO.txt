@@ -47,13 +47,13 @@ statusbar fullscreen, forcescaled, fullscreenoffsets
 	
 	//Stats
 	DrawNumber 3, SMALLFONT, Red, "StatVit",alignment(left),18,-111;
-	drawimage "HUDVit", 4, -114;
+	drawimage "HUDVit", 4, -103;
 	DrawNumber 3, SMALLFONT, White, "StatATK",alignment(left),18,-100;
-	drawimage "HUDatk", 4, -103;
+	drawimage "HUDatk", 4, -92;
 	DrawNumber 3, SMALLFONT, Blue, "StatINT",alignment(left),18,-89;
-	drawimage "HUDInt", 4, -92;
-	DrawNumber 3, SMALLFONT, DarkRed, "StatSTR",alignment(left),18,-78;
-	drawimage "HUDSTR", 4, -81;
+	drawimage "HUDInt", 4, -81;
+	//DrawNumber 3, SMALLFONT, DarkRed, "StatSTR",alignment(left),18,-78;
+	//drawimage "HUDSTR", 4, -81;
 	DrawNumber 3, SMALLFONT, Green, "StatDEF",alignment(left),18,-67;
     drawimage "HUDDEF", 4, -70;
 	
