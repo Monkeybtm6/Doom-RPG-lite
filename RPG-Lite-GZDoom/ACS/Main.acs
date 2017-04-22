@@ -103,12 +103,14 @@ Script "UpdateStats" (void)
 	Player_Max_Health_in = CheckInventory("StatVIT") * 2,
 	Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
 	MyInt = CheckInventory("StatINT"),
+	MyMass = CheckInventory("StatDEF"),
 	Damagereduction = defbase * CheckInventory("StatDEF"),
 	DamageBoost = atkbase * CheckInventory("StatATK");
   
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_SPAWNHEALTH, Player_Max_Health_Out);
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageMultiplier, 1.0 + DamageBoost);
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_Mass, 100 + MyMass);
 	SetAmmoCapacity("Mana", 50 + MyInt); 
 	ACS_NamedExecuteAlways("SetAmmoCap",0);
 }
@@ -202,6 +204,7 @@ script "MonsterLoop" (Void)
 	MonHealth = (getactorproperty(0, APROP_Health)),
 	MonHealthmult = 0.02 * MonLevel,
 	DamageBoost = 0.01 * MonLevel,
+	MonMass = getactorproperty(0,APROP_MASS),
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
 	
 	if(getcvar("MRPG_Monsterscaling") == true)
@@ -209,6 +212,7 @@ script "MonsterLoop" (Void)
 		SetActorProperty(0, APROP_SpawnHealth, (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_Health, (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_DamageMultiplier, 1.0 + DamageBoost);
+		SetActorProperty(0, APROP_Mass, MonMass * (1.0 + (0.01 * Monlevel)) >> 16);
 	}
 	
 	//Living loop
