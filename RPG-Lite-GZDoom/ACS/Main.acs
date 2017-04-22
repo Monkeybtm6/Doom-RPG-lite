@@ -108,11 +108,16 @@ Script "UpdateStats" (void)
 	DamageBoost = atkbase * CheckInventory("StatATK");
   
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_SPAWNHEALTH, Player_Max_Health_Out);
-	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageMultiplier, 1.0 + DamageBoost);
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_Mass, 100 + MyMass);
+	
+	if(CheckInventory("StatDEF")<=200)
+	{
+		SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
+	}
+	
 	SetAmmoCapacity("Mana", 50 + MyInt); 
-	ACS_NamedExecuteAlways("SetAmmoCap",0);
+	//ACS_NamedExecuteAlways("SetAmmoCap",0);
 }
 
 Script "ManaRegen" (void)

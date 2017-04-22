@@ -30,7 +30,7 @@ Actor StatATK : Inventory
 
 Actor StatINT : Inventory
 {          
-  Inventory.PickupMessage "Defense Increased"
+  Inventory.PickupMessage "Inteligence Increased"
   Inventory.Amount 1
   Inventory.MaxAmount 500
   +INVENTORY.ALWAYSPICKUP
@@ -60,9 +60,9 @@ Actor StatSTR : Inventory
 
 Actor StatDEF : Inventory
 {          
-  Inventory.PickupMessage "Attack Increased"
+  Inventory.PickupMessage "Defense Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 200
+  Inventory.MaxAmount 500
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
