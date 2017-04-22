@@ -59,7 +59,7 @@ ACTOR BlurUpgrade : CustomInventory
   }
 }*/
 
-ACTOR RPGHealthBonus : HealthBonus replaces HealthBonus
+/*ACTOR RPGHealthBonus : HealthBonus replaces HealthBonus
 {
   +COUNTITEM
   +INVENTORY.ALWAYSPICKUP
@@ -72,9 +72,9 @@ ACTOR RPGHealthBonus : HealthBonus replaces HealthBonus
     BON1 ABCDCB 6
     Loop
   }
-}
+}*/
 
-ACTOR RPGSoulsphere : Soulsphere replaces Soulsphere
+/*ACTOR RPGSoulsphere : Soulsphere replaces Soulsphere
 {
   +COUNTITEM
   +INVENTORY.AUTOACTIVATE
@@ -90,9 +90,9 @@ ACTOR RPGSoulsphere : Soulsphere replaces Soulsphere
     SOUL ABCDCB 6 Bright
     Loop
   }
-}
+}*/
 
-Actor SpellSpawner : RandomSpawner Replaces BlurSphere
+Actor SpellSpawner : RandomSpawner 
 {
   DropItem "BlurUpgrade"
   DropItem "SPSpeed"

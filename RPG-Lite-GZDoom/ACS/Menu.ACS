@@ -40,7 +40,7 @@ script "inMenu" (void)
 	
 		else if (button & BT_back)
 		{
-			if(Selection<5)
+			if(Selection<4)
 			{
 				Selection++;
 				TakeInventory("MenuSelection",99);
@@ -77,15 +77,15 @@ script "inMenu" (void)
 					}
 				Break;
 			
-				case 3:
+				/*case 3:
 				if (CheckInventory("statPoints") >= 1)
 					{
 						TakeInventory("statPoints",1);
 						GiveInventory("StatSTR",1);
 					}
-				Break;
+				Break;*/
 			
-				case 4:
+				case 3:
 				if (CheckInventory("statPoints") >= 1)
 					{
 						TakeInventory("statPoints",1);
@@ -93,7 +93,7 @@ script "inMenu" (void)
 					}
 				Break;
 				
-				case 5:
+				case 4:
 				TakeInventory("MenuOpen",1);
 				TakeInventory("MenuSelection",99);
 				SetPlayerProperty(0, False, PROP_TOTALLYFROZEN);
@@ -151,7 +151,7 @@ script "inMenuTEXT" (void)
     	                   HUDMSG_PLAIN,14,CR_RED, 340.0, 230.0,0.2,1);
 		}
 	
-		if(CheckInventory("MenuSelection")==3)
+		/*if(CheckInventory("MenuSelection")==3)
 		{
 			HudMessage (s:"Increase Strength";
     	                   HUDMSG_PLAIN,15,CR_GOLD, 340.0, 240.0,0.2,1);
@@ -160,20 +160,20 @@ script "inMenuTEXT" (void)
 		{
 			HudMessage (s:"Increase Strength";
     	                   HUDMSG_PLAIN,15,CR_RED, 340.0, 240.0,0.2,1);
-		}
+		}*/
 	
-		if(CheckInventory("MenuSelection")==4)
+		if(CheckInventory("MenuSelection")==3)
 		{
 			HudMessage (s:"Increase Defense";
-    	                   HUDMSG_PLAIN,16,CR_GOLD, 340.0, 250.0,0.2,1);
+    	                   HUDMSG_PLAIN,16,CR_GOLD, 340.0, 240.0,0.2,1);
 		}
 		else
 		{
 			HudMessage (s:"Increase Defense";
-    	                   HUDMSG_PLAIN,16,CR_RED, 340.0, 250.0,0.2,1);
+    	                   HUDMSG_PLAIN,16,CR_RED, 340.0, 240.0,0.2,1);
 		}
 	
-		if(CheckInventory("MenuSelection")==5)
+		if(CheckInventory("MenuSelection")==4)
 		{
 			HudMessage (s:"Exit Menu";
     	                   HUDMSG_PLAIN,17,CR_GOLD, 350.0, 270.0,0.2,1);

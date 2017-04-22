@@ -228,5 +228,6 @@ script "MonsterLoop" (Void)
 	
 	//Death
 	ACS_NamedExecuteAlways("Levelupcheck",0,MonEXP);
+	DropItem(0,"SpellSpawner",1,45);
 
 }

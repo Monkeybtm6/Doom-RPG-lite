@@ -46,11 +46,11 @@ statusbar fullscreen, forcescaled, fullscreenoffsets
 	DrawNumber 3, SMALLFONT, White,"PlayerLevel", 26, -52;
 	
 	//Stats
-	DrawNumber 3, SMALLFONT, Red, "StatVit",alignment(left),18,-111;
+	DrawNumber 3, SMALLFONT, Red, "StatVit",alignment(left),18,-100;
 	drawimage "HUDVit", 4, -103;
-	DrawNumber 3, SMALLFONT, White, "StatATK",alignment(left),18,-100;
+	DrawNumber 3, SMALLFONT, White, "StatATK",alignment(left),18,-89;
 	drawimage "HUDatk", 4, -92;
-	DrawNumber 3, SMALLFONT, Blue, "StatINT",alignment(left),18,-89;
+	DrawNumber 3, SMALLFONT, Blue, "StatINT",alignment(left),18,-78;
 	drawimage "HUDInt", 4, -81;
 	//DrawNumber 3, SMALLFONT, DarkRed, "StatSTR",alignment(left),18,-78;
 	//drawimage "HUDSTR", 4, -81;
