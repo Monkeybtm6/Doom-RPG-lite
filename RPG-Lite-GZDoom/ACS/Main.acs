@@ -16,7 +16,7 @@ str StatArray[5] =
 
 Function int ThisLevel (void)
 {
-	int SkillMult = 1 * GameSkill(),
+	int SkillMult = 5 * GameSkill(),
 	leveladd = playercount() * 1,
 	levelSet = 0,
 	i = 0,
@@ -33,7 +33,7 @@ Function int ThisLevel (void)
 		Levelset = 1;
 	}
  
-	Return (Leveladd + LevelSet) + SkillMult;
+	Return (Leveladd + LevelSet) + Random(0,SkillMult);
 }
 
 script 90 ENTER
@@ -102,7 +102,7 @@ Script "UpdateStats" (void)
 	int StartHealth = 100,
 	Player_Max_Health_in = CheckInventory("StatVIT") * 2,
 	Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
-	MyInt = CheckInventory("StatINT"),
+	MyInt = (1.5 * CheckInventory("StatINT")) >> 16,
 	MyMass = CheckInventory("StatDEF"),
 	Damagereduction = defbase * CheckInventory("StatDEF"),
 	DamageBoost = atkbase * CheckInventory("StatATK");
@@ -124,9 +124,9 @@ Script "ManaRegen" (void)
 {
 	if (! (CheckInventory("SpellActive") == 1))
 	{
-		Giveinventory("Mana",1);
+		Giveinventory("Mana",(GetAmmoCapacity("mana") / 100)+1);
 	}
-	Delay(18);
+	Delay(35);
 	Restart;
 }
 
@@ -228,6 +228,12 @@ script "MonsterLoop" (Void)
 	
 	//Death
 	ACS_NamedExecuteAlways("Levelupcheck",0,MonEXP);
-	DropItem(0,"SpellSpawner",1,45);
+	DropItem(0,"SpellSpawner",1,25);
 
+}
+
+script "FriendlySummon" (int Duration)
+{
+	Delay(35*Duration);
+	DamageThing(0);
 }
