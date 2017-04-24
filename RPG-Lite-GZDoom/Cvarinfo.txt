@@ -1,6 +1,6 @@
 Server Int MRPG_EXPBase = 50;
 Server Float MRPG_EXPMult = 1.0;
-Server Int MRPG_StatsPerLevel = 4;
+Server Int MRPG_StatsPerLevel = 8;
 Server Int MRPG_LevelCap = 100;
 Server bool MRPG_MonsterScaling = False;
 

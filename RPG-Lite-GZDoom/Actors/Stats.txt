@@ -92,7 +92,7 @@ Actor PlayerLevel : Inventory
 {          
   Inventory.PickupMessage "Gained Level!!!"
   Inventory.Amount 1
-  Inventory.MaxAmount 999
+  Inventory.MaxAmount 200
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
