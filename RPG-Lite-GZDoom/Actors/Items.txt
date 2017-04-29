@@ -80,6 +80,7 @@ Actor SpellSpawner : RandomSpawner
   DropItem "SPAmmoSynth",256,2
   DropItem "SPSpeed",256,2
   DropItem "SPRage",256,2
+  DropItem "SPPush",256,2
   DropItem "SPLesserGuardian",256,2
   DropItem "SPGuardian",256,1
 }

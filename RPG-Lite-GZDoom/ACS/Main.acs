@@ -4,15 +4,6 @@
 
 #define atkbase 0.01
 #define Defbase 0.005
-int Playerloaded;
-str StatArray[5] =
-{
-"StatVIT",
-"StatATK",
-"StatINT",
-"StatSTR",
-"StatDEF"
-};
 
 Function int ThisLevel (void)
 {
@@ -141,23 +132,6 @@ script "LevelendGrowth" UNLOADING
 		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPKillBonus);
 		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPSecretBonus * 10);
 	}
-}
-
-Script "SpellActive" (int spelldur)
-{
-
-	if((checkinventory("mana") >= 1) && (checkinventory("SpellActive") == 1))
-	{
-		delay(spelldur);
-		TakeInventory("Mana",1);
-		restart;
-	}
-	TakeInventory("SpellActive",1);
-	TakeInventory ("PowerIronFeet",1);
-	TakeInventory ("PowerInvisibility",1);
-	TakeInventory ("PowerDoubleFiringSpeed",1);
-	TakeInventory ("PowerSpeed",1);
-	GiveInventory("RadsuitEffectend",1);
 }
 
 script "DAMAGESCR" (int indamage, int Isproj)
