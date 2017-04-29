@@ -8,10 +8,12 @@ Function Void inMenuTEXT (Int Selection)
 	
 		setfont("SMALLFONT");
 		sethudsize (640,400, 1);
-		Hudmessage(s:"Stat Menu. Forward and backward to change selection. use to select";HUDMSG_PLAIN,10,CR_Red, 340.0, 170.0,0.2,10);
+		Hudmessage(s:"Stat Menu.";HUDMSG_PLAIN,10,CR_White, 340.0, 170.0,0.2,10);
 	
-		Hudmessage(s:"Stat Points: ",d:CheckInventory("StatPoints");HUDMSG_PLAIN,11,CR_Red, 340.0, 300.0,0.2,10);
+		Hudmessage(s:"Stat Points: ",d:CheckInventory("StatPoints");HUDMSG_PLAIN,11,CR_White, 340.0, 300.0,0.2,10);
 	
+		Hudmessage(s:"Forward and backward to change selection. use to select";HUDMSG_PLAIN,20,CR_White, 340.0, 330.0,0.2,10);
+		
 		if(Selection==0)
 		{
 			HudMessage (s:"Increase Vitality";
@@ -20,7 +22,7 @@ Function Void inMenuTEXT (Int Selection)
 		else
 		{
 			HudMessage (s:"Increase Vitality";
-    	                   HUDMSG_PLAIN,12,CR_RED, 340.0, 210.0,0.2,10);
+    	                   HUDMSG_PLAIN,12,CR_White, 340.0, 210.0,0.2,10);
 		}
 	
 		if(Selection==1)
@@ -31,7 +33,7 @@ Function Void inMenuTEXT (Int Selection)
 		else
 		{
 			HudMessage (s:"Increase Attack";
-    	                   HUDMSG_PLAIN,13,CR_RED, 340.0, 220.0,0.2,10);
+    	                   HUDMSG_PLAIN,13,CR_White, 340.0, 220.0,0.2,10);
 		}
 	
 		if(Selection==2)
@@ -42,7 +44,7 @@ Function Void inMenuTEXT (Int Selection)
 		else
 		{
 			HudMessage (s:"Increase Intelligence";
-    	                   HUDMSG_PLAIN,14,CR_RED, 340.0, 230.0,0.2,10);
+    	                   HUDMSG_PLAIN,14,CR_White, 340.0, 230.0,0.2,10);
 		}
 	
 		if(Selection==3)
@@ -53,7 +55,7 @@ Function Void inMenuTEXT (Int Selection)
 		else
 		{
 			HudMessage (s:"Increase Defense";
-    	                   HUDMSG_PLAIN,16,CR_RED, 340.0, 240.0,0.2,10);
+    	                   HUDMSG_PLAIN,16,CR_White, 340.0, 240.0,0.2,10);
 		}
 	
 		if(Selection==4)
@@ -64,7 +66,7 @@ Function Void inMenuTEXT (Int Selection)
 		else
 		{
 			HudMessage (s:"Exit Menu";
-    	                   HUDMSG_PLAIN,17,CR_RED, 350.0, 270.0,0.2,10);
+    	                   HUDMSG_PLAIN,17,CR_White, 350.0, 270.0,0.2,10);
 		}
 }
 
