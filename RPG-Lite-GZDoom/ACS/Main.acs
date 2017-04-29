@@ -5,6 +5,14 @@
 #define atkbase 0.01
 #define Defbase 0.005
 
+str StatArray[4] =
+{
+"StatVIT",
+"StatATK",
+"StatINT",
+"StatDEF"
+};
+
 Function int ThisLevel (void)
 {
 	int SkillMult = 5 * GameSkill(),
@@ -79,7 +87,18 @@ Script "Levelupcheck" (int EXPA)
 		TakeInventory("Expereince",Nextlevel);
 		ACS_NamedExecuteAlways("UpdateStats",0);
 		SetAmmoCapacity("Expereince", Nextlevel);
-		GiveInventory("StatPoints",Statincrease);
+		
+		if(GetUserCVar(PlayerNumber(),"MRPG_RandomStats")==false)
+		{	
+			GiveInventory("StatPoints",Statincrease);
+		}
+		Else
+		{
+			for(int sid = 0; sid < Statincrease; sid++)
+			{
+				GiveInventory(StatArray[random(1,4)], 1);
+			}
+		}
 	}
 }
 
@@ -108,7 +127,7 @@ Script "UpdateStats" (void)
 		SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 0.1);
 	}
 	
-	SetAmmoCapacity("Mana", 50 + MyInt); 
+	SetAmmoCapacity("Mana", 75 + MyInt); 
 	//ACS_NamedExecuteAlways("SetAmmoCap",0);
 }
 

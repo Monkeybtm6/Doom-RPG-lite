@@ -32,6 +32,7 @@ OptionMenu "MRPGOpt"
 	Slider "Experience Multiplier", "MRPG_EXPMult", 1.0, 2.0, 0.1, 1
 	Slider "Stat points per level", "MRPG_StatsPerLevel", 1, 20, 1.0, 0
 	Slider "Level Cap", "MRPG_Levelcap", 10, 200, 1.0, 0
+	Option "Random Stat Allocation", "MRPG_RandomStats", "OnOff"
 	StaticText " "
 	StaticText "Character Saving"
 	StaticText " "

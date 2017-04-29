@@ -6,6 +6,8 @@ Server bool MRPG_MonsterScaling = False;
 
 Server bool MRPG_SaveEnabled = False;
 
+User Bool MRPG_RandomStats = False;
+
 User int MRPG_StatLevel = 1;
 User int MRPG_StatEXP = 0;
 User int MRPG_StatPoints = 0;
