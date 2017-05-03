@@ -15,7 +15,7 @@ str StatArray[4] =
 
 Function int ThisLevel (void)
 {
-	int SkillMult = 1 * GameSkill(),
+	int SkillMult = 5 * GameSkill(),
 	leveladd = playercount() * 1,
 	levelSet = 0,
 	i = 0,
@@ -27,12 +27,7 @@ Function int ThisLevel (void)
 	}
 	LevelSet = (levelav / playercount());
  
-	if( Levelset <= 0)
-	{
-		Levelset = 1;
-	}
- 
-	Return (Leveladd + LevelSet) + Random(0,SkillMult);
+	Return (Leveladd + LevelSet) + Random(-10,SkillMult);
 }
 
 script 90 ENTER
@@ -113,13 +108,13 @@ Script "UpdateStats" (void)
 	Player_Max_Health_in = CheckInventory("StatVIT") * 2,
 	Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
 	MyInt = (1.5 * CheckInventory("StatINT")) >> 16,
-	MyMass = CheckInventory("StatDEF"),
+	MyMass = CheckInventory("StatDEF") / 2,
 	Damagereduction = defbase * CheckInventory("StatDEF"),
 	DamageBoost = atkbase * CheckInventory("StatATK");
   
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_SPAWNHEALTH, Player_Max_Health_Out);
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageMultiplier, 1.0 + DamageBoost);
-	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_Mass, 100 + MyMass);
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_Mass, 100 + (MyMass >> 16));
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
 	
 	if(getactorproperty(0,APROP_DamageFactor)<0.1)
@@ -153,7 +148,8 @@ script "LevelendGrowth" UNLOADING
 	}
 }
 
-script "DAMAGESCR" (int indamage, int Isproj)
+//Leftover Zandronum code
+/*script "DAMAGESCR" (int indamage, int Isproj)
 {
 	if(Isproj == 1)
 	{ SetActivatorToTarget(0); }
@@ -162,31 +158,6 @@ script "DAMAGESCR" (int indamage, int Isproj)
 	setresultvalue(outdamage >> 16);
 	//print(f: outdamage);
 	
-}
-
-Script "MonsterInit" (void)
-{
-	int MonLevel = ThisLevel(),
-	MonHealth = (getactorproperty(0, APROP_Health)),
-	MonHealthmult = 0.02 * MonLevel,
-	DamageBoost = ATKbase * MonLevel;
-	
-	SetActorProperty(0, APROP_Health, (MonHealth * (1.0 + MonHealthmult))>> 16 );
-	SetActorProperty(0, APROP_SpawnHealth, (MonHealth * (1.0 + MonHealthmult))>> 16 );
-	SetActorProperty(0, APROP_DamageMultiplier, 1.0 + DamageBoost);
-	
-}
-
-/*script "Monster Death" KILL
-{
-	if(!(ClassifyActor (0) & Actor_Monster))
-		{terminate;}
-	
-	int MonHP = getactorproperty(0, APROP_SpawnHealth),
-	MonEXP = MonHP / 10;
-	SetActivatorToTarget(0);
-	GiveInventory("Expereince", MonEXP);
-	ACS_NamedExecuteAlways("Levelupcheck",0);
 }*/
 
 script "MonsterInitializer" Open
@@ -211,7 +182,7 @@ script "MonsterLoop" (Void)
 	MonHealthmult = 0.02 * CheckInventory("StatVIT"),
 	DamageBoost = atkbase * CheckInventory("StatATK"),
 	MonMass = getactorproperty(0,APROP_MASS),
-	MonMassMult = 0.01 * CheckInventory("StatDEF"),
+	MonMassMult = 0.005 * CheckInventory("StatDEF"),
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
 	
 	if(getcvar("MRPG_Monsterscaling") == true)
