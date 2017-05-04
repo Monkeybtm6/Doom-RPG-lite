@@ -136,7 +136,7 @@ Script "ManaRegen" (void)
 	Restart;
 }
 
-script "LevelendGrowth" UNLOADING
+/*script "LevelendGrowth" UNLOADING
 {
 	int ExpKillbonus = getlevelinfo(LEVELINFO_KILLED_MONSTERS),
 	ExpSecretBonus = getlevelinfo(LEVELINFO_FOUND_SECRETS);
@@ -146,7 +146,7 @@ script "LevelendGrowth" UNLOADING
 		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPKillBonus);
 		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPSecretBonus * 10);
 	}
-}
+}*/
 
 //Leftover Zandronum code
 /*script "DAMAGESCR" (int indamage, int Isproj)
