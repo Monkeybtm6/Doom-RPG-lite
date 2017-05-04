@@ -1,9 +1,9 @@
 
 height 0;
-Resolution 640,400;
+//Resolution 640,400;
 InterpolateHealth true;
 
-statusbar fullscreen, forcescaled, fullscreenoffsets
+statusbar fullscreen, fullscreenoffsets
 {
 	//drawimage "HUDLONG3", 2, -67;
 	

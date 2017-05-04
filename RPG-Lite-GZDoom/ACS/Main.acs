@@ -1,4 +1,4 @@
-#library "Main"
+#library "MRPGMain"
 #include "zcommon.acs"
 #define PLAYER_TID_START 1000
 
