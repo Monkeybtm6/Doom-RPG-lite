@@ -38,17 +38,7 @@ ACTOR RadsuitEffect : PowerupGiver
   +INVENTORY.ALWAYSPICKUP
   Inventory.MaxAmount 0
   Powerup.Type "IronFeet"
-  Powerup.Duration -30
-
-}
-
-ACTOR RadsuitEffectend : PowerupGiver
-{
-  +INVENTORY.AUTOACTIVATE
-  +INVENTORY.ALWAYSPICKUP
-  Inventory.MaxAmount 0
-  Powerup.Type "IronFeet"
-  Powerup.Duration 1
+  Powerup.Duration -20
 
 }
 
@@ -85,7 +75,7 @@ ACTOR PInvisEffect : PowerupGiver
   Inventory.MaxAmount 0
   Powerup.Type "Invisibility"
   RenderStyle Translucent
-  Powerup.Duration -30
+  Powerup.Duration -20
 
 }
 
@@ -122,7 +112,7 @@ ACTOR SpeedEffect : PowerupGiver
   Inventory.MaxAmount 0
   Powerup.Type "PowerSpeed"
   RenderStyle Translucent
-  Powerup.Duration -30
+  Powerup.Duration -20
 
 }
 
@@ -159,7 +149,7 @@ ACTOR RageEffect : PowerupGiver
   Inventory.MaxAmount 0
   Powerup.Type "PowerDoubleFiringSpeed"
   RenderStyle Translucent
-  Powerup.Duration -30
+  Powerup.Duration -10
 
 }
 
@@ -229,7 +219,7 @@ ACTOR SPLesserGuardian : CustomInventory
 
 ACTOR LesserGuardianEffect
 {
-	Health 50
+	Health 100
 	Radius 20
 	Height 39
 	Mass 1000
@@ -293,7 +283,7 @@ ACTOR SPGuardian : CustomInventory
 
 ACTOR GuardianEffect
 {
-	Health 80
+	Health 150
 	Radius 20
 	Height 39
 	Mass 1000
