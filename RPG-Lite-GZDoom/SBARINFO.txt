@@ -7,17 +7,20 @@ statusbar fullscreen, forcescaled, fullscreenoffsets
 {
 	//drawimage "HUDLONG3", 2, -67;
 	
+	//Mugshot
+	DrawMugShot 4, 0,-36;
+	
 	//health
-    DrawBar "HUDBHPSM", "HUDBSM",health,horizontal,4,-38;
-	drawnumber 4, SMALLFONT, White, health, drawshadow,alignment(left) , 6, -34;
+    DrawBar "HUDBHPSM", "HUDBSM",health,horizontal,32,-38;
+	drawnumber 4, SMALLFONT, White, health, drawshadow,alignment(left) ,34, -34;
 
     //Mana
-    DrawBar "HUDBMPSM", "HUDBSM",ammo("Mana"),horizontal,4,-26;
-	drawnumber 3, SMALLFONT, White,ammo("Mana"), drawshadow,alignment(left) , 6, -22;
+    DrawBar "HUDBMPSM", "HUDBSM",ammo("Mana"),horizontal,32,-26;
+	drawnumber 3, SMALLFONT, White,ammo("Mana"), drawshadow,alignment(left) ,34, -22;
 	
 	//armor
-    DrawBar "HUDBAPSM", "HUDBSM",armor,horizontal,4,-14;
-	drawnumber 3, SMALLFONT, White, armor, drawshadow,alignment(left) , 6, -10;
+    DrawBar "HUDBAPSM", "HUDBSM",armor,horizontal,32,-14;
+	drawnumber 3, SMALLFONT, White, armor, drawshadow,alignment(left) ,34, -10;
 
 
     usesSecondaryammo not
@@ -38,7 +41,7 @@ statusbar fullscreen, forcescaled, fullscreenoffsets
     }
 
     //inventory
-	DrawSelectedInventory SMALLFONT, 128, -36;  
+	DrawSelectedInventory SMALLFONT, 158, -36;  
 
     //Essence
     DrawNumber 6, SMALLFONT, GREEN,"Expereince", 78, -52;

@@ -7,10 +7,10 @@
 
 str StatArray[4] =
 {
-"StatVIT",
-"StatATK",
-"StatINT",
-"StatDEF"
+	"StatVIT",
+	"StatATK",
+	"StatINT",
+	"StatDEF"
 };
 
 Function int ThisLevel (void)
