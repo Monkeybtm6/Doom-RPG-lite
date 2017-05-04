@@ -76,7 +76,7 @@ ACTOR BlurUpgrade : CustomInventory
 Actor SpellSpawner : RandomSpawner 
 {
   DropItem "SPBaseSpell",256,2
-  DropItem "SPBlur",256,2
+  DropItem "SPInvis",256,2
   DropItem "SPAmmoSynth",256,2
   DropItem "SPSpeed",256,2
   DropItem "SPRage",256,2
