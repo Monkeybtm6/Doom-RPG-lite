@@ -291,6 +291,7 @@ ACTOR GuardianEffect
 	PainChance 200
 	Monster
 	+FLOAT
+	+FLOATBOB
 	+NOGRAVITY
 	+Friendly
 	-Solid
