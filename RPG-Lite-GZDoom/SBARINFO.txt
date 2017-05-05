@@ -44,7 +44,7 @@ statusbar fullscreen, fullscreenoffsets
 	DrawSelectedInventory SMALLFONT, 158, -36;  
 
     //Essence
-    DrawNumber 6, SMALLFONT, GREEN,"Expereince", 78, -52;
+    DrawNumber 6, SMALLFONT, GREEN,"Experience", 78, -52;
 	drawimage "HUDXP",4, -56;
 	DrawNumber 3, SMALLFONT, White,"PlayerLevel", 26, -52;
 	

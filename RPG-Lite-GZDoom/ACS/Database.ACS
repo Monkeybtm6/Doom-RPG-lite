@@ -1,4 +1,4 @@
-#library "Database"
+#library "MRPGDatabase"
 #include "zcommon.acs"
 #define PLAYER_TID_START 1000
 
@@ -44,4 +44,16 @@ script "Loadscript" Enter
 	GiveInventory("StatSTR",GetUserCVar(PlayerNumber(),"MRPG_StatSTR"));
 	GiveInventory("StatDEF",GetUserCVar(PlayerNumber(),"MRPG_StatDEF"));
 	
+}
+
+script "Clearscript" (Void)
+{
+	setCVar("MRPG_StatLevel",1);
+	SetCVar("MRPG_StatPoints",0);
+	SetCVar("MRPG_StatEXP",0);
+	SetCVar("MRPG_StatVIT",0);
+	SetCVar("MRPG_StatATK",0);
+	SetCVar("MRPG_StatINT",0);
+	SetCVar("MRPG_StatSTR",0);
+	SetCVar("MRPG_StatDEF",0);
 }

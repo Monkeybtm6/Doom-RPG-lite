@@ -2,7 +2,7 @@ Actor StatVit : Inventory
 {          
   Inventory.PickupMessage "Vitality Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 500
+  Inventory.MaxAmount 1000
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -17,7 +17,7 @@ Actor StatATK : Inventory
 {          
   Inventory.PickupMessage "Attack Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 500
+  Inventory.MaxAmount 1000
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -32,7 +32,7 @@ Actor StatINT : Inventory
 {          
   Inventory.PickupMessage "Inteligence Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 500
+  Inventory.MaxAmount 1000
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -47,7 +47,7 @@ Actor StatSTR : Inventory
 {          
   Inventory.PickupMessage "Strength Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 200
+  Inventory.MaxAmount 1000
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -62,7 +62,7 @@ Actor StatDEF : Inventory
 {          
   Inventory.PickupMessage "Defense Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 500
+  Inventory.MaxAmount 1000
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -92,7 +92,7 @@ Actor PlayerLevel : Inventory
 {          
   Inventory.PickupMessage "Gained Level!!!"
   Inventory.Amount 1
-  Inventory.MaxAmount 200
+  Inventory.MaxAmount 999
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States

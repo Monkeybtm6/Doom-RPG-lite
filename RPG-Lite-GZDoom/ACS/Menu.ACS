@@ -1,22 +1,24 @@
-#library "Menu"
+#library "MRPGMenu"
 #include "zcommon.acs"
 #define PLAYER_TID_START 1000
 
-Function Void inMenuTEXT (Int Selection)
+Function Void MRPGinmenuTEXT (Int Selection)
 {
 
 	int Lvl = CheckInventory("Playerlevel"),
 	EXPBase = GetCvar("MRPG_EXPBase"),
 	EXPMULT = GetCvar("MRPG_EXPMULT"),
 	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16);
-		setfont("SMALLFONT");
+		setfont("BIGFONT");
 		sethudsize (640,400, 1);
-		Hudmessage(s:"Stat Menu.";HUDMSG_PLAIN,10,CR_White, 320.0, 140.0,0.2,10);
-	
+		Hudmessage(s:"Stat Menu.";HUDMSG_PLAIN,10,CR_White, 320.0, 100.0,0.2,10);
+		
+		setfont("SMALLFONT");
 		Hudmessage(s:"Stat Points: ",d:CheckInventory("StatPoints");HUDMSG_PLAIN,11,CR_White, 320.0, 270.0,0.2,10);
-	
 		Hudmessage(s:"Experience: ",d:CheckInventory("Experience"),s:" / ",d:Nextlevel;HUDMSG_PLAIN,21,CR_White, 320.0, 280.0,0.2,10);
 		Hudmessage(s:"Forward and backward to change selection. use to select";HUDMSG_PLAIN,20,CR_White, 320.0, 340.0,0.2,10);
+		Hudmessage(s:"Health:",d:getActorProperty(0,APROP_HEALTH),s:" / ",d:getActorProperty(0,APROP_SPAWNHEALTH);HUDMSG_PLAIN,23,CR_White, 320.0, 120.0,0.2,10);
+		Hudmessage(s:"Mana:",d:CheckInventory("Mana"),s:" / ",d:Getammocapacity("mana");HUDMSG_PLAIN,24,CR_White, 320.0, 130.0,0.2,10);
 		
 		if(Selection==0)
 		{
@@ -35,7 +37,7 @@ Function Void inMenuTEXT (Int Selection)
 		{
 			HudMessage (s:"Attack: ",d:CheckInventory("StatAtk");
 				HUDMSG_PLAIN,13,CR_GOLD, 320.0, 190.0,0.2,10);
-			Hudmessage(s:"Increases Damage by 1%.";
+			Hudmessage(s:"Increases Damage by 2%.";
 				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
 		}
 		else
@@ -84,7 +86,7 @@ Function Void inMenuTEXT (Int Selection)
 		}
 }
 
-script "OpenMenu" (void)
+script "MRPGOpenMenu" (void)
 {
 	if(CheckInventory("MenuOpen")==1)
 	{
@@ -94,12 +96,12 @@ script "OpenMenu" (void)
 	else
 	{
 		GiveInventory("MenuOpen",1);
-		ACS_NamedExecuteAlways("inMenu",0);
+		ACS_NamedExecuteAlways("MRPGinmenu",0);
 	}
 	Delay(10);
 }
 
-script "inMenu" (void)
+script "MRPGinmenu" (void)
 {
 	SetPlayerProperty(0, true, PROP_TOTALLYFROZEN);
 	while(CheckInventory("MenuOpen"))
@@ -170,7 +172,7 @@ script "inMenu" (void)
 		Delay(5);
 		ACS_NamedExecuteAlways("UpdateStats",0);
 		}
-	inMenuTEXT(Selection);
+	MRPGinmenuTEXT(Selection);
 	Delay(1);
 	}
 }

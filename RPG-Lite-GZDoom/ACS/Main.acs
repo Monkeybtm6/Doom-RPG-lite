@@ -2,7 +2,7 @@
 #include "zcommon.acs"
 #define PLAYER_TID_START 1000
 
-#define atkbase 0.01
+#define atkbase 0.02
 #define Defbase 0.005
 
 str StatArray[4] =
@@ -119,9 +119,9 @@ Script "UpdateStats" (void)
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_Mass, 100 + (MyMass >> 16));
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
 	
-	if(getactorproperty(0,APROP_DamageFactor)<0.1)
+	if(getactorproperty(0,APROP_DamageFactor)<0.2)
 	{
-		SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 0.1);
+		SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 0.2);
 	}
 	
 	SetAmmoCapacity("Mana", 75 + MyInt); 
@@ -172,6 +172,12 @@ script "MonsterLoop" (Void)
 {
 	//Monster initialization
 	delay(5);
+	
+	if(CheckFlag(0,"CountKill") == False)
+	{
+		Terminate;
+	}
+	
 	int MonLevel = ThisLevel(),
 	MonStats = GetCvar("MRPG_statsperlevel") * MonLevel;
 	

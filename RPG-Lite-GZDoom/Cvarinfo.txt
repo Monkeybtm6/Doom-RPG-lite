@@ -1,4 +1,4 @@
-Server Int MRPG_EXPBase = 50;
+Server Int MRPG_EXPBase = 100;
 Server Float MRPG_EXPMult = 1.0;
 Server Int MRPG_StatsPerLevel = 8;
 Server Int MRPG_LevelCap = 100;
