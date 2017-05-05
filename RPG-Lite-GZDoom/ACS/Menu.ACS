@@ -15,7 +15,7 @@ Function Void inMenuTEXT (Int Selection)
 	
 		Hudmessage(s:"Stat Points: ",d:CheckInventory("StatPoints");HUDMSG_PLAIN,11,CR_White, 320.0, 270.0,0.2,10);
 	
-		Hudmessage(s:"Experience: ",d:CheckInventory("Expereince"),s:" / ",d:Nextlevel;HUDMSG_PLAIN,21,CR_White, 320.0, 280.0,0.2,10);
+		Hudmessage(s:"Experience: ",d:CheckInventory("Experience"),s:" / ",d:Nextlevel;HUDMSG_PLAIN,21,CR_White, 320.0, 280.0,0.2,10);
 		Hudmessage(s:"Forward and backward to change selection. use to select";HUDMSG_PLAIN,20,CR_White, 320.0, 340.0,0.2,10);
 		
 		if(Selection==0)

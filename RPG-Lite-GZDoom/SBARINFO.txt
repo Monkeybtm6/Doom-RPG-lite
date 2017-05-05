@@ -45,7 +45,7 @@ statusbar fullscreen, fullscreenoffsets
 
     //Essence
     DrawNumber 6, SMALLFONT, GREEN,"Expereince", 78, -52;
-	DrawBar "HUDXP", "HUDXPB", ammo("Expereince"),Horizontal,4, -56;
+	drawimage "HUDXP",4, -56;
 	DrawNumber 3, SMALLFONT, White,"PlayerLevel", 26, -52;
 	
 	//Stats

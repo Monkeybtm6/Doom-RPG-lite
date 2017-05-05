@@ -73,7 +73,7 @@ Actor StatDEF : Inventory
   }
 }
 
-Actor Expereince : ammo
+Actor Experience : Inventory
 {          
   Inventory.PickupMessage "Absorbed Essence"
   Inventory.Amount 1

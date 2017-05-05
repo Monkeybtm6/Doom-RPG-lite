@@ -43,7 +43,6 @@ script 90 ENTER
 	Int EXPMULT = GetCvar("MRPG_EXPMULT"),
 	Lvl = CheckInventory("Playerlevel"),
 	EXPBase = GetCvar("MRPG_EXPBase");
-	SetAmmoCapacity("Expereince", EXPBASE * (EXPMULT * lvl) >> 16);
 	delay(1);
 	SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
 }
@@ -65,7 +64,7 @@ Script "Levelupcheck" (int EXPA)
 		Terminate; 
 	}
   
-	int EXP = CheckInventory("Expereince"),
+	int EXP = CheckInventory("Experience"),
 	Lvl = CheckInventory("Playerlevel"),
 	EXPBase = GetCvar("MRPG_EXPBase"),
 	EXPMULT = GetCvar("MRPG_EXPMULT"),
@@ -73,15 +72,13 @@ Script "Levelupcheck" (int EXPA)
 	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16),
 	MaxLevel = GetCvar("MRPG_LevelCap");
 
-	GiveInventory("Expereince", EXPA);
-	SetAmmoCapacity("Expereince", Nextlevel);
+	GiveInventory("Experience", EXPA);
  
-	if(CheckInventory("Expereince") >= Nextlevel && LVL <= Maxlevel)
+	if(CheckInventory("Experience") >= Nextlevel && LVL <= Maxlevel)
 	{
 		GiveInventory("Playerlevel", 1);
-		TakeInventory("Expereince",Nextlevel);
+		TakeInventory("Experience",Nextlevel);
 		ACS_NamedExecuteAlways("UpdateStats",0);
-		SetAmmoCapacity("Expereince", Nextlevel);
 		
 		setfont("SMALLFONT");
 		sethudsize (640,400, 1);
@@ -148,8 +145,8 @@ Script "ManaRegen" (void)
 
 	for (int i = 0; i < playercount(); i++) 
 	{
-		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPKillBonus);
-		GiveActorInventory(PLAYER_TID_START + i,"Expereince",EXPSecretBonus * 10);
+		GiveActorInventory(PLAYER_TID_START + i,"Experience",EXPKillBonus);
+		GiveActorInventory(PLAYER_TID_START + i,"Experience",EXPSecretBonus * 10);
 	}
 }*/
 
