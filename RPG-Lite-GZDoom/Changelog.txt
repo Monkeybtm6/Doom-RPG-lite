@@ -4,3 +4,5 @@
 	Can no longer gain experience by killing your own summons.
 	Summons now have their own attack.
 	Added a skill points system.
+	Fixed bug where random stat allocation would occassionally eat stat points.
+	Fixed errors in hexen.
