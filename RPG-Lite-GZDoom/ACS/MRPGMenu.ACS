@@ -114,8 +114,10 @@ Function Void MRPGinmenu2TEXT (Int Selection)
 		{
 			HudMessage (s:"Energy Regen: ",d:CheckInventory("SKManaRegen");
 				HUDMSG_PLAIN,12,CR_GOLD, 320.0, 100.0,0.2,10);
-			Hudmessage(s:"Regenerates Energy slowly. Costs 5. Max 1.";
+			Hudmessage(s:"Regenerates Energy slowly. 1 energy point per rank, per second. (Max 10)";
 				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+			Hudmessage(s:"Cost: ",d:(2 * (CheckInventory("SKManaRegen") + 1));
+				HUDMSG_PLAIN,23,CR_White, 320.0, 310.0,0.2,10);
 		}
 		else
 		{
@@ -127,8 +129,10 @@ Function Void MRPGinmenu2TEXT (Int Selection)
 		{
 			HudMessage (s:"Health Regen: ",d:CheckInventory("SKHealthRegen");
 				HUDMSG_PLAIN,13,CR_GOLD, 320.0, 110.0,0.2,10);
-			Hudmessage(s:"Regenerates Health slowly. Costs 5. Max 1.";
+			Hudmessage(s:"Regenerates Health slowly to a max of 20 per rank. (max 10)";
 				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+			Hudmessage(s:"Cost: ",d:(2 * (CheckInventory("SKHealthRegen") + 1));
+				HUDMSG_PLAIN,23,CR_White, 320.0, 310.0,0.2,10);
 		}
 		else
 		{
@@ -139,14 +143,16 @@ Function Void MRPGinmenu2TEXT (Int Selection)
 		if(Selection==2)
 		{
 			HudMessage (s:"Exit Menu";
-				HUDMSG_PLAIN,30,CR_GOLD, 320.0, 280.0,0.2,10);
+				HUDMSG_PLAIN,30,CR_GOLD, 320.0, 270.0,0.2,10);
 			Hudmessage(s:"Exits the menu.";
 				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+			Hudmessage(s:"";
+				HUDMSG_PLAIN,23,CR_White, 320.0, 310.0,0.2,10);
 		}
 		else
 		{
 			HudMessage (s:"Exit Menu";
-				HUDMSG_PLAIN,30,CR_Darkgrey, 320.0, 280.0,0.2,10);
+				HUDMSG_PLAIN,30,CR_Darkgrey, 320.0, 270.0,0.2,10);
 		}
 }
 
@@ -271,20 +277,22 @@ script "MRPGinmenu" (void)
 			Switch(Selection)
 			{	
 				Case 0:
-				if (CheckInventory("SkillPoints") >= 5 && CheckInventory("SKManaRegen") < 1)
+				if (CheckInventory("SkillPoints") >= (2 * (CheckInventory("SKManaRegen") + 1)) && CheckInventory("SKManaRegen") < 10)
 				{
-					TakeInventory("SkillPoints",5);
+					TakeInventory("SkillPoints",2 * (CheckInventory("SKManaRegen")+1));
+					GiveInventory("SpentSkillPoints",2 * (CheckInventory("SKManaRegen")+1));
 					GiveInventory("SKManaRegen",1);
-					GiveInventory("SpentSkillPoints",5);
+					Delay(5);
 				}
 				Break;
 				
 				Case 1:
-				if (CheckInventory("SkillPoints") >= 5 && CheckInventory("SKHealthRegen") < 1)
+				if (CheckInventory("SkillPoints") >= (2 * (CheckInventory("SKHealthRegen") + 1)) && CheckInventory("SKHealthRegen") < 10)
 				{
-					TakeInventory("SkillPoints",5);
+					TakeInventory("SkillPoints",2 * (CheckInventory("SKHealthRegen")+1));
+					GiveInventory("SpentSkillPoints",(2 * CheckInventory("SKHealthRegen")+1));
 					GiveInventory("SKHealthRegen",1);
-					GiveInventory("SpentSkillPoints",5);
+					Delay(5);
 				}
 				Break;
 				

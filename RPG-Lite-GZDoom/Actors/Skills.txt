@@ -1,11 +1,11 @@
 Actor SKmanaregen : Inventory
 {
-  Inventory.Maxamount 1
+  Inventory.Maxamount 10
 }
 
 Actor SKHealthregen : Inventory
 {
-  Inventory.Maxamount 1
+  Inventory.Maxamount 10
 }
 
 Actor SkillHealthgiver : health
