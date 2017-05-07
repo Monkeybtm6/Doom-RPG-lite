@@ -1,5 +1,8 @@
 #library "MRPGMain"
 #include "zcommon.acs"
+//#include "MRPGSkills.acs"
+//#include "MRPGMenu.acs"
+//#include "MRPGDatabase.acs"
 #define PLAYER_TID_START 1000
 
 #define atkbase 0.02
@@ -28,75 +31,6 @@ Function int ThisLevel (void)
 	LevelSet = (levelav / playercount());
  
 	Return (Leveladd + LevelSet) + Random(-10,SkillMult);
-}
-
-script 90 ENTER
-{
-	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
-	delay(2);
-	ACS_NamedExecuteAlways("UpdateStats",0);
-	if(CheckInventory("Playerlevel") <= 0)
-	{
-		GiveInventory("Playerlevel",1);
-	}
-	ACS_NamedExecuteAlways("Manaregen",0);
-	Int EXPMULT = GetCvar("MRPG_EXPMULT"),
-	Lvl = CheckInventory("Playerlevel"),
-	EXPBase = GetCvar("MRPG_EXPBase");
-	delay(1);
-	SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
-}
-
-script 91 RESPAWN
-{
-	Thing_ChangeTID(PLAYER_TID_START+PlayerNumber(),0);
-	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
-	delay(1);
-	ACS_NamedExecuteAlways("UpdateStats",0);
-}
-
-
-Script "Levelupcheck" (int EXPA)
-{
-	SetActivatorToTarget(0);
-	if(ClassifyActor(0) & ACTOR_MONSTER)
-	{ 
-		Terminate; 
-	}
-  
-	int EXP = CheckInventory("Experience"),
-	Lvl = CheckInventory("Playerlevel"),
-	EXPBase = GetCvar("MRPG_EXPBase"),
-	EXPMULT = GetCvar("MRPG_EXPMULT"),
-	Statincrease = GetCvar("MRPG_statsperlevel"),
-	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16),
-	MaxLevel = GetCvar("MRPG_LevelCap");
-
-	GiveInventory("Experience", EXPA);
- 
-	if(CheckInventory("Experience") >= Nextlevel && LVL <= Maxlevel)
-	{
-		GiveInventory("Playerlevel", 1);
-		TakeInventory("Experience",Nextlevel);
-		ACS_NamedExecuteAlways("UpdateStats",0);
-		
-		setfont("SMALLFONT");
-		sethudsize (640,400, 1);
-		Hudmessage(s:"You have gained a level!";HUDMSG_PLAIN,10,CR_Red, 340.0, 150.0,5.0,1.0);
-		Playsound(0,"misc/p_pkup");
-		
-		if(GetUserCVar(PlayerNumber(),"MRPG_RandomStats")==false)
-		{	
-			GiveInventory("StatPoints",Statincrease);
-		}
-		Else
-		{
-			for(int sid = 0; sid < Statincrease; sid++)
-			{
-				GiveInventory(StatArray[random(1,4)], 1);
-			}
-		}
-	}
 }
 
 Script "UpdateStats" (void)
@@ -128,15 +62,92 @@ Script "UpdateStats" (void)
 	//ACS_NamedExecuteAlways("SetAmmoCap",0);
 }
 
-Script "ManaRegen" (void)
+
+script "MRPGEnter" ENTER
 {
-	if (! (CheckInventory("SpellActive") == 1))
+	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
+	delay(2);
+	if(CheckInventory("Playerlevel") <= 0)
 	{
-		Giveinventory("Mana",(GetAmmoCapacity("mana") / 100)+1);
+		GiveInventory("Playerlevel",1);
 	}
-	Delay(35);
-	Restart;
+	ACS_NamedExecuteAlways("UpdateStats",0);
+	//ACS_NamedExecuteAlways("ConstSkillActivator",0);
+	//ACS_NamedExecuteAlways("SkillActivator",0);
+	Int EXPMULT = GetCvar("MRPG_EXPMULT"),
+	Lvl = CheckInventory("Playerlevel"),
+	EXPBase = GetCvar("MRPG_EXPBase");
+	delay(1);
+	SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
+	Giveinventory("Mana",GetAmmoCapacity("mana"));
 }
+
+script "MRPGRespawn" RESPAWN
+{
+	Thing_ChangeTID(PLAYER_TID_START+PlayerNumber(),0);
+	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
+	delay(1);
+	ACS_NamedExecuteAlways("UpdateStats",0);
+}
+
+
+Script "Levelupcheck" (int EXPA)
+{
+	if(ClassifyActor(0) & ACTOR_MONSTER)
+	{ 
+		Terminate; 
+	}
+	
+	int EXP = CheckInventory("Experience"),
+	Lvl = CheckInventory("Playerlevel"),
+	EXPBase = GetCvar("MRPG_EXPBase"),
+	EXPMULT = GetCvar("MRPG_EXPMULT"),
+	Statincrease = GetCvar("MRPG_statsperlevel"),
+	RandStat,
+	Skillincrease = GetCvar("MRPG_skillsperlevel"),
+	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16),
+	MaxLevel = GetCvar("MRPG_LevelCap");
+
+	GiveInventory("Experience", EXPA);
+ 
+	if(CheckInventory("Experience") >= Nextlevel && LVL <= Maxlevel)
+	{
+		GiveInventory("Playerlevel", 1);
+		TakeInventory("Experience",Nextlevel);
+		ACS_NamedExecuteAlways("UpdateStats",0);
+		
+		setfont("SMALLFONT");
+		sethudsize (640,400, 1);
+		Hudmessage(s:"You have gained a level!";HUDMSG_PLAIN,10,CR_Red, 340.0, 150.0,5.0,1.0);
+		Playsound(0,"misc/p_pkup");
+		GiveInventory("SkillPoints",Skillincrease);
+		
+		if(GetUserCVar(PlayerNumber(),"MRPG_RandomStats")==false)
+		{	
+			GiveInventory("StatPoints",Statincrease);
+		}
+		Else
+		{
+			for(int sid = 0; sid < Statincrease; sid++)
+			{
+				int StatCounter;
+				Randstat = random(1,4);
+				while(CheckInventory(StatArray[Randstat])==1000 || StatCounter < 4)
+					{
+						randstat ++; 
+						StatCounter ++;
+						if(randstat > 4)
+						{
+							Randstat = 1;
+						}
+					}
+				
+				GiveInventory(StatArray[Randstat], 1);
+			}
+		}
+	}
+}
+
 
 /*script "LevelendGrowth" UNLOADING
 {
@@ -171,13 +182,7 @@ script "MonsterInitializer" Open
 script "MonsterLoop" (Void)
 {
 	//Monster initialization
-	delay(5);
-	
-	if(CheckFlag(0,"CountKill") == False)
-	{
-		Terminate;
-	}
-	
+	Delay(5);
 	int MonLevel = ThisLevel(),
 	MonStats = GetCvar("MRPG_statsperlevel") * MonLevel;
 	
@@ -195,7 +200,7 @@ script "MonsterLoop" (Void)
 	
 	if(getcvar("MRPG_Monsterscaling") == true)
 	{
-		SetActorProperty(0, APROP_SpawnHealth, (MonHealth * (1.0 + MonHealthmult))>> 16 );
+		//SetActorProperty(0, APROP_SpawnHealth, (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_Health, (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_DamageMultiplier, 1.0 + DamageBoost);
 		SetActorProperty(0, APROP_Mass, MonMass * (1.0 + MonMassMult) >> 16);
@@ -208,8 +213,11 @@ script "MonsterLoop" (Void)
 	}
 	
 	//Death
-	ACS_NamedExecuteAlways("Levelupcheck",0,MonEXP);
 	DropItem(0,"SpellSpawner",1,25);
+	SetActivatorToTarget(0);
+	ACS_NamedExecuteAlways("Levelupcheck",0,MonEXP);
+	GiveActorinventory(0,"Mana",random(1,10));
+	
 
 }
 

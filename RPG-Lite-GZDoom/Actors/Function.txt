@@ -2,7 +2,7 @@ Actor MenuOpen : Inventory
 {          
   Inventory.PickupMessage "Defense Increased"
   Inventory.Amount 1
-  Inventory.MaxAmount 1
+  Inventory.MaxAmount 99
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
@@ -13,6 +13,11 @@ Actor MenuOpen : Inventory
   }
 }
 
+Actor MRPGHasloaded : Inventory
+{
+  Inventory.MaxAmount 1
+}
+
 Actor Monsterinitgiver
 {
 
@@ -20,8 +25,8 @@ Actor Monsterinitgiver
   {
   Spawn:
     TNT1 A 0
-	TNT1 A 5 A_RadiusGive( "Monsterinit", 16383.0, RGF_MONSTERS|RGF_NOSIGHT|RGF_CUBE)
-	TNT1 A 30
+	TNT1 A 0 A_RadiusGive( "Monsterinit", 16383.0, RGF_MONSTERS|RGF_NOSIGHT|RGF_CUBE)
+	TNT1 A 35
     Loop
   }
 }
@@ -35,6 +40,10 @@ Actor Monsterinit : CustomInventory
     Loop
   Pickup:
     TNT1 A 0
+	TNT1 A 0 A_CheckFlag("CountKill","Activate")
+    stop
+  Activate:
+	TNT1 A 0
 	TNT1 A 0 A_JumpIfInventory("Monsterinitdone",1,"Done")
 	TNT1 A 0 ACS_NamedExecuteAlways("MonsterLoop")
 	TNT1 A 0 A_GiveInventory("Monsterinitdone")

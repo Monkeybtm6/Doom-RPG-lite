@@ -11,7 +11,8 @@ ACTOR SPBaseSpell : CustomInventory
 
   +INVENTORY.INVBAR
   +FLOATBOB
-  inventory.maxamount 1
+  +INVENTORY.ALWAYSPICKUP
+  inventory.maxamount 5
   Inventory.InterHubAmount 1
   inventory.icon RADS_I
   Inventory.PickupMessage "Picked up Radiation Shield Upgrade" 
@@ -47,7 +48,8 @@ ACTOR SPInvis : SPBaseSpell
 
   +INVENTORY.INVBAR
   +FLOATBOB
-  inventory.maxamount 1
+  +INVENTORY.ALWAYSPICKUP
+  inventory.maxamount 5
   Inventory.InterHubAmount 1
   inventory.icon PIN2_I
   Inventory.PickupMessage "Picked up Partial invisibility upgrade" 
@@ -84,7 +86,8 @@ ACTOR SPSpeed : SPBaseSpell
 
   +INVENTORY.INVBAR
   +FLOATBOB
-  inventory.maxamount 1
+  +INVENTORY.ALWAYSPICKUP
+  inventory.maxamount 5
   Inventory.InterHubAmount 1
   inventory.icon SPDB_I
   Inventory.PickupMessage "Picked up Speed Upgrade" 
@@ -121,7 +124,8 @@ ACTOR SPRage: SPBaseSpell
 
   +INVENTORY.INVBAR
   +FLOATBOB
-  inventory.maxamount 1
+  +INVENTORY.ALWAYSPICKUP
+  inventory.maxamount 5
   Inventory.InterHubAmount 1
   inventory.icon RGSP_I
   Inventory.PickupMessage "Picked up Rage Upgrade" 
@@ -155,9 +159,9 @@ ACTOR RageEffect : PowerupGiver
 
 ACTOR SPAmmoSynth : CustomInventory
 {
-  +INVENTORY.KEEPDEPLETED
   +INVENTORY.INVBAR
   +FLOATBOB
+  +INVENTORY.ALWAYSPICKUP
   inventory.maxamount 1
   Inventory.InterHubAmount 1
   inventory.icon ASSP_I
@@ -193,9 +197,9 @@ Actor AmmoSynthEffect : RandomSpawner
 
 ACTOR SPLesserGuardian : CustomInventory
 {
-  +INVENTORY.KEEPDEPLETED
   +INVENTORY.INVBAR
   +FLOATBOB
+  +INVENTORY.ALWAYSPICKUP
   inventory.maxamount 1
   Inventory.InterHubAmount 1
   inventory.icon GSSP_I
@@ -229,6 +233,7 @@ ACTOR LesserGuardianEffect
 	+FLOATBOB
 	+Friendly
 	-Solid
+	-CountKill
 	States
 	{
 	Spawn:
@@ -243,7 +248,7 @@ ACTOR LesserGuardianEffect
 	Missile:
 		GSSP B 8 A_FaceTarget
 		GSSP BC 2
-		GSSP D 2 A_TroopAttack 
+		GSSP D 2 A_CustomMissile("SummonedGuardianAttack")
 		Goto See
 	Pain:
 		GSSP B 2
@@ -257,9 +262,9 @@ ACTOR LesserGuardianEffect
 
 ACTOR SPGuardian : CustomInventory
 {
-  +INVENTORY.KEEPDEPLETED
   +INVENTORY.INVBAR
   +FLOATBOB
+  +INVENTORY.ALWAYSPICKUP
   inventory.maxamount 1
   Inventory.InterHubAmount 1
   inventory.icon GSSP_I2
@@ -294,6 +299,7 @@ ACTOR GuardianEffect
 	+FLOATBOB
 	+NOGRAVITY
 	+Friendly
+	-CountKill
 	-Solid
 	States
 	{
@@ -309,7 +315,7 @@ ACTOR GuardianEffect
 	Missile:
 		GSSP F 8 A_FaceTarget
 		GSSP FG 2
-		GSSP H 2 A_TroopAttack  
+		GSSP HHH 5 A_CustomMissile("SummonedGuardianAttack")
 		Goto See
 	Pain:
 		GSSP F 2
@@ -321,12 +327,57 @@ ACTOR GuardianEffect
 	}
 }
 
+Actor SummonedGuardianSmoke
+{
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+SHADOW
+	+NOTELEPORT
+	+CANNOTPUSH
+	+NODAMAGETHRUST
+	RenderStyle "Translucent"
+	Alpha 0.6
+	States
+	{
+	Spawn:
+		MSGA ABAB 4
+		Stop
+	}
+}
+
+Actor SummonedGuardianAttack : FastProjectile
+{
+  Speed 184
+  Radius 12
+  Height 8
+  Damage 2
+  +RIPPER
+  +CANNOTPUSH
+  +NODAMAGETHRUST
+  +SPAWNSOUNDSOURCE
+  MissileType "SummonedGuardianSmoke"
+  //SeeSound "MageWandFire"
+  States
+  {
+	Spawn:
+		MSGA AB 4 Bright
+		Loop
+	Death:
+		MSGA C 4 Bright
+		MSGA D 3 Bright
+		MSGA E 4 Bright
+		MSGA F 3 Bright
+		MSGA G 4 Bright
+		Stop
+  }
+}
+
 ACTOR SPPush : CustomInventory
 {
-  +INVENTORY.KEEPDEPLETED
   +INVENTORY.INVBAR
   +FLOATBOB
-  inventory.maxamount 1
+  +INVENTORY.ALWAYSPICKUP
+  inventory.maxamount 5
   Inventory.InterHubAmount 1
   inventory.icon FPSP_I
   Inventory.PickupMessage "Picked up Push" 

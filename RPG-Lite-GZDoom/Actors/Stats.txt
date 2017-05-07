@@ -8,7 +8,7 @@ Actor StatVit : Inventory
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
     loop
   }
 }
@@ -23,7 +23,7 @@ Actor StatATK : Inventory
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
     loop
   }
 }
@@ -38,7 +38,7 @@ Actor StatINT : Inventory
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
     loop
   }
 }
@@ -53,7 +53,7 @@ Actor StatSTR : Inventory
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
     loop
   }
 }
@@ -68,7 +68,7 @@ Actor StatDEF : Inventory
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
     loop
   }
 }
@@ -77,13 +77,13 @@ Actor Experience : Inventory
 {          
   Inventory.PickupMessage "Absorbed Essence"
   Inventory.Amount 1
-  Inventory.MaxAmount 99999
+  Inventory.MaxAmount 999999
   +INVENTORY.ALWAYSPICKUP
   +NOGRAVITY
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
     loop
   }
 }
@@ -98,7 +98,7 @@ Actor PlayerLevel : Inventory
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
     loop
 	Pickup:
     TNT1 A 0 //ACS_NamedExecuteAlways("UpdateStats")
@@ -121,7 +121,35 @@ Actor StatPoints : Inventory
   States
   {
   Spawn:
-    ESES A -1 
+    TNT1 A -1 
+    loop
+  }
+}
+
+Actor SkillPoints : Inventory
+{          
+  Inventory.Amount 1
+  Inventory.MaxAmount 999
+  +INVENTORY.ALWAYSPICKUP
+  +NOGRAVITY
+  States
+  {
+  Spawn:
+    TNT1 A -1 
+    loop
+  }
+}
+
+Actor SpentSkillPoints : Inventory
+{          
+  Inventory.Amount 1
+  Inventory.MaxAmount 999
+  +INVENTORY.ALWAYSPICKUP
+  +NOGRAVITY
+  States
+  {
+  Spawn:
+    TNT1 A -1 
     loop
   }
 }

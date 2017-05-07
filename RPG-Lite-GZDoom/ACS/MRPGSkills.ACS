@@ -1,0 +1,22 @@
+#library "MRPGSkills"
+#include "zcommon.acs"
+
+Script "ConstSkillActivator" (void)
+{
+	if (CheckInventory("SKManaRegen") == 1)
+	{
+		Giveinventory("Mana",(GetAmmoCapacity("mana") / 100)+1);
+	}
+	
+	if (CheckInventory("SKHealthRegen") == 1)
+	{
+		Giveinventory("Skillhealthgiver",1);
+	}
+	Delay(35);
+	Restart;
+}
+
+Script "SkillActivator" (void)
+{
+	Terminate;
+}

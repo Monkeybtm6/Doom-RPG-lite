@@ -1,0 +1,14 @@
+Actor SKmanaregen : Inventory
+{
+  Inventory.Maxamount 1
+}
+
+Actor SKHealthregen : Inventory
+{
+  Inventory.Maxamount 1
+}
+
+Actor SkillHealthgiver : health
+{
+  Inventory.amount 1
+}

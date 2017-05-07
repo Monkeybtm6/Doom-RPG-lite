@@ -1,0 +1,302 @@
+#library "MRPGMenu"
+#include "zcommon.acs"
+#define PLAYER_TID_START 1000
+
+Function Void MRPGinmenuTEXT (Int Selection)
+{
+
+	int Lvl = CheckInventory("Playerlevel"),
+	EXPBase = GetCvar("MRPG_EXPBase"),
+	EXPMULT = GetCvar("MRPG_EXPMULT"),
+	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16);
+		setfont("BIGFONT");
+		sethudsize (640,400, 1);
+		Hudmessage(s:"Stats Menu.";HUDMSG_PLAIN,50,CR_White, 320.0, 50.0,0.2,10);
+		
+		setfont("SMALLFONT");
+		Hudmessage(s:"Stat Points: ",d:CheckInventory("StatPoints");HUDMSG_PLAIN,51,CR_White, 320.0, 320.0,0.2,10);
+		Hudmessage(s:"Experience: ",d:CheckInventory("Experience"),s:" / ",d:Nextlevel;HUDMSG_PLAIN,52,CR_White, 320.0, 330.0,0.2,10);
+		Hudmessage(s:"Forward and backward to change selection. use to select";HUDMSG_PLAIN,53,CR_White, 320.0, 350.0,0.2,10);
+		Hudmessage(s:"Health: ",d:getActorProperty(0,APROP_HEALTH),s:" / ",d:getActorProperty(0,APROP_SPAWNHEALTH);HUDMSG_PLAIN,54,CR_White, 320.0, 70.0,0.2,10);
+		Hudmessage(s:"Energy: ",d:CheckInventory("Mana"),s:" / ",d:Getammocapacity("mana");HUDMSG_PLAIN,55,CR_White, 320.0, 80.0,0.2,10);
+		
+		if(Selection==0)
+		{
+			HudMessage (s:"Vitality: ",d:CheckInventory("StatVit");
+				HUDMSG_PLAIN,12,CR_GOLD, 320.0, 180.0,0.2,10);
+			Hudmessage(s:"Increases max health by 2%.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Vitality: ",d:CheckInventory("StatVit");
+				HUDMSG_PLAIN,12,CR_Darkgrey, 320.0, 180.0,0.2,10);
+		}
+	
+		if(Selection==1)
+		{
+			HudMessage (s:"Attack: ",d:CheckInventory("StatAtk");
+				HUDMSG_PLAIN,13,CR_GOLD, 320.0, 190.0,0.2,10);
+			Hudmessage(s:"Increases Damage by 2%.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Attack: ",d:CheckInventory("Statatk");
+				HUDMSG_PLAIN,13,CR_Darkgrey, 320.0, 190.0,0.2,10);
+		}
+	
+		if(Selection==2)
+		{
+			HudMessage (s:"Power: ",d:CheckInventory("StatInt");
+				HUDMSG_PLAIN,14,CR_GOLD, 320.0, 200.0,0.2,10);
+			Hudmessage(s:"Increases Energy by 1.5.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Power: ",d:CheckInventory("StatInt");
+				HUDMSG_PLAIN,14,CR_Darkgrey, 320.0, 200.0,0.2,10);
+		}
+	
+		if(Selection==3)
+		{
+			HudMessage (s:"Defense: ",d:CheckInventory("StatDef");
+				HUDMSG_PLAIN,16,CR_GOLD, 320.0, 210.0,0.2,10);
+			Hudmessage(s:"Decreases damage taken by 0.5% and Reduces knockback.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Defense: ",d:CheckInventory("StatDef");
+				HUDMSG_PLAIN,16,CR_Darkgrey, 320.0, 210.0,0.2,10);
+		}
+	
+		if(Selection==4)
+		{
+			HudMessage (s:"Skills Menu";
+				HUDMSG_PLAIN,125,CR_GOLD, 320.0, 240.0,0.2,10);
+			Hudmessage(s:"Enters skills menu";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Skills Menu";
+				HUDMSG_PLAIN,25,CR_Darkgrey, 320.0, 240.0,0.2,10);
+		}
+		
+		if(Selection==5)
+		{
+			HudMessage (s:"Exit Menu";
+				HUDMSG_PLAIN,17,CR_GOLD, 320.0, 280.0,0.2,10);
+			Hudmessage(s:"Exits the menu.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Exit Menu";
+				HUDMSG_PLAIN,17,CR_Darkgrey, 320.0, 280.0,0.2,10);
+		}
+}
+
+Function Void MRPGinmenu2TEXT (Int Selection)
+{
+
+		setfont("BIGFONT");
+		sethudsize (640,400, 1);
+		Hudmessage(s:"Skills Menu.";HUDMSG_PLAIN,50,CR_White, 320.0, 50.0,0.2,10);
+		
+		setfont("SMALLFONT");
+		Hudmessage(s:"Skill Points: ",d:CheckInventory("SkillPoints");HUDMSG_PLAIN,51,CR_White, 320.0, 320.0,0.2,10);
+		Hudmessage(s:"Forward and backward to change selection. use to select";HUDMSG_PLAIN,53,CR_White, 320.0, 340.0,0.2,10);
+		
+		if(Selection==0)
+		{
+			HudMessage (s:"Energy Regen: ",d:CheckInventory("SKManaRegen");
+				HUDMSG_PLAIN,12,CR_GOLD, 320.0, 100.0,0.2,10);
+			Hudmessage(s:"Regenerates Energy slowly. Costs 5. Max 1.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Energy Regen: ",d:CheckInventory("SKManaRegen");
+				HUDMSG_PLAIN,12,CR_Darkgrey, 320.0, 100.0,0.2,10);
+		}
+		
+		if(Selection==1)
+		{
+			HudMessage (s:"Health Regen: ",d:CheckInventory("SKHealthRegen");
+				HUDMSG_PLAIN,13,CR_GOLD, 320.0, 110.0,0.2,10);
+			Hudmessage(s:"Regenerates Health slowly. Costs 5. Max 1.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Health Regen: ",d:CheckInventory("SKHealthRegen");
+				HUDMSG_PLAIN,13,CR_Darkgrey, 320.0, 110.0,0.2,10);
+		}
+		
+		if(Selection==2)
+		{
+			HudMessage (s:"Exit Menu";
+				HUDMSG_PLAIN,30,CR_GOLD, 320.0, 280.0,0.2,10);
+			Hudmessage(s:"Exits the menu.";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Exit Menu";
+				HUDMSG_PLAIN,30,CR_Darkgrey, 320.0, 280.0,0.2,10);
+		}
+}
+
+script "MRPGOpenMenu" (void)
+{
+	if(CheckInventory("MenuOpen")>=1)
+	{
+		TakeInventory("MenuOpen",99);
+		SetPlayerProperty(0, False, PROP_TOTALLYFROZEN);
+	}
+	else
+	{
+		GiveInventory("MenuOpen",1);
+		ACS_NamedExecuteAlways("MRPGinmenu",0);
+	}
+	Delay(10);
+}
+
+script "MRPGinmenu" (void)
+{
+	SetPlayerProperty(0, true, PROP_TOTALLYFROZEN);
+	int button,
+	Selection;
+	while(CheckInventory("MenuOpen")==1)
+	{
+		button = GetPlayerInput(-1, INPUT_BUTTONS);
+		if (button & BT_FORWARD)
+		{
+			if(Selection>0)
+			{
+				Selection--;
+				Delay(5);
+			}
+		}
+	
+		else if (button & BT_back)
+		{
+			if(Selection<5)
+			{
+				Selection++;
+				Delay(5);
+			}
+		}
+
+		else if (button & BT_USE)
+		{
+			Switch(Selection)
+			{
+				case 0:
+				if (CheckInventory("statPoints") >= 1 && CheckInventory("StatVIT") < 1000)
+					{
+						TakeInventory("statPoints",1);
+						GiveInventory("StatVIT",1);
+					}
+				Break;
+			
+				case 1:
+				if (CheckInventory("statPoints") >= 1 && CheckInventory("StatATK") < 1000)
+					{
+						TakeInventory("statPoints",1);
+						GiveInventory("StatATK",1);
+					}
+				Break;
+			
+				case 2:
+				if (CheckInventory("statPoints") >= 1 && CheckInventory("StatINT") < 1000)
+					{
+						TakeInventory("statPoints",1);
+						GiveInventory("StatINT",1);
+					}
+				Break;
+			
+				case 3:
+				if (CheckInventory("statPoints") >= 1 && CheckInventory("StatDEF") < 1000)
+					{
+						TakeInventory("statPoints",1);
+						GiveInventory("StatDEF",1);
+					}
+				Break;
+				
+				case 4:
+				GiveInventory("MenuOpen",1);
+				Selection=0;
+				Break;
+				
+				//always last
+				case 5:
+				TakeInventory("MenuOpen",1);
+				SetPlayerProperty(0, False, PROP_TOTALLYFROZEN);
+				Break;
+				
+			}
+			Delay(5);
+			ACS_NamedExecuteAlways("UpdateStats",0);
+		}
+		MRPGinmenuTEXT(Selection);
+		Delay(1);
+	}
+	while(CheckInventory("MenuOpen")==2)
+	{
+		button = GetPlayerInput(-1, INPUT_BUTTONS);
+		if (button & BT_FORWARD)
+		{
+			if(Selection>0)
+			{
+				Selection--;
+				Delay(5);
+			}
+		}
+	
+		else if (button & BT_back)
+		{
+			if(Selection<2)
+			{
+				Selection++;
+				Delay(5);
+			}
+		}
+		
+		else if (button & BT_USE)
+		{
+			Switch(Selection)
+			{	
+				Case 0:
+				if (CheckInventory("SkillPoints") >= 5 && CheckInventory("SKManaRegen") < 1)
+				{
+					TakeInventory("SkillPoints",5);
+					GiveInventory("SKManaRegen",1);
+					GiveInventory("SpentSkillPoints",5);
+				}
+				Break;
+				
+				Case 1:
+				if (CheckInventory("SkillPoints") >= 5 && CheckInventory("SKHealthRegen") < 1)
+				{
+					TakeInventory("SkillPoints",5);
+					GiveInventory("SKHealthRegen",1);
+					GiveInventory("SpentSkillPoints",5);
+				}
+				Break;
+				
+				//always last
+				case 2:
+				TakeInventory("MenuOpen",1);
+				Selection=0;
+				Restart;
+				Break;
+			}
+		}
+		MRPGinmenu2TEXT(Selection);
+		Delay(1);
+	}
+}

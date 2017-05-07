@@ -2,7 +2,7 @@
 #include "zcommon.acs"
 #define PLAYER_TID_START 1000
 
-script "savescript" Unloading
+script "MRPGsavescript" Unloading
 {
 	if (getcvar("MRPG_SaveEnabled") == False)
 	{Terminate;}
@@ -11,45 +11,48 @@ script "savescript" Unloading
 	{
 		SetUserCVar(i,"MRPG_StatLevel",CheckActorInventory(PLAYER_TID_START + i,"Playerlevel"));
 		SetUserCVar(i,"MRPG_StatPoints",CheckActorInventory(PLAYER_TID_START + i,"Statpoints"));
+		SetUserCVar(i,"MRPG_SkillPoints",CheckActorInventory(PLAYER_TID_START + i,"SkillPoints")+CheckActorInventory(PLAYER_TID_START + i,"SpentSkillPoints"));
 		SetUserCVar(i,"MRPG_StatEXP",CheckActorInventory(PLAYER_TID_START + i,"Experience"));
 		SetUserCVar(i,"MRPG_StatVIT",CheckActorInventory(PLAYER_TID_START + i,"StatVIT"));
 		SetUserCVar(i,"MRPG_StatATK",CheckActorInventory(PLAYER_TID_START + i,"StatATK"));
 		SetUserCVar(i,"MRPG_StatINT",CheckActorInventory(PLAYER_TID_START + i,"StatINT"));
-		SetUserCVar(i,"MRPG_StatSTR",CheckActorInventory(PLAYER_TID_START + i,"StatSTR"));
 		SetUserCVar(i,"MRPG_StatDEF",CheckActorInventory(PLAYER_TID_START + i,"StatDEF"));
 	}
 }
 
-script "Loadscript" Enter
+script "MRPGLoadscript" Enter
 {
-	if (getcvar("MRPG_SaveEnabled") == False)
+	if (getcvar("MRPG_SaveEnabled") == False || CheckInventory("MRPGhasloaded") == 1)
 	{Terminate;}
 	delay(1);
 	
 	TakeInventory("Playerlevel",GetUserCVar(PlayerNumber(),"MRPG_StatLevel"));
 	TakeInventory("StatPoints",GetUserCVar(PlayerNumber(),"MRPG_StatPoints"));
+	TakeInventory("SkillPoints",GetUserCVar(PlayerNumber(),"MRPG_SkillPoints"));
+	TakeInventory("SpentSkillPoints",999);
 	TakeInventory("Experience",GetUserCVar(PlayerNumber(),"MRPG_StatEXP"));
 	TakeInventory("StatVIT",GetUserCVar(PlayerNumber(),"MRPG_StatVIT"));
 	TakeInventory("StatATK",GetUserCVar(PlayerNumber(),"MRPG_StatATK"));
 	TakeInventory("StatINT",GetUserCVar(PlayerNumber(),"MRPG_StatINT"));
-	TakeInventory("StatSTR",GetUserCVar(PlayerNumber(),"MRPG_StatSTR"));
 	TakeInventory("StatDEF",GetUserCVar(PlayerNumber(),"MRPG_StatDEF"));
 	
 	GiveInventory("Playerlevel",GetUserCVar(PlayerNumber(),"MRPG_StatLevel"));
 	GiveInventory("StatPoints",GetUserCVar(PlayerNumber(),"MRPG_StatPoints"));
+	GiveInventory("SkillPoints",GetUserCVar(PlayerNumber(),"MRPG_SkillPoints"));
 	GiveInventory("Experience",GetUserCVar(PlayerNumber(),"MRPG_StatEXP"));
 	GiveInventory("StatVIT",GetUserCVar(PlayerNumber(),"MRPG_StatVIT"));
 	GiveInventory("StatATK",GetUserCVar(PlayerNumber(),"MRPG_StatATK"));
 	GiveInventory("StatINT",GetUserCVar(PlayerNumber(),"MRPG_StatINT"));
-	GiveInventory("StatSTR",GetUserCVar(PlayerNumber(),"MRPG_StatSTR"));
 	GiveInventory("StatDEF",GetUserCVar(PlayerNumber(),"MRPG_StatDEF"));
+	GiveInventory("MRPGhasloaded",1);
 	
 }
 
-script "Clearscript" (Void)
+script "MRPGClearscript" (Void)
 {
 	setCVar("MRPG_StatLevel",1);
 	SetCVar("MRPG_StatPoints",0);
+	SetCVar("MRPG_SkillPoints",0);
 	SetCVar("MRPG_StatEXP",0);
 	SetCVar("MRPG_StatVIT",0);
 	SetCVar("MRPG_StatATK",0);

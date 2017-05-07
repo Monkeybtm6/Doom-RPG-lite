@@ -1,0 +1,6 @@
+1.5.0:
+	Can no longer waste points on a maxed out stat
+	Mana renamed to Energy to avoid confusion in hexen.
+	Can no longer gain experience by killing your own summons.
+	Summons now have their own attack.
+	Added a skill points system.
