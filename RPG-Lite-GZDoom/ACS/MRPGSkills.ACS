@@ -15,7 +15,15 @@ Script "ConstSkillActivator" (void)
 			Giveinventory("Skillhealthgiver",1);
 		}
 	}
-	Delay(35);
+	
+	if (CheckInventory("SKArmorRegen") >= 1)
+	{
+		if(CheckInventory("Armor") < (10 * CheckInventory("SKArmorRegen")))
+		{
+			Giveinventory("Skillarmorgiver",1);
+		}
+	}
+	Delay(50);
 	Restart;
 }
 

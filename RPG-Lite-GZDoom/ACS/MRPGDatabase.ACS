@@ -60,3 +60,15 @@ script "MRPGClearscript" (Void)
 	SetCVar("MRPG_StatSTR",0);
 	SetCVar("MRPG_StatDEF",0);
 }
+
+script "MRPGSetDefaults" (Void)
+{
+	setCVar("MRPG_EXPBase",100);
+	SetCVar("MRPG_EXPMult",1.0);
+	SetCVar("MRPG_StatsPerLevel",8);
+	SetCVar("MRPG_SkillsPerLevel",1);
+	SetCVar("MRPG_LevelCap",100);
+	SetCVar("MRPG_MonsterScaling",True);
+	SetCVar("MRPG_SaveEnabled",True);
+	SetCVar("MRPG_RandomStats",False);
+}

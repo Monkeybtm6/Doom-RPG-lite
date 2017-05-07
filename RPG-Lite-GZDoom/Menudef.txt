@@ -28,10 +28,10 @@ OptionMenu "MRPGOpt"
 	StaticText " "
 	StaticText "Player Growth Settings."
 	StaticText " "
-	Slider "Base Experience Rate", "MRPG_EXPBase", 000, 200, 5.0, 0
+	Slider "Base Experience Rate", "MRPG_EXPBase", 010, 200, 5.0, 0
 	Slider "Experience Multiplier", "MRPG_EXPMult", 1.0, 2.0, 0.1, 1
-	Slider "Stat points per level", "MRPG_StatsPerLevel", 1, 20, 1.0, 0
-	Slider "Skill points per level", "MRPG_SkillsPerLevel", 1, 20, 1.0, 0
+	Slider "Stat points per level", "MRPG_StatsPerLevel", 1, 16, 1.0, 0
+	Slider "Skill points per level", "MRPG_SkillsPerLevel", 1, 5, 1.0, 0
 	Slider "Level Cap", "MRPG_Levelcap", 10, 200, 1.0, 0
 	Option "Random Stat Allocation", "MRPG_RandomStats", "OnOff"
 	StaticText " "

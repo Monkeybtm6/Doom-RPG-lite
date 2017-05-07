@@ -114,7 +114,7 @@ Function Void MRPGinmenu2TEXT (Int Selection)
 		{
 			HudMessage (s:"Energy Regen: ",d:CheckInventory("SKManaRegen");
 				HUDMSG_PLAIN,12,CR_GOLD, 320.0, 100.0,0.2,10);
-			Hudmessage(s:"Regenerates Energy slowly. 1 energy point per rank, per second. (Max 10)";
+			Hudmessage(s:"Regenerates Energy slowly. 1 energy point per rank, per cycle. (Max 10)";
 				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
 			Hudmessage(s:"Cost: ",d:(2 * (CheckInventory("SKManaRegen") + 1));
 				HUDMSG_PLAIN,23,CR_White, 320.0, 310.0,0.2,10);
@@ -141,6 +141,21 @@ Function Void MRPGinmenu2TEXT (Int Selection)
 		}
 		
 		if(Selection==2)
+		{
+			HudMessage (s:"Armor Regen: ",d:CheckInventory("SKArmorRegen");
+				HUDMSG_PLAIN,14,CR_GOLD, 320.0, 120.0,0.2,10);
+			Hudmessage(s:"Regenerates Armor slowly to a max of 10 per rank. (max 10)";
+				HUDMSG_PLAIN,22,CR_White, 320.0, 300.0,0.2,10);
+			Hudmessage(s:"Cost: ",d:(2 * (CheckInventory("SKArmorRegen") + 1));
+				HUDMSG_PLAIN,23,CR_White, 320.0, 310.0,0.2,10);
+		}
+		else
+		{
+			HudMessage (s:"Armor Regen: ",d:CheckInventory("SKArmorRegen");
+				HUDMSG_PLAIN,14,CR_Darkgrey, 320.0, 120.0,0.2,10);
+		}
+		
+		if(Selection==3)
 		{
 			HudMessage (s:"Exit Menu";
 				HUDMSG_PLAIN,30,CR_GOLD, 320.0, 270.0,0.2,10);
@@ -265,7 +280,7 @@ script "MRPGinmenu" (void)
 	
 		else if (button & BT_back)
 		{
-			if(Selection<2)
+			if(Selection<3)
 			{
 				Selection++;
 				Delay(5);
@@ -296,8 +311,18 @@ script "MRPGinmenu" (void)
 				}
 				Break;
 				
+				Case 2:
+				if (CheckInventory("SkillPoints") >= (2 * (CheckInventory("SKArmorRegen") + 1)) && CheckInventory("SKArmorRegen") < 10)
+				{
+					TakeInventory("SkillPoints",2 * (CheckInventory("SKArmorRegen")+1));
+					GiveInventory("SpentSkillPoints",(2 * CheckInventory("SKArmorRegen")+1));
+					GiveInventory("SKArmorRegen",1);
+					Delay(5);
+				}
+				Break;
+				
 				//always last
-				case 2:
+				case 3:
 				TakeInventory("MenuOpen",1);
 				Selection=0;
 				Restart;

@@ -12,3 +12,15 @@ Actor SkillHealthgiver : health
 {
   Inventory.amount 1
 }
+
+Actor SKArmorregen : Inventory
+{
+  Inventory.Maxamount 10
+}
+
+Actor SkillArmorgiver : BasicArmorBonus
+{
+  Armor.SavePercent 5
+  Armor.SaveAmount 1
+  Armor.MaxSaveAmount 100
+}
