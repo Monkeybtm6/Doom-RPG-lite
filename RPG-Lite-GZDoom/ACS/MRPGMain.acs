@@ -6,7 +6,7 @@
 #define PLAYER_TID_START 1000
 
 #define atkbase 0.02
-#define Defbase 0.005
+#define Defbase 0.0025
 
 str StatArray[4] =
 {
@@ -30,7 +30,7 @@ Function int ThisLevel (void)
 	}
 	LevelSet = (levelav / playercount());
  
-	Return (Leveladd + LevelSet) + Random(0,SkillMult);
+	Return (Leveladd + LevelSet) + Random(-10,SkillMult);
 }
 
 Script "UpdateStats" (void)
@@ -44,7 +44,7 @@ Script "UpdateStats" (void)
 	Player_Max_Health_in = CheckInventory("StatVIT") * 2,
 	Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
 	MyInt = (1.5 * CheckInventory("StatINT")) >> 16,
-	MyMass = CheckInventory("StatDEF") / 2,
+	MyMass = CheckInventory("StatDEF") / 4,
 	Damagereduction = defbase * CheckInventory("StatDEF"),
 	DamageBoost = atkbase * CheckInventory("StatATK");
   
@@ -53,9 +53,9 @@ Script "UpdateStats" (void)
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_Mass, 100 + (MyMass >> 16));
 	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
 	
-	if(getactorproperty(0,APROP_DamageFactor)<0.2)
+	if(getactorproperty(0,APROP_DamageFactor)<0.5)
 	{
-		SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 0.2);
+		SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 0.5);
 	}
 	SetAmmoCapacity("Mana", 75 + MyInt); 
 }
@@ -179,7 +179,7 @@ script "MonsterLoop" (Void)
 	//Monster initialization
 	Delay(5);
 	int MonLevel = ThisLevel();
-	int MonStats = (GetCvar("MRPG_statsperlevel") * MonLevel) / 4;
+	int MonStats = (GetCvar("MRPG_statsperlevel") * MonLevel) / 3;
 	
 	GiveInventory("StatVIT", MonStats);
 	GiveInventory("StatATK", MonStats);
@@ -189,7 +189,7 @@ script "MonsterLoop" (Void)
 	MonHealthmult = 0.02 * CheckInventory("StatVIT"),
 	DamageBoost = atkbase * CheckInventory("StatATK"),
 	MonMass = getactorproperty(0,APROP_MASS),
-	MonMassMult = 0.005 * CheckInventory("StatDEF"),
+	MonMassMult = 0.0025 * CheckInventory("StatDEF"),
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
 	if(getcvar("MRPG_Monsterscaling") == true)
 	{
@@ -207,6 +207,15 @@ script "MonsterLoop" (Void)
 	SetActivatorToTarget(0);
 	ACS_NamedExecuteAlways("Levelupcheck",0,MonEXP);
 	GiveActorinventory(0,"Mana",random(1,10));
+	
+	if(CheckInventory("SKRefuel") >= 1)
+	{
+		DropItem(0,"AmmoSynthEffect",1,(32 * CheckInventory("SKRefuel")));
+	}
+	if(CheckInventory("SKVampirisim") >= 1)
+	{
+		GiveInventory("Health",(Random(1,CheckInventory("SKVampirisim"))));
+	}
 }
 
 script "FriendlySummon" (int Duration)

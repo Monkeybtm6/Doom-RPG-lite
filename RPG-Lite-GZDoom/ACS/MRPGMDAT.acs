@@ -1,0 +1,36 @@
+#library "MRPGMdat"
+#include "zcommon.acs"
+
+#libDefine TotalSubMenus 2
+#libdefine TotalOptions 20
+
+struct Menustruct
+{
+	str name;
+	str item;
+	str desc;
+	int Cost;
+	int levelreq;
+	int maxrank;
+}
+
+Menustruct Menuoptions[TotalSubMenus][TotalOptions] =
+{
+	{
+		{"menu1opt01","StatVIT","menu1Desc01",0,0,0},
+		{"menu1opt02","StatATK","menu1Desc02",0,0,0},
+		{"menu1opt03","StatINT","menu1Desc03",0,0,0},
+		{"menu1opt04","StatDEF","menu1Desc04",0,0,0},
+		{"menu1opt05","","menu1Desc05",0,0,0},
+		{"menu1opt06","","menu1Desc06",0,0,0}
+	},
+	{
+		{"menu2opt04","SKRefuel","menu2Desc04",1, 2, 5},
+		{"menu2opt06","SKVampirisim","menu2Desc06",1, 2, 5},
+		{"menu2opt01","SKManaRegen","menu2Desc01",2, 4, 10},
+		{"menu2opt02","SKHealthRegen","menu2Desc02",2, 6, 10},
+		{"menu2opt03","SKArmorRegen","menu2Desc03",2, 8, 10},
+		{"menu2opt05","","menu2Desc05",0,0,0},
+		{"menu1opt06","","menu1Desc06",0,0,0}
+	}
+};

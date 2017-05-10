@@ -24,3 +24,13 @@ Actor SkillArmorgiver : BasicArmorBonus
   Armor.SaveAmount 1
   Armor.MaxSaveAmount 100
 }
+
+Actor SKRefuel : Inventory
+{
+  Inventory.Maxamount 5
+}
+
+Actor SKVampirisim : Inventory
+{
+  Inventory.Maxamount 5
+}

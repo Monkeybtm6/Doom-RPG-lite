@@ -10,7 +10,7 @@ Script "ConstSkillActivator" (void)
 	
 	if (CheckInventory("SKHealthRegen") >= 1)
 	{
-		if(CheckInventory("Health") < (20 * CheckInventory("SKHealthRegen")))
+		if(CheckInventory("Health") < (10 * CheckInventory("SKHealthRegen")))
 		{
 			Giveinventory("Skillhealthgiver",1);
 		}
@@ -23,7 +23,7 @@ Script "ConstSkillActivator" (void)
 			Giveinventory("Skillarmorgiver",1);
 		}
 	}
-	Delay(50);
+	Delay(60);
 	Restart;
 }
 

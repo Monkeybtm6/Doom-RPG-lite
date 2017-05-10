@@ -26,6 +26,8 @@ OptionMenu "MRPGOpt"
 {
 	Title "RPG Options"
 	StaticText " "
+	Submenu "Scripted Hud Options", "MRPGHUDOpt"
+	StaticText " "
 	StaticText "Player Growth Settings."
 	StaticText " "
 	Slider "Base Experience Rate", "MRPG_EXPBase", 010, 200, 5.0, 0
@@ -43,4 +45,16 @@ OptionMenu "MRPGOpt"
 	StaticText "Monster Settings."
 	StaticText " "
 	Option "Monster Level Scaling", "MRPG_MonsterScaling", "OnOff"
+}
+
+OptionMenu "MRPGHUDOpt"
+{
+	Title "Scripted Hud Options"
+	StaticText " "
+	Option "Scripted Hud", "MRPG_scrhudenabled", "OnOff"
+	StaticText " "
+	StaticText "Power Location"
+	StaticText " "
+	Slider "X Pos", "MRPG_scrhudmanax", 000, 640, 1.0, 0
+	Slider "Y Pos", "MRPG_scrhudmanay", 000, 400, 1.0, 0
 }

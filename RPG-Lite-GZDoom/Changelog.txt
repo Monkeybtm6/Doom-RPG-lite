@@ -6,3 +6,4 @@
 	Added a skill points system.
 	Fixed bug where random stat allocation would occassionally eat stat points.
 	Fixed errors in hexen.
+	
