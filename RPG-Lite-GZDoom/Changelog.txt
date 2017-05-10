@@ -3,7 +3,8 @@
 	Mana renamed to Energy to avoid confusion in hexen.
 	Can no longer gain experience by killing your own summons.
 	Summons now have their own attack.
-	Added a skill points system.
+	Added a skills system.
 	Fixed bug where random stat allocation would occassionally eat stat points.
 	Fixed errors in hexen.
-	
+	Fixed ACS errors that were appearing in several mods and games.
+	Menu system entirely recoded.

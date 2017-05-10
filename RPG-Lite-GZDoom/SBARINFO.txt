@@ -25,18 +25,18 @@ statusbar fullscreen, fullscreenoffsets
 
     usesSecondaryammo not
 	{
-		DrawString SMALLFONT, White, Weapontag, -16, -32;
+		DrawString SMALLFONT, Untranslated, Weapontag, -16, -32;
 		DrawBar "HUDVAMSM", "HUDVSM", ammo1,Vertical,-14,-124;
-		drawnumber 4, BIGFONT, White, ammo1, drawshadow, alignment(right), -18, -18;
+		drawnumber 4, BIGFONT, Untranslated, ammo1, drawshadow, alignment(right), -18, -18;
 	}
 	//secondary ammo
     usessecondaryammo
     {
-        DrawString SMALLFONT, White, Weapontag, -28, -44;
+        DrawString SMALLFONT, Untranslated, Weapontag, -28, -44;
         DrawBar "HUDVAMSM", "HUDVSM", ammo2,Vertical,-14,-124;
-		drawnumber 4, BIGFONT, White, ammo2, drawshadow,alignment(right), -28, -18;
+		drawnumber 4, BIGFONT, Untranslated, ammo2, drawshadow,alignment(right), -28, -18;
 		DrawBar "HUDVAMSM", "HUDVSM", ammo1,Vertical,-26,-124;
-		drawnumber 4, BIGFONT, White, ammo1, drawshadow, alignment(right), -28, -32;
+		drawnumber 4, BIGFONT, Untranslated, ammo1, drawshadow, alignment(right), -28, -32;
 
     }
 

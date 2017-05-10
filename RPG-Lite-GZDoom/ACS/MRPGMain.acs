@@ -18,7 +18,7 @@ str StatArray[4] =
 
 Function int ThisLevel (void)
 {
-	int SkillMult = 5 * GameSkill(),
+	int SkillMult = 2 * GameSkill(),
 	leveladd = playercount() * 1,
 	levelSet,
 	i = 0,
@@ -30,7 +30,7 @@ Function int ThisLevel (void)
 	}
 	LevelSet = (levelav / playercount());
  
-	Return (Leveladd + LevelSet) + Random(-10,SkillMult);
+	Return (Leveladd + LevelSet) + Random(-10, (10 - SkillMult));
 }
 
 Script "UpdateStats" (void)

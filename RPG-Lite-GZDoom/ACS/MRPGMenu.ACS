@@ -174,7 +174,7 @@ script "MRPGinmenu" (void)
 				Case 3:
 				Case 4:
 				if (CheckInventory("SkillPoints") >= (Menuoptions[1][Selection].Cost * (CheckInventory(Menuoptions[1][Selection].item) + 1)) 
-				&& CheckInventory(Menuoptions[1][Selection].item) < 10 
+				&& CheckInventory(Menuoptions[1][Selection].item) < Menuoptions[1][Selection].maxrank 
 				&& CheckInventory("Playerlevel") >= Menuoptions[1][Selection].levelreq)
 				{
 					TakeInventory("SkillPoints",Menuoptions[1][Selection].Cost * (CheckInventory(Menuoptions[1][Selection].item)+1));
