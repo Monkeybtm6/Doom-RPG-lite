@@ -30,7 +30,7 @@ Function int ThisLevel (void)
 	}
 	LevelSet = (levelav / playercount());
  
-	Return (Leveladd + LevelSet) + Random(-10, (10 - SkillMult));
+	Return (Leveladd + LevelSet) + Random(-10 -(Levelset/10), 10 +(Levelset/10));
 }
 
 Script "UpdateStats" (void)
@@ -93,8 +93,7 @@ Script "Levelupcheck" (int EXPA)
 		Terminate; 
 	}
 	
-	int EXP = CheckInventory("Experience"),
-	Lvl = CheckInventory("Playerlevel"),
+	int Lvl = CheckInventory("Playerlevel"),
 	EXPBase = GetCvar("MRPG_EXPBase"),
 	EXPMULT = GetCvar("MRPG_EXPMULT"),
 	Statincrease = GetCvar("MRPG_statsperlevel"),
@@ -105,7 +104,7 @@ Script "Levelupcheck" (int EXPA)
 
 	GiveInventory("Experience", EXPA);
  
-	if(CheckInventory("Experience") >= Nextlevel && LVL <= Maxlevel)
+	While(CheckInventory("Experience") >= Nextlevel && LVL <= Maxlevel)
 	{
 		GiveInventory("Playerlevel", 1);
 		TakeInventory("Experience",Nextlevel);
@@ -113,9 +112,12 @@ Script "Levelupcheck" (int EXPA)
 		
 		setfont("SMALLFONT");
 		sethudsize (640,400, 1);
-		Hudmessage(s:"You have gained a level!";HUDMSG_PLAIN,10,CR_Red, 340.0, 150.0,5.0,1.0);
+		Hudmessage(s:"You have gained a level!";HUDMSG_PLAIN,10,CR_UNTRANSLATED, 340.0, 150.0,5.0,1.0);
 		Playsound(0,"misc/p_pkup");
 		GiveInventory("SkillPoints",Skillincrease);
+		
+		Lvl = CheckInventory("Playerlevel");
+		Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16);
 		
 		if(GetUserCVar(PlayerNumber(),"MRPG_RandomStats")==false)
 		{	
@@ -179,11 +181,13 @@ script "MonsterLoop" (Void)
 	//Monster initialization
 	Delay(5);
 	int MonLevel = ThisLevel();
-	int MonStats = (GetCvar("MRPG_statsperlevel") * MonLevel) / 3;
+	int MonStats = ((GetCvar("MRPG_statsperlevel") * MonLevel) / 4);
 	
 	GiveInventory("StatVIT", MonStats);
 	GiveInventory("StatATK", MonStats);
 	GiveInventory("StatDEF", MonStats);
+	
+	GiveInventory("PlayerLevel", MonLevel);
 	
 	int MonHealth = getactorproperty(0, APROP_Health),
 	MonHealthmult = 0.02 * CheckInventory("StatVIT"),
@@ -193,6 +197,7 @@ script "MonsterLoop" (Void)
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
 	if(getcvar("MRPG_Monsterscaling") == true)
 	{
+		GiveInventory("MyMaxHealth", (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_Health, (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_DamageMultiplier, 1.0 + DamageBoost);
 		SetActorProperty(0, APROP_Mass, MonMass * (1.0 + MonMassMult) >> 16);
@@ -204,8 +209,14 @@ script "MonsterLoop" (Void)
 	}
 	//Death
 	DropItem(0,"SpellSpawner",1,25);
+	
+	for (int i = 0; i < playercount(); i++) 
+	{
+		GiveActorInventory(PLAYER_TID_START + i,"Experience",MonEXP);
+	}
+	
 	SetActivatorToTarget(0);
-	ACS_NamedExecuteAlways("Levelupcheck",0,MonEXP);
+		ACS_NamedExecuteAlways("Levelupcheck",0,0);
 	GiveActorinventory(0,"Mana",random(1,10));
 	
 	if(CheckInventory("SKRefuel") >= 1)
@@ -221,5 +232,18 @@ script "MonsterLoop" (Void)
 script "FriendlySummon" (int Duration)
 {
 	Delay(35*Duration);
+	
 	DamageThing(0);
+}
+
+script "Healthbonuseffect" (int amount)
+{
+	int setMaxhealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+	
+	GiveInventory("HealthBonEffect",amount);
+	
+	If(GetActorProperty(0,APROP_HEALTH) > (setMaxhealth + 100))
+	{
+		SetActorProperty(0, APROP_Health, (setMaxhealth + 100));
+	}
 }

@@ -153,3 +153,10 @@ Actor SpentSkillPoints : Inventory
     loop
   }
 }
+
+Actor MyMaxHealth : Inventory
+{          
+  Inventory.Amount 1
+  Inventory.MaxAmount 99999
+  +INVENTORY.ALWAYSPICKUP
+}

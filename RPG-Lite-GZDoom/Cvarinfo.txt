@@ -1,7 +1,7 @@
 Server Int MRPG_EXPBase = 100;
 Server Float MRPG_EXPMult = 1.0;
 Server Int MRPG_StatsPerLevel = 8;
-Server Int MRPG_SkillsPerLevel = 1;
+Server Int MRPG_SkillsPerLevel = 2;
 Server Int MRPG_LevelCap = 100;
 Server bool MRPG_MonsterScaling = True;
 

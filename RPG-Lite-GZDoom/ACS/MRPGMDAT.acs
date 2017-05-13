@@ -28,6 +28,7 @@ Menustruct Menuoptions[TotalSubMenus][TotalOptions] =
 		{"menu2opt04","SKRefuel","menu2Desc04",1, 2, 5},
 		{"menu2opt06","SKVampirisim","menu2Desc06",1, 2, 5},
 		{"menu2opt01","SKManaRegen","menu2Desc01",2, 4, 10},
+		{"menu2opt07","SKMagicPotency","menu2Desc07",2, 5, 5},
 		{"menu2opt02","SKHealthRegen","menu2Desc02",2, 6, 10},
 		{"menu2opt03","SKArmorRegen","menu2Desc03",2, 8, 10},
 		{"menu2opt05","","menu2Desc05",0,0,0},

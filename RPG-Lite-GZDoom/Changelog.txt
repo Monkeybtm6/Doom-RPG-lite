@@ -8,3 +8,6 @@
 	Fixed errors in hexen.
 	Fixed ACS errors that were appearing in several mods and games.
 	Menu system entirely recoded.
+	Health bonuses and soulspheres should max out at 100 above max health now.
+	Added Holy Fire spell.
+	

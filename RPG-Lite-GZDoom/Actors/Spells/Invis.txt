@@ -1,0 +1,82 @@
+ACTOR SPInvis : SPBaseSpell
+{
+
+  +INVENTORY.INVBAR
+  +FLOATBOB
+  +INVENTORY.ALWAYSPICKUP
+  inventory.maxamount 5
+  Inventory.InterHubAmount 1
+  inventory.icon PIN2_I
+  Inventory.PickupMessage "Picked up Partial invisibility upgrade" 
+  States
+  {
+  Spawn:
+    PIN2 A -1
+    Stop
+  Use:
+	TNT1 A 0 A_JumpIfInventory("Mana",40,"ConfirmUse")
+    TNT1 A 0 A_Print("Needs 40 mana")
+	fail
+  ConfirmUse:
+	TNT1 A 0 A_TakeInventory ("mana", 40)
+	TNT1 A 0 A_Playsound("misc/p_pkup", CHAN_WEAPON)
+	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",5,"Power5")
+	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",4,"Power4")
+	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",3,"Power3")
+	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",2,"Power2")
+	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",1,"Power1")
+	TNT1 A 0 A_GiveInventory("PInvisEffect")
+	FAIL
+  Power1:
+	TNT1 A 0 A_GiveInventory("PInvisEffect1")
+	fail
+  Power2:
+	TNT1 A 0 A_GiveInventory("PInvisEffect2")
+	fail
+  Power3:
+	TNT1 A 0 A_GiveInventory("PInvisEffect3")
+	fail
+  Power4:
+	TNT1 A 0 A_GiveInventory("PInvisEffect4")
+	fail
+  Power5:
+	TNT1 A 0 A_GiveInventory("PInvisEffect5")
+	fail
+  }
+}
+
+ACTOR PInvisEffect : PowerupGiver
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.MaxAmount 0
+  Powerup.Type "Invisibility"
+  RenderStyle Translucent
+  Powerup.Duration -20
+
+}
+
+ACTOR PInvisEffect1 : PInvisEffect
+{
+  Powerup.Duration -24
+}
+
+ACTOR PInvisEffect2 : PInvisEffect
+{
+  Powerup.Duration -28
+}
+
+ACTOR PInvisEffect3 : PInvisEffect
+{
+  Powerup.Duration -32
+}
+
+ACTOR PInvisEffect4 : PInvisEffect
+{
+  Powerup.Duration -36
+}
+
+ACTOR PInvisEffect5 : PInvisEffect
+{
+  Powerup.Duration -40
+}

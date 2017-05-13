@@ -40,29 +40,28 @@ ACTOR BlurUpgrade : CustomInventory
   }
 }*/
 
-/*ACTOR RPGHealthBonus : HealthBonus replaces HealthBonus
+ACTOR RPGHealthBonus : CustomInventory replaces HealthBonus
 {
   +COUNTITEM
   +INVENTORY.ALWAYSPICKUP
-  Inventory.Amount 1
-  Inventory.MaxAmount 2000
   Inventory.PickupMessage "$GOTHTHBONUS" // "Picked up a health bonus."
   States
   {
   Spawn:
     BON1 ABCDCB 6
     Loop
+  Pickup:
+	TNT1 A 0 ACS_NAMEDEXECUTEALWAYS("Healthbonuseffect",0,1)
+	stop
   }
-}*/
+}
 
-/*ACTOR RPGSoulsphere : Soulsphere replaces Soulsphere
+ACTOR RPGSoulsphere : CustomInventory replaces Soulsphere
 {
   +COUNTITEM
   +INVENTORY.AUTOACTIVATE
   +INVENTORY.ALWAYSPICKUP
   +INVENTORY.FANCYPICKUPSOUND
-  Inventory.Amount 100
-  Inventory.MaxAmount 2000
   Inventory.PickupMessage "$GOTSUPER" // "Supercharge!"
   Inventory.PickupSound "misc/p_pkup"
   States
@@ -70,17 +69,26 @@ ACTOR BlurUpgrade : CustomInventory
   Spawn:
     SOUL ABCDCB 6 Bright
     Loop
+  Pickup:
+	TNT1 A 0 ACS_NAMEDEXECUTEALWAYS("Healthbonuseffect",0,100)
+	stop
   }
-}*/
+}
 
 Actor SpellSpawner : RandomSpawner 
 {
-  DropItem "SPBaseSpell",256,2
-  DropItem "SPInvis",256,2
-  DropItem "SPAmmoSynth",256,2
-  DropItem "SPSpeed",256,2
-  DropItem "SPRage",256,2
-  DropItem "SPPush",256,2
-  DropItem "SPLesserGuardian",256,2
-  DropItem "SPGuardian",256,1
+  DropItem "SPBaseSpell",256,4
+  DropItem "SPInvis",256,4
+  DropItem "SPAmmoSynth",256,4
+  DropItem "SPSpeed",256,4
+  DropItem "SPRage",256,4
+  DropItem "SPPush",256,4
+  DropItem "SPLesserGuardian",256,4
+  DropItem "SPGuardian",256,2
+  DropItem "SPHolyFire",256,1
+}
+
+Actor Healthboneffect : HealthBonus
+{
+	Inventory.MaxAmount 9999
 }

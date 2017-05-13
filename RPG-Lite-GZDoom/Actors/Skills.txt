@@ -34,3 +34,8 @@ Actor SKVampirisim : Inventory
 {
   Inventory.Maxamount 5
 }
+
+Actor SKMagicPotency : Inventory
+{
+  Inventory.Maxamount 5
+}

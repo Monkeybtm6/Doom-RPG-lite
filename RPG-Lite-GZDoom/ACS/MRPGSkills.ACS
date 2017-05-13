@@ -31,3 +31,10 @@ Script "SkillActivator" (void)
 {
 	Terminate;
 }
+
+Script "SkillMagicPotency" (void)
+{
+	int checkpotency = checkinventory("SKMagicPotency");
+	
+	setresultvalue(checkpotency);
+}
