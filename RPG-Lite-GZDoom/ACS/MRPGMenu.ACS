@@ -18,19 +18,23 @@ Function Void MRPGinmenuTEXT (Int selected, Int Selections, Int Submenu)
 	EXPBase = GetCvar("MRPG_EXPBase"),
 	EXPMULT = GetCvar("MRPG_EXPMULT"),
 	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16);
-	setfont("BIGFONT");
 	sethudsize (640,400, 1);
-	Hudmessage(l:submenus[Submenu];HUDMSG_PLAIN,50,CR_UNTRANSLATED, 320.0, 50.0,0.2,10);	
+	setfont("MenuBG");
+	Hudmessage(s:"A";HUDMSG_PLAIN,500,CR_UNTRANSLATED, 320.0, 200.0,0.2,10);	
+	setfont("BIGFONT");
+	Hudmessage(l:submenus[Submenu];HUDMSG_PLAIN,51,CR_UNTRANSLATED, 320.0, 50.0,0.2,10);	
 	setfont("SmallFONT");	
-	Hudmessage(s:"Level: ",d:CheckInventory("PlayerLevel");HUDMSG_PLAIN,51,CR_UNTRANSLATED, 120.0, 60.0,0.2,10);
-	Hudmessage(s:"Experience: ",d:CheckInventory("Experience"),s:" / ",d:Nextlevel;HUDMSG_PLAIN,52,CR_UNTRANSLATED, 120.0, 70.0,0.2,10);
-	Hudmessage(s:"Health: ",d:getActorProperty(0,APROP_HEALTH),s:" / ",d:getActorProperty(0,APROP_SPAWNHEALTH);HUDMSG_PLAIN,53,CR_UNTRANSLATED, 120.0, 80.0,0.2,10);
-	Hudmessage(s:"Energy: ",d:CheckInventory("Mana"),s:" / ",d:Getammocapacity("mana");HUDMSG_PLAIN,54,CR_UNTRANSLATED, 120.0, 90.0,0.2,10);
+	Hudmessage(s:"Level: ",d:CheckInventory("PlayerLevel"),
+	s:"\nExperience: ",d:CheckInventory("Experience"),s:" / ",d:Nextlevel,
+	s:"\nHealth: ",d:getActorProperty(0,APROP_HEALTH),s:" / ",d:getActorProperty(0,APROP_SPAWNHEALTH),
+	s:"\nEnergy: ",d:CheckInventory("Mana"),s:" / ",d:Getammocapacity("mana")
+	;HUDMSG_PLAIN,52,CR_UNTRANSLATED, 100.0, 60.1,0.2,10);
 	Hudmessage(s:"Stat Points: ",d:CheckInventory("StatPoints");HUDMSG_PLAIN,55,CR_UNTRANSLATED, 520.0, 60.0,0.2,10);
 	Hudmessage(s:"Skill Points: ",d:CheckInventory("SkillPoints");HUDMSG_PLAIN,56,CR_UNTRANSLATED, 520.0, 70.0,0.2,10);
-	Hudmessage(s:"Damage Reduction: ",f:getactorproperty(0,APROP_DamageFactor);HUDMSG_PLAIN,57,CR_UNTRANSLATED, 120.0, 110.0,0.2,10);
-	Hudmessage(s:"Damage Multiplier: ",f:getactorproperty(0,APROP_DamageMultiplier);HUDMSG_PLAIN,58,CR_UNTRANSLATED, 120.0, 120.0,0.2,10);
-	Hudmessage(s:" Move up: ",k: "+forward" ,s:"\n Move Down: ",k: "+back" ,s:"\n Select: ",k: "+use";
+	Hudmessage(s:"Damage Reduction: ",f:getactorproperty(0,APROP_DamageFactor),
+	s:"\nDamage Multiplier: ",f:getactorproperty(0,APROP_DamageMultiplier);
+	HUDMSG_PLAIN,57,CR_UNTRANSLATED, 120.0, 110.0,0.2,10);
+	Hudmessage(s:" Move up: ",k: "+forward" ,s:"\nMove Down: ",k: "+back" ,s:"\nSelect: ",k: "+use";
 		HUDMSG_PLAIN,60,CR_White, 250.0, 380.0,0.2,10);
 	
 	str Selectedstring;
@@ -55,7 +59,7 @@ Function Void MRPGinmenuTEXT (Int selected, Int Selections, Int Submenu)
 		}
 				
 		Hudmessage(l:Menuoptions[SubMenu][selected].desc;
-				HUDMSG_PLAIN,40,CR_UNTRANSLATED, 320.0, 310.0,0.2,10);
+				HUDMSG_PLAIN,40,CR_UNTRANSLATED, 320.0, 310.1,0.2,10);
 		
 		if(submenu >= 1)
 		{
@@ -63,7 +67,7 @@ Function Void MRPGinmenuTEXT (Int selected, Int Selections, Int Submenu)
 			d:Menuoptions[SubMenu][selected].Cost * (CheckInventory(menuoptions[Submenu][Selected].item) + 1),
 			s:"\nLevel Required: ",
 			d:Menuoptions[SubMenu][selected].Levelreq;
-					HUDMSG_PLAIN,41,CR_UNTRANSLATED, 320.0, 290.0,0.2,10);
+					HUDMSG_PLAIN,41,CR_UNTRANSLATED, 320.0, 290.1,0.2,10);
 		}
 	}
 
@@ -159,7 +163,7 @@ script "MRPGinmenu" (void)
 	
 		else if (button & BT_back)
 		{
-			if(Selection<7)
+			if(Selection<(TotalSkills -1))
 			{
 				Selection++;
 				Delay(5);
@@ -203,7 +207,55 @@ script "MRPGinmenu" (void)
 				Break;
 			}
 		}
-		MRPGinmenuTEXT(Selection,8,1);
+		MRPGinmenuTEXT(Selection,TotalSkills,1);
 		Delay(1);
 	}
+}
+
+script "SpellSelectDisplay" (void)
+{
+	int SelectedSpell = Checkinventory("PlayerSpellSelector");
+	sethudsize (640,400, 1);
+	setfont(SpellsList[SelectedSpell].Icon);
+	Hudmessage(s:"A";HUDMSG_PLAIN,100,CR_UNTRANSLATED, GetCvar("MRPG_scrhudSIx") +.1, GetCvar("MRPG_scrhudSIy") +.1,0.2,10);
+	Delay(5);
+	Restart;
+}
+
+script "SpellSelectUp" (void)
+{
+	int SelectedSpell = Checkinventory("PlayerSpellSelector");
+	SelectedSpell++;
+	while(Checkinventory(SpellsList[SelectedSpell].item) == 0)
+	{
+		SelectedSpell++;
+		if(SelectedSpell > Totalspells)
+		{
+			SelectedSpell = 0;
+		}
+	}
+	takeinventory("PlayerSpellSelector",99);
+	giveinventory("PlayerSpellSelector",SelectedSpell);
+}
+
+script "SpellSelectDown" (void)
+{
+	int SelectedSpell = Checkinventory("PlayerSpellSelector");
+	SelectedSpell--;
+	while(Checkinventory(SpellsList[SelectedSpell].item) == 0)
+	{
+		SelectedSpell--;
+		if(SelectedSpell < 0)
+		{
+			SelectedSpell = Totalspells;
+		}
+	}
+	takeinventory("PlayerSpellSelector",99);
+	giveinventory("PlayerSpellSelector",SelectedSpell);
+}
+
+script "SpellUse" (void)
+{
+	int SelectedSpell = Checkinventory("PlayerSpellSelector");
+	giveinventory(SpellsList[SelectedSpell].Effect,1);
 }

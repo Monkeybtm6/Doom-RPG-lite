@@ -38,3 +38,35 @@ Script "SkillMagicPotency" (void)
 	
 	setresultvalue(checkpotency);
 }
+
+Script "SpellSlow" (int Duration)
+{
+	int Saveval = GetActorProperty(0,APROP_SPEED),
+	Time = 35;
+	
+	SetActivator(0,AAPTR_TRACER);
+	SetActorProperty(0,APROP_SPEED,GetActorProperty(0,APROP_SPEED) / 2);
+	Delay(time * Duration);
+	SetActorProperty(0,APROP_SPEED,Saveval);
+}
+
+Script "SpellStop" (int Duration)
+{
+	int Saveval = GetActorProperty(0,APROP_SPEED),
+	Time = 35;
+	
+	SetActorProperty(0,APROP_SPEED,0.0);
+	Delay(time * Duration);
+	SetActorProperty(0,APROP_SPEED,Saveval);
+}
+
+Script "SpellWeaken" (int Duration)
+{
+	int Saveval = GetActorProperty(0,APROP_DamageMultiplier),
+	Time = 35;
+	
+	SetActivator(0,AAPTR_TRACER);
+	SetActorProperty(0,APROP_DamageMultiplier,GetActorProperty(0,APROP_DamageMultiplier) / 2);
+	Delay(time * Duration);
+	SetActorProperty(0,APROP_DamageMultiplier,Saveval);
+}

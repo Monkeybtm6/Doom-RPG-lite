@@ -1,12 +1,23 @@
+ACTOR SPRageItem : Inventory
+{
+	+FLOATBOB
+	+INVENTORY.ALWAYSPICKUP
+	inventory.maxamount 1
+	Inventory.PickupMessage "Picked up Rage Upgrade" 
+	States
+	{
+	Spawn:
+		RGSP A -1 Bright
+		Stop
+	}
+}
+
 ACTOR SPRage : CustomInventory
 {
-  +INVENTORY.INVBAR
+  //+INVENTORY.INVBAR
+  +INVENTORY.AUTOACTIVATE
   +FLOATBOB
   +INVENTORY.ALWAYSPICKUP
-  inventory.maxamount 5
-  Inventory.InterHubAmount 1
-  inventory.icon RGSP_I
-  Inventory.PickupMessage "Picked up Rage Upgrade" 
   States
   {
   Spawn:
@@ -15,7 +26,7 @@ ACTOR SPRage : CustomInventory
   Use:
 	TNT1 A 0 A_JumpIfInventory("Mana",80,"ConfirmUse")
     TNT1 A 0 A_Print("Needs 80 mana")
-	fail
+	stop
   ConfirmUse:
 	TNT1 A 0 A_TakeInventory ("mana", 60)
 	TNT1 A 0 A_Playsound("misc/p_pkup", CHAN_WEAPON)
@@ -25,22 +36,22 @@ ACTOR SPRage : CustomInventory
 	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",2,"Power2")
 	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",1,"Power1")
 	TNT1 A 0 A_GiveInventory("RageEffect")
-	FAIL
+	stop
   Power1:
 	TNT1 A 0 A_GiveInventory("RageEffect1")
-	Fail
+	stop
   Power2:
 	TNT1 A 0 A_GiveInventory("RageEffect2")
-	Fail
+	stop
   Power3:
 	TNT1 A 0 A_GiveInventory("RageEffect3")
-	Fail
+	stop
   Power4:
 	TNT1 A 0 A_GiveInventory("RageEffect4")
-	Fail
+	stop
   Power5:
 	TNT1 A 0 A_GiveInventory("RageEffect5")
-	Fail
+	stop
   }
 }
 

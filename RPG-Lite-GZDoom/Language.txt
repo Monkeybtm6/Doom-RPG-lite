@@ -9,10 +9,10 @@
 	Menu1opt05 = "Skills Menu";
 	Menu1opt06 = "Exit Menu";
 	
-	Menu1Desc01 = "Increases max health by 2%.";
-	Menu1Desc02 = "Increases Damage by 2%.";
-	Menu1Desc03 = "Increases Energy by 1.5.";
-	Menu1Desc04 = "Decreases damage taken by 0.25% and Reduces knockback.";
+	Menu1Desc01 = "Increases max health by 5.";
+	Menu1Desc02 = "Increases Damage by 5%.";
+	Menu1Desc03 = "Increases Energy by 2.";
+	Menu1Desc04 = "Decreases damage taken by 0.5% and Reduces knockback.";
 	Menu1Desc05 = "Enters skills menu";
 	Menu1Desc06 = "Exits the menu.";
 	
@@ -30,4 +30,4 @@
 	Menu2Desc04 = "Killing monsters grants a chance of finding ammo. \nHigher chances per rank (Max 5)";
 	Menu2Desc05 = "Enters Stats menu";
 	Menu2Desc06 = "Killing monsters give you health. Higher ranks give more. (Max 5)";
-	Menu2Desc07 = "Increases the power of spells. (Max 10)";
+	Menu2Desc07 = "Increases the power of spells. (Max 5)";

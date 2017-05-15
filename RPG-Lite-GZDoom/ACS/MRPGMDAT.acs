@@ -3,6 +3,8 @@
 
 #libDefine TotalSubMenus 2
 #libdefine TotalOptions 20
+#libdefine TotalSkills 8
+#libdefine TotalSpells 12
 
 struct Menustruct
 {
@@ -34,4 +36,29 @@ Menustruct Menuoptions[TotalSubMenus][TotalOptions] =
 		{"menu2opt05","","menu2Desc05",0,0,0},
 		{"menu1opt06","","menu1Desc06",0,0,0}
 	}
+};
+
+struct Spellstruct
+{
+	str Name;
+	str Icon;
+	str Item;
+	str Effect;
+	int Cost;
+}
+
+Spellstruct SpellsList[TotalSpells] =
+{
+	{"Nullspell","Nullspel","Nullspell","Nullspell",0},
+	{"LesserGuardian","GSSP_I","SPLesserGuardianItem","SPLesserGuardian",50},
+	{"Guardian","GSSP_I2","SPGuardianItem","SPGuardian",50},
+	{"Holy Fire","SPHF_I","SPHolyFireItem","SPHolyFire",50},
+	{"Invisibility","PIN2_I","SPInvisItem","SPInvis",50},
+	{"Rage","RGSP_I","SPRageItem","SPRage",50},
+	{"Radiation Shield","RADS_I","SPRadiationItem","SPBaseSpell",50},
+	{"AmmoSynth","ASSP_I","SPAmmoSynthItem","SPAmmoSynth",50},
+	{"Push","FPSP_I","SPPushItem","SPPush",50},
+	{"Speed","SPDB_I","SPSpeedItem","SPSpeed",50},
+	{"Weaken","SPFR_I","SPWeakenItem","SPWeaken",50},
+	{"Slow","SPSL_I","SPSlowItem","SPSlow",50}
 };

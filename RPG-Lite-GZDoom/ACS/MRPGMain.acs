@@ -1,12 +1,9 @@
 #library "MRPGMain"
 #include "zcommon.acs"
-//#include "MRPGSkills.acs"
-//#include "MRPGMenu.acs"
-//#include "MRPGDatabase.acs"
 #define PLAYER_TID_START 1000
 
-#define atkbase 0.02
-#define Defbase 0.0025
+#define atkbase 0.05
+#define Defbase 0.005
 
 str StatArray[4] =
 {
@@ -30,7 +27,7 @@ Function int ThisLevel (void)
 	}
 	LevelSet = (levelav / playercount());
  
-	Return (Leveladd + LevelSet) + Random(-10 -(Levelset/10), 10 +(Levelset/10));
+	Return (Leveladd + LevelSet) + Random(-2 -(Levelset/5), 2 +(Levelset/5));
 }
 
 Script "UpdateStats" (void)
@@ -41,10 +38,10 @@ Script "UpdateStats" (void)
 	}
   
 	int StartHealth = 100,
-	Player_Max_Health_in = CheckInventory("StatVIT") * 2,
+	Player_Max_Health_in = CheckInventory("StatVIT") * 5,
 	Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
-	MyInt = (1.5 * CheckInventory("StatINT")) >> 16,
-	MyMass = CheckInventory("StatDEF") / 4,
+	MyInt = 2 * CheckInventory("StatINT"),
+	MyMass = CheckInventory("StatDEF") / 2,
 	Damagereduction = defbase * CheckInventory("StatDEF"),
 	DamageBoost = atkbase * CheckInventory("StatATK");
   
@@ -72,8 +69,14 @@ script "MRPGEnter" ENTER
 	ACS_NamedExecuteAlways("UpdateStats",0);
 	ACS_NamedExecuteAlways("ConstSkillActivator",0);
 	ACS_NamedExecuteAlways("SkillActivator",0);
+	ACS_NamedExecuteAlways("SpellSelectDisplay",0);
+	Giveinventory("Nullspell",1);
 	delay(1);
-	SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
+	
+	if(CheckInventory("Playerintdone") == 0)
+	{
+		SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
+	}
 	Giveinventory("Mana",GetAmmoCapacity("mana"));
 }
 
@@ -83,6 +86,7 @@ script "MRPGRespawn" RESPAWN
 	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
 	delay(1);
 	ACS_NamedExecuteAlways("UpdateStats",0);
+	SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
 }
 
 
@@ -129,7 +133,7 @@ Script "Levelupcheck" (int EXPA)
 			{
 				int StatCounter;
 				Randstat = random(0,3);
-				while(CheckInventory(StatArray[Randstat])==1000 || StatCounter < 3)
+				while(CheckInventory(StatArray[Randstat])==500 || StatCounter < 3)
 					{
 						randstat ++; 
 						StatCounter ++;
@@ -190,10 +194,10 @@ script "MonsterLoop" (Void)
 	GiveInventory("PlayerLevel", MonLevel);
 	
 	int MonHealth = getactorproperty(0, APROP_Health),
-	MonHealthmult = 0.02 * CheckInventory("StatVIT"),
+	MonHealthmult = 0.05 * CheckInventory("StatVIT"),
 	DamageBoost = atkbase * CheckInventory("StatATK"),
 	MonMass = getactorproperty(0,APROP_MASS),
-	MonMassMult = 0.0025 * CheckInventory("StatDEF"),
+	MonMassMult = 0.005 * CheckInventory("StatDEF"),
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
 	if(getcvar("MRPG_Monsterscaling") == true)
 	{

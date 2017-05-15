@@ -58,3 +58,16 @@ Actor Monsterinitdone : Inventory
 {
 	Inventory.MaxAmount 1
 }
+
+Actor Playerinitdone : Inventory
+{
+	Inventory.MaxAmount 1
+}
+
+Actor PlayerSpellSelector : Inventory
+{
+	Inventory.MaxAmount 99
+}
+
+Actor NullSpell : Inventory
+{}

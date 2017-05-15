@@ -1,12 +1,23 @@
+ACTOR SPGuardianItem : Inventory
+{
+	+FLOATBOB
+	+INVENTORY.ALWAYSPICKUP
+	inventory.maxamount 1
+	Inventory.PickupMessage "Picked up Summon Guardian" 
+	States
+	{
+	Spawn:
+		GSSP E -1 Bright
+		Stop
+	}
+}
+
 ACTOR SPGuardian : CustomInventory
 {
-  +INVENTORY.INVBAR
+  //+INVENTORY.INVBAR
+  +INVENTORY.AUTOACTIVATE
   +FLOATBOB
   +INVENTORY.ALWAYSPICKUP
-  inventory.maxamount 1
-  Inventory.InterHubAmount 1
-  inventory.icon GSSP_I2
-  Inventory.PickupMessage "Picked up Summon Guardian" 
   States
   {
   Spawn:
@@ -15,7 +26,7 @@ ACTOR SPGuardian : CustomInventory
   Use:
     TNT1 A 0 A_JumpIfInventory("Mana",60,"ConfirmUse")
     TNT1 A 0 A_Print("Needs 60 mana")
-	fail
+	Stop
   ConfirmUse:
 	TNT1 A 0 A_TakeInventory("Mana",60)
 	TNT1 A 0 A_Playsound("misc/p_pkup", CHAN_WEAPON)
@@ -25,22 +36,22 @@ ACTOR SPGuardian : CustomInventory
 	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",2,"Power2")
 	TNT1 A 0 A_JumpIfInventory("SKMagicPotency",1,"Power1")
 	TNT1 A 0 A_SpawnItemEx("GuardianEffect",45,0,0,5)
-	fail
+	Stop
   Power1:
 	TNT1 A 0 A_SpawnItemEx("GuardianEffect1",45,0,0,5)
-	fail
+	Stop
   Power2:
 	TNT1 A 0 A_SpawnItemEx("GuardianEffect2",45,0,0,5)
-	fail
+	Stop
   Power3:
 	TNT1 A 0 A_SpawnItemEx("GuardianEffect3",45,0,0,5)
-	fail
+	Stop
   Power4:
 	TNT1 A 0 A_SpawnItemEx("GuardianEffect4",45,0,0,5)
-	fail
+	Stop
   Power5:
 	TNT1 A 0 A_SpawnItemEx("GuardianEffect5",45,0,0,5)
-	fail
+	Stop
   }
 }
 
