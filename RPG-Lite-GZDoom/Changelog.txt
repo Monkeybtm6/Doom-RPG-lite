@@ -14,6 +14,7 @@
 	-Now all enemy deaths give experience, infighting and enviroment alike.
 	
 1.6.0
-	-Rage icon changed
-	-Added Weaken spell
-	-Added Slow spell
+	-Rage icon changed.
+	-Added Weaken spell.
+	-Added Slow spell.
+	-Spells are no longer inventory items.

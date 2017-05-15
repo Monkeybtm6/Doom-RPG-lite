@@ -41,13 +41,17 @@ Script "SkillMagicPotency" (void)
 
 Script "SpellSlow" (int Duration)
 {
+	SetActivator(0,AAPTR_TRACER);
+	if (Checkinventory("SlowDebuff") > 0)
+		{Terminate;}
+	Giveinventory("SlowDebuff",1);
+	
 	int Saveval = GetActorProperty(0,APROP_SPEED),
 	Time = 35;
-	
-	SetActivator(0,AAPTR_TRACER);
 	SetActorProperty(0,APROP_SPEED,GetActorProperty(0,APROP_SPEED) / 2);
 	Delay(time * Duration);
 	SetActorProperty(0,APROP_SPEED,Saveval);
+	Takeinventory("SlowDebuff",1);
 }
 
 Script "SpellStop" (int Duration)
@@ -62,11 +66,15 @@ Script "SpellStop" (int Duration)
 
 Script "SpellWeaken" (int Duration)
 {
+	SetActivator(0,AAPTR_TRACER);
+	if (Checkinventory("WeakenDebuff") > 0)
+		{Terminate;}
+	Giveinventory("WeakenDebuff",1);
 	int Saveval = GetActorProperty(0,APROP_DamageMultiplier),
 	Time = 35;
 	
-	SetActivator(0,AAPTR_TRACER);
 	SetActorProperty(0,APROP_DamageMultiplier,GetActorProperty(0,APROP_DamageMultiplier) / 2);
 	Delay(time * Duration);
 	SetActorProperty(0,APROP_DamageMultiplier,Saveval);
+	Takeinventory("WeakenDebuff",1);
 }
