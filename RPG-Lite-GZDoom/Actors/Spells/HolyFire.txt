@@ -105,7 +105,7 @@ Actor HolyFireEffect
   Speed 10
   Radius 24
   Height 12
-  Damage 2
+  Damage 5
   Projectile
   -NOGRAVITY
   +DROPOFF
@@ -116,7 +116,7 @@ Actor HolyFireEffect
 	Spawn:
 		FLBE ABC 4 Bright
 	Death:
-		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGHIJK 4 Bright A_Explode(1,24,true,24)
+		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGHIJK 4 Bright A_Explode(2,24,true,24)
 		stop
   }
 }
@@ -128,8 +128,8 @@ Actor HolyFireEffect1 : HolyFireEffect
 	Spawn:
 		FLBE ABC 4 Bright
 	Death:
-		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFG 4 Bright A_Explode(1,24,true,24)
-		FLBE DEFGDEFGDEFGDHIJK 4 Bright A_Explode(1,24,true,24)
+		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFG 4 Bright A_Explode(2,24,true,24)
+		FLBE DEFGDEFGDEFGDHIJK 4 Bright A_Explode(2,24,true,24)
 		stop
   }
 }
@@ -141,36 +141,36 @@ Actor HolyFireEffect2 : HolyFireEffect
 	Spawn:
 		FLBE ABC 4 Bright
 	Death:
-		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFG 4 Bright A_Explode(1,24,true,24)
-		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDHIJK 4 Bright A_Explode(1,24,true,24)
-		stop
-  }
-}
-
-Actor HolyFireEffect3 : HolyFireEffect
-{
-  Damage 3
-  States
-  {
-	Spawn:
-		FLBE ABC 4 Bright
-	Death:
 		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFG 4 Bright A_Explode(2,24,true,24)
 		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDHIJK 4 Bright A_Explode(2,24,true,24)
 		stop
   }
 }
 
-Actor HolyFireEffect4 : HolyFireEffect
+Actor HolyFireEffect3 : HolyFireEffect
 {
-  Damage 3
+  Damage 10
   States
   {
 	Spawn:
 		FLBE ABC 4 Bright
 	Death:
-		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFG 4 Bright A_Explode(2,24,true,24)
-		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFDEFGGDHIJK 4 Bright A_Explode(2,24,true,24)
+		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFG 4 Bright A_Explode(5,24,true,24)
+		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDHIJK 4 Bright A_Explode(5,24,true,24)
+		stop
+  }
+}
+
+Actor HolyFireEffect4 : HolyFireEffect
+{
+  Damage 10
+  States
+  {
+	Spawn:
+		FLBE ABC 4 Bright
+	Death:
+		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFG 4 Bright A_Explode(5,24,true,24)
+		FLBE DEFGDEFGDEFGDEFGDEFGDEFGDEFGDEFDEFGGDHIJK 4 Bright A_Explode(5,24,true,24)
 		stop
   }
 }

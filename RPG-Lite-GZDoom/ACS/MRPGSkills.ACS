@@ -3,6 +3,8 @@
 
 Script "ConstSkillActivator" (void)
 {
+	int Healthregenammount = ((Fixeddiv(GetActorProperty(0,APROP_SPAWNHEALTH),10) + 0.9) >> 16);
+	
 	if (CheckInventory("SKManaRegen") >= 1)
 	{
 		Giveinventory("Mana",1 * CheckInventory("SKManaRegen"));
@@ -10,7 +12,7 @@ Script "ConstSkillActivator" (void)
 	
 	if (CheckInventory("SKHealthRegen") >= 1)
 	{
-		if(CheckInventory("Health") < (10 * CheckInventory("SKHealthRegen")))
+		if(CheckInventory("Health") < (Healthregenammount * CheckInventory("SKHealthRegen")))
 		{
 			Giveinventory("Skillhealthgiver",1);
 		}

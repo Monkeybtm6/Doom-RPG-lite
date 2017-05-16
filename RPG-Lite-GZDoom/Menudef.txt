@@ -56,5 +56,5 @@ OptionMenu "MRPGHUDOpt"
 	StaticText "Spell Icon"
 	StaticText " "
 	Slider "X Pos", "MRPG_scrhudSIx", 000, 640, 1.0, 0
-	Slider "Y Pos", "MRPG_scrhudSIy", 000, 400, 1.0, 0
+	Slider "Y Pos", "MRPG_scrhudSIy", 000, 480, 1.0, 0
 }

@@ -39,3 +39,8 @@ Actor SKMagicPotency : Inventory
 {
   Inventory.Maxamount 5
 }
+
+Actor SKScan : Inventory
+{
+  Inventory.Maxamount 1
+}

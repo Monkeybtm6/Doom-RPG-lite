@@ -19,5 +19,5 @@ User int MRPG_Statatk = 0;
 User int MRPG_Statint = 0;
 User int MRPG_Statdef = 0;
 
-User Float MRPG_scrhudSIx = 212.0;
-User Float MRPG_scrhudSIy = 372.0;
+User Float MRPG_scrhudSIx = 206.0;
+User Float MRPG_scrhudSIy = 446.0;

@@ -12,13 +12,45 @@ str submenus[TotalSubMenus] =
 	"SubMenu2"
 };
 
+Function Bool DrawSprite (Str Sprite, Int ID, Int X, Int Y, Int Alpha)
+{
+	SetFont(Sprite);
+	HUDMessage(s:"A"; HUDMSG_FADEINOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, 0.2, 0.025, Alpha);
+	Return True;
+}
+
+Function Bool DrawEnemyHealthBar (Int CurrentHealth, Int MaxHealth,int RPGlevel , Str Name)
+{
+	Int a = CurrentHealth << 16;
+	Int b = Maxhealth << 16;
+	Int c = FixedDiv(a, b); // This should give us a percentage of remaining health as a fixed point number between 0 and 1.0
+	Int f_xresolution = 640 << 16;
+	
+	Int centerbarx = ((FixedDiv (f_xresolution, 2.0)) - (FixedDiv(120.0, 2.0)));
+	
+	Int barwidth = (FixedMul(c, 120.0) + 0.5) >> 16;
+	
+	SetHudSize(640,480);
+	SetHUDClipRect((centerbarx >> 16),0,barwidth,400, 0);
+	DrawSprite("HudBHPSM", 101, 0.1+centerbarx, 90.1, 1.0);
+	
+	SetHUDClipRect(0, 0, 0, 0);
+	DrawSprite("HudBSM", 102, 0.1+centerbarx, 90.1, 1.0);
+	
+	SetFont("SmallFONT");
+	hudmessage(d:CurrentHealth,s: " / ",d:MaxHealth;HUDMSG_PLAIN,90,CR_White, 262.1, 92.1,0.2,1.0);
+	hudmessage(s:Name,s:" ",d:RPGlevel;HUDMSG_PLAIN,91,CR_White, 262.1, 81.1,0.2,1.0);
+	
+	Return True;
+}
+
 Function Void MRPGinmenuTEXT (Int selected, Int Selections, Int Submenu)
 {
 	int Lvl = CheckInventory("Playerlevel"),
 	EXPBase = GetCvar("MRPG_EXPBase"),
 	EXPMULT = GetCvar("MRPG_EXPMULT"),
 	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16);
-	sethudsize (640,400, 1);
+	SetHudSize(640,400, 1);
 	setfont("MenuBG");
 	Hudmessage(s:"A";HUDMSG_PLAIN,500,CR_UNTRANSLATED, 320.0, 200.0,0.2,10);	
 	setfont("BIGFONT");
@@ -180,6 +212,7 @@ script "MRPGinmenu" (void)
 				Case 3:
 				Case 4:
 				Case 5:
+				Case 6:
 				if (CheckInventory("SkillPoints") >= (Menuoptions[1][Selection].Cost * (CheckInventory(Menuoptions[1][Selection].item) + 1)) 
 				&& CheckInventory(Menuoptions[1][Selection].item) < Menuoptions[1][Selection].maxrank 
 				&& CheckInventory("Playerlevel") >= Menuoptions[1][Selection].levelreq)
@@ -192,14 +225,14 @@ script "MRPGinmenu" (void)
 				Break;
 
 				//always last
-				case 6:
+				case 7:
 				TakeInventory("MenuOpen",1);
 				Selection=0;
 				Delay(5);
 				Restart;
 				Break;
 				
-				case 7:
+				case 8:
 				TakeInventory("MenuOpen",99);
 				Selection=0;
 				SetPlayerProperty(0, False, PROP_TOTALLYFROZEN);
@@ -215,9 +248,38 @@ script "MRPGinmenu" (void)
 script "SpellSelectDisplay" (void)
 {
 	int SelectedSpell = Checkinventory("PlayerSpellSelector");
-	sethudsize (640,400, 1);
-	setfont(SpellsList[SelectedSpell].Icon);
-	Hudmessage(s:"A";HUDMSG_PLAIN,100,CR_UNTRANSLATED, GetCvar("MRPG_scrhudSIx") +.1, GetCvar("MRPG_scrhudSIy") +.1,0.2,10);
+	int Savemytid = ActivatorTID();
+	int thisThingMaxHealth;
+	int thisThingHealth;
+	int thisThingLevel;
+	SetHudSize(640,480, 1);
+	DrawSprite(SpellsList[SelectedSpell].Icon, 100, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIx") +.1, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIy") +.1, 1.0);
+	if(CheckInventory("SKscan") > 0)
+	{
+		if(SetActivator(0,AAPTR_PLAYER_GETTARGET))
+		{
+			SetActivator(0,AAPTR_PLAYER_GETTARGET);
+			int thisthingtid = ActivatorTID();
+			if( (ClassifyActor(0) & ACTOR_MONSTER) && (ClassifyActor(0) & ACTOR_ALIVE) && (CheckFlag(0, "Shootable")))
+			{
+				
+				Str Monstername = GetActorProperty(thisthingtid, APROP_NameTag);
+				thisThingMaxHealth = CheckActorInventory(thisthingtid,"MyMaxHealth");
+				thisThingHealth = GetActorProperty(thisthingtid,APROP_Health);
+				thisThingLevel = CheckActorInventory(thisthingtid,"Playerlevel");
+						
+				if (Savemytid != ActivatorTID())
+				{
+					SetActivator(Savemytid);
+					If (CheckSight (thisthingtid, Savemytid,0))
+					{
+						DrawEnemyHealthBar(thisThingHealth, thisThingMaxHealth, thisThingLevel, Monstername);
+					}
+				}
+			}
+		}
+		SetActivator(Savemytid);
+	}
 	Delay(5);
 	Restart;
 }

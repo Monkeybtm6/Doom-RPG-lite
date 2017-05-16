@@ -133,7 +133,7 @@ Script "Levelupcheck" (int EXPA)
 			{
 				int StatCounter;
 				Randstat = random(0,3);
-				while(CheckInventory(StatArray[Randstat])==500 || StatCounter < 3)
+				while(CheckInventory(StatArray[Randstat]) >= 500 && StatCounter < 3)
 					{
 						randstat ++; 
 						StatCounter ++;
@@ -184,6 +184,11 @@ script "MonsterLoop" (Void)
 {
 	//Monster initialization
 	Delay(5);
+	if(ActivatorTID() == 0)
+		{
+			Thing_ChangeTID(0,UniqueTID());
+		}
+	
 	int MonLevel = ThisLevel();
 	int MonStats = ((GetCvar("MRPG_statsperlevel") * MonLevel) / 4);
 	
@@ -201,11 +206,11 @@ script "MonsterLoop" (Void)
 	MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
 	if(getcvar("MRPG_Monsterscaling") == true)
 	{
-		GiveInventory("MyMaxHealth", (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_Health, (MonHealth * (1.0 + MonHealthmult))>> 16 );
 		SetActorProperty(0, APROP_DamageMultiplier, 1.0 + DamageBoost);
 		SetActorProperty(0, APROP_Mass, MonMass * (1.0 + MonMassMult) >> 16);
 	}
+	GiveInventory("MyMaxHealth", GetActorProperty(0,APROP_Health));
 	//Living loop
 	While (getactorproperty(0, APROP_Health) > 0)
 	{

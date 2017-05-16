@@ -18,3 +18,6 @@
 	-Added Weaken spell.
 	-Added Slow spell.
 	-Spells are no longer inventory items.
+	-added Scan Skill, when activated enemy statistics are displayed.
+	-Buffed holy fire
+	-Buffed Health regen skill heavilly

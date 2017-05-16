@@ -23,11 +23,13 @@
 	Menu2opt05 = "Stats Menu";
 	Menu2opt06 = "Vampirisim ";
 	Menu2opt07 = "Magic Potancy ";
+	Menu2opt08 = "Scan ";
 	
 	Menu2Desc01 = "Regenerates Energy slowly. 1 energy point per rank, per cycle. (Max 10)";
-	Menu2Desc02 = "Regenerates Health slowly to a max of 10 per rank. (max 10)";
+	Menu2Desc02 = "Regenerates Health slowly to a max of 10% per rank. (max 10)";
 	Menu2Desc03 = "Regenerates Armor slowly to a max of 10 per rank. (max 10)";
 	Menu2Desc04 = "Killing monsters grants a chance of finding ammo. \nHigher chances per rank (Max 5)";
 	Menu2Desc05 = "Enters Stats menu";
 	Menu2Desc06 = "Killing monsters give you health. Higher ranks give more. (Max 5)";
 	Menu2Desc07 = "Increases the power of spells. (Max 5)";
+	Menu2Desc08 = "Displays targeted enemy stats. (Max 1)";
