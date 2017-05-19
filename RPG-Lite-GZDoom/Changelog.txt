@@ -21,3 +21,4 @@
 	-added Scan Skill, when activated enemy statistics are displayed.
 	-Buffed holy fire
 	-Buffed Health regen skill heavilly
+	-Fixed RNG with random stat allocation

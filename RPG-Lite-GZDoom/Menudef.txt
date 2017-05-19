@@ -51,8 +51,6 @@ OptionMenu "MRPGHUDOpt"
 {
 	Title "Scripted Hud Options"
 	StaticText " "
-	Option "Scripted Hud", "MRPG_scrhudenabled", "OnOff"
-	StaticText " "
 	StaticText "Spell Icon"
 	StaticText " "
 	Slider "X Pos", "MRPG_scrhudSIx", 000, 640, 1.0, 0

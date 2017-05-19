@@ -1,6 +1,6 @@
 
 height 0;
-//Resolution 640,400;
+Resolution 640,400;
 InterpolateHealth true;
 
 statusbar fullscreen, fullscreenoffsets

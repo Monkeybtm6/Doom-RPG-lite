@@ -42,12 +42,7 @@ ACTOR SPBaseSpell : CustomInventory
     RADS A -1
     Stop
   Use:
-	TNT1 A 0 A_JumpIfInventory("Mana",30,"ConfirmUse")
-    TNT1 A 0 A_Print("Needs 30 mana")
-	stop
-  ConfirmUse:
 	TNT1 A 0 A_GiveInventory("RadsuitEffect")
-	TNT1 A 0 A_TakeInventory ("mana", 30)
 	TNT1 A 0 A_Playsound("misc/p_pkup", CHAN_WEAPON)
 	stop
   }
@@ -89,12 +84,7 @@ ACTOR SPAmmoSynth : CustomInventory
     ASSP A -1 Bright
     Stop
   Use:
-    TNT1 A 0 A_JumpIfInventory("Mana",30,"ConfirmUse")
-    TNT1 A 0 A_Print("Needs 30 mana")
-	stop
-  ConfirmUse:
 	TNT1 A 0 A_SpawnItemEx("AmmoSynthEffect",45,0,30,5)
-	TNT1 A 0 A_TakeInventory("Mana",30)
 	TNT1 A 0 A_Playsound("misc/p_pkup", CHAN_WEAPON)
 	stop
   }
@@ -138,10 +128,6 @@ ACTOR SPPush : CustomInventory
     FPSP A -1 Bright
     Stop
   Use:
-    TNT1 A 0 A_JumpIfInventory("Mana",10,"ConfirmUse")
-    TNT1 A 0 A_Print("Needs 10 mana")
-	stop
-  ConfirmUse:
 	TNT1 A 0 A_Blast(BF_NOIMPACTDAMAGE,128)
 	TNT1 A 0 A_TakeInventory("Mana",10)
 	stop

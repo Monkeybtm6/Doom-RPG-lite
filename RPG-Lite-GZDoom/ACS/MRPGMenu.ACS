@@ -30,7 +30,7 @@ Function Bool DrawEnemyHealthBar (Int CurrentHealth, Int MaxHealth,int RPGlevel 
 	
 	Int barwidth = (FixedMul(c, 120.0) + 0.5) >> 16;
 	
-	SetHudSize(640,480);
+	SetHudSize(640,480,1);
 	SetHUDClipRect((centerbarx >> 16),0,barwidth,400, 0);
 	DrawSprite("HudBHPSM", 101, 0.1+centerbarx, 90.1, 1.0);
 	
@@ -38,8 +38,8 @@ Function Bool DrawEnemyHealthBar (Int CurrentHealth, Int MaxHealth,int RPGlevel 
 	DrawSprite("HudBSM", 102, 0.1+centerbarx, 90.1, 1.0);
 	
 	SetFont("SmallFONT");
-	hudmessage(d:CurrentHealth,s: " / ",d:MaxHealth;HUDMSG_PLAIN,90,CR_White, 262.1, 92.1,0.2,1.0);
-	hudmessage(s:Name,s:" ",d:RPGlevel;HUDMSG_PLAIN,91,CR_White, 262.1, 81.1,0.2,1.0);
+	hudmessage(d:CurrentHealth,s: "/",d:MaxHealth;HUDMSG_FADEINOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_ALPHA,90,CR_White, 262.1, 95.1,0.2,0.025,1.0);
+	hudmessage(s:Name,s:" ",d:RPGlevel;HUDMSG_FADEINOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_ALPHA,91,CR_White, 262.1, 81.1,0.2,0.025,1.0);
 	
 	Return True;
 }
@@ -319,5 +319,16 @@ script "SpellSelectDown" (void)
 script "SpellUse" (void)
 {
 	int SelectedSpell = Checkinventory("PlayerSpellSelector");
-	giveinventory(SpellsList[SelectedSpell].Effect,1);
+	
+	if(Checkinventory("Mana") >= SpellsList[SelectedSpell].Cost)
+	{
+		Takeinventory("Mana",SpellsList[SelectedSpell].Cost);
+		giveinventory(SpellsList[SelectedSpell].Effect,1);
+	}
+	Else
+	{
+		SetHudSize(640,480, 1);
+		setfont("SmallFONT");
+		hudmessage(s:"Needs ",d:SpellsList[SelectedSpell].Cost,s:" Energy";HUDMSG_PLAIN,92,CR_White, 320.0, 200.0,1.0,1.0);
+	}
 }
