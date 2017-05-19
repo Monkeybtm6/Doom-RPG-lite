@@ -1,4 +1,4 @@
-ACTOR SPLesserGuardianItem : Inventory
+ACTOR SPLesserGuardian : Inventory
 {
 	+FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
@@ -12,7 +12,7 @@ ACTOR SPLesserGuardianItem : Inventory
 	}
 }
 
-ACTOR SPLesserGuardian : CustomInventory
+ACTOR SPLesserGuardianCast : CustomInventory
 {
   //+INVENTORY.INVBAR
   +INVENTORY.AUTOACTIVATE

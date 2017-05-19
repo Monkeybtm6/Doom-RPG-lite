@@ -1,0 +1,5 @@
+Actor HAmmoSynthEffect : Randomspawner Replaces AmmoSynthEffect
+{
+  DropItem "Mana1",256, 1
+  DropItem "Mana2",256, 1
+}

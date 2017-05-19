@@ -1,4 +1,4 @@
-ACTOR SPSlowItem : Inventory
+ACTOR SPSlow : Inventory
 {
 	+FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
@@ -12,7 +12,7 @@ ACTOR SPSlowItem : Inventory
 	}
 }
 
-ACTOR SPSlow : CustomInventory
+ACTOR SPSlowCast : CustomInventory
 {
   //+INVENTORY.INVBAR
   +INVENTORY.AUTOACTIVATE
@@ -53,8 +53,8 @@ ACTOR SPSlow : CustomInventory
 Actor SlowEffect
 {
   Speed 120
-  Radius 24
-  Height 12
+  Radius 12
+  Height 8
   Damage 0
   Projectile
   Translation "0:255=%[0,0,0]:[217,217,0]"

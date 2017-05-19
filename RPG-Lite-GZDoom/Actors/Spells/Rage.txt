@@ -1,4 +1,4 @@
-ACTOR SPRageItem : Inventory
+ACTOR SPRage : Inventory
 {
 	+FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
@@ -12,7 +12,7 @@ ACTOR SPRageItem : Inventory
 	}
 }
 
-ACTOR SPRage : CustomInventory
+ACTOR SPRageCast : CustomInventory
 {
   //+INVENTORY.INVBAR
   +INVENTORY.AUTOACTIVATE

@@ -320,15 +320,21 @@ script "SpellUse" (void)
 {
 	int SelectedSpell = Checkinventory("PlayerSpellSelector");
 	
-	if(Checkinventory("Mana") >= SpellsList[SelectedSpell].Cost)
+	If(Checkinventory("SpellActive") < 1)
 	{
-		Takeinventory("Mana",SpellsList[SelectedSpell].Cost);
-		giveinventory(SpellsList[SelectedSpell].Effect,1);
-	}
-	Else
-	{
-		SetHudSize(640,480, 1);
-		setfont("SmallFONT");
-		hudmessage(s:"Needs ",d:SpellsList[SelectedSpell].Cost,s:" Energy";HUDMSG_PLAIN,92,CR_White, 320.0, 200.0,1.0,1.0);
+		if(Checkinventory("Mana") >= SpellsList[SelectedSpell].Cost)
+		{
+			Takeinventory("Mana",SpellsList[SelectedSpell].Cost);
+			giveinventory(SpellsList[SelectedSpell].Effect,1);
+			giveinventory("SpellActive",1);
+			Delay(70);
+			Takeinventory("SpellActive",1);
+		}
+		Else
+		{
+			SetHudSize(640,480, 1);
+			setfont("SmallFONT");
+			hudmessage(s:"Needs ",d:SpellsList[SelectedSpell].Cost,s:" Energy";HUDMSG_PLAIN,92,CR_White, 320.0, 200.0,1.0,1.0);
+		}
 	}
 }

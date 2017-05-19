@@ -1,4 +1,4 @@
-ACTOR SPHolyFireItem : Inventory
+ACTOR SPHolyFire : Inventory
 {
 	+FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
@@ -12,7 +12,7 @@ ACTOR SPHolyFireItem : Inventory
 	}
 }
 
-ACTOR SPHolyFire : CustomInventory
+ACTOR SPHolyFireCasr : CustomInventory
 {
   //+INVENTORY.INVBAR
   +INVENTORY.AUTOACTIVATE

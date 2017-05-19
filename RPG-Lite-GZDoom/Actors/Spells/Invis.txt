@@ -1,4 +1,4 @@
-ACTOR SPInvisItem : Inventory
+ACTOR SPInvis : Inventory
 {
 	+FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
@@ -12,7 +12,7 @@ ACTOR SPInvisItem : Inventory
 	}
 }
 
-ACTOR SPInvis : CustomInventory
+ACTOR SPInvisCast : CustomInventory
 {
   //+INVENTORY.INVBAR
   +INVENTORY.AUTOACTIVATE

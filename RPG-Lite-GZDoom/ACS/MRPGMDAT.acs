@@ -51,15 +51,15 @@ struct Spellstruct
 Spellstruct SpellsList[TotalSpells] =
 {
 	{"Nullspell","Nullspel","Nullspell","Nullspell",0},
-	{"LesserGuardian","GSSP_I","SPLesserGuardianItem","SPLesserGuardian",40},
-	{"Guardian","GSSP_I2","SPGuardianItem","SPGuardian",60},
-	{"Holy Fire","SPHF_I","SPHolyFireItem","SPHolyFire",30},
-	{"Invisibility","PIN2_I","SPInvisItem","SPInvis",30},
-	{"Rage","RGSP_I","SPRageItem","SPRage",50},
-	{"Radiation Shield","RADS_I","SPRadiationItem","SPBaseSpell",30},
-	{"AmmoSynth","ASSP_I","SPAmmoSynthItem","SPAmmoSynth",30},
-	{"Push","FPSP_I","SPPushItem","SPPush",5},
-	{"Speed","SPDB_I","SPSpeedItem","SPSpeed",30},
-	{"Weaken","SPFR_I","SPWeakenItem","SPWeaken",40},
-	{"Slow","SPSL_I","SPSlowItem","SPSlow",30}
+	{"LesserGuardian","GSSP_I","SPLesserGuardian","SPLesserGuardianCast",40},
+	{"Guardian","GSSP_I2","SPGuardian","SPGuardianCast",60},
+	{"Holy Fire","SPHF_I","SPHolyFire","SPHolyFireCast",30},
+	{"Invisibility","PIN2_I","SPInvis","SPInvisCast",30},
+	{"Rage","RGSP_I","SPRage","SPRageCast",50},
+	{"Radiation Shield","RADS_I","SPRadiation","SPBaseSpellCast",30},
+	{"AmmoSynth","ASSP_I","SPAmmoSynth","SPAmmoSynthCast",30},
+	{"Push","FPSP_I","SPPush","SPPushCast",5},
+	{"Speed","SPDB_I","SPSpeed","SPSpeedCast",30},
+	{"Weaken","SPFR_I","SPWeaken","SPWeakenCast",40},
+	{"Slow","SPSL_I","SPSlow","SPSlowCast",30}
 };

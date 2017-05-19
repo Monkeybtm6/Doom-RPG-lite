@@ -1,4 +1,4 @@
-ACTOR SPSpeedItem : Inventory
+ACTOR SPSpeed : Inventory
 {
 	+FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
@@ -12,7 +12,7 @@ ACTOR SPSpeedItem : Inventory
 	}
 }
 
-ACTOR SPSpeed : CustomInventory
+ACTOR SPSpeedCast : CustomInventory
 {
   //+INVENTORY.INVBAR
   +INVENTORY.AUTOACTIVATE

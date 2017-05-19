@@ -77,17 +77,17 @@ ACTOR RPGSoulsphere : CustomInventory replaces Soulsphere
 
 Actor SpellSpawner : RandomSpawner 
 {
-  DropItem "SPRadiationItem",256,4
-  DropItem "SPInvisItem",256,4
-  DropItem "SPAmmoSynthItem",256,4
-  DropItem "SPSpeedItem",256,4
-  DropItem "SPRageItem",256,4
-  DropItem "SPPushItem",256,4
-  DropItem "SPLesserGuardianItem",256,4
-  DropItem "SPWeakenItem",256,4
-  DropItem "SPSlowItem",256,4
-  DropItem "SPGuardianItem",256,2
-  DropItem "SPHolyFireItem",256,1
+  DropItem "SPRadiation",256,4
+  DropItem "SPInvis",256,4
+  DropItem "SPAmmoSynth",256,4
+  DropItem "SPSpeed",256,4
+  DropItem "SPRage",256,4
+  DropItem "SPPush",256,4
+  DropItem "SPLesserGuardian",256,4
+  DropItem "SPWeaken",256,4
+  DropItem "SPSlow",256,4
+  DropItem "SPGuardian",256,2
+  DropItem "SPHolyFire",256,1
 }
 
 Actor Healthboneffect : HealthBonus
