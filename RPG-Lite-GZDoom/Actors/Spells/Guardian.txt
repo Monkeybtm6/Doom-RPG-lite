@@ -80,7 +80,7 @@ ACTOR GuardianEffect
 	Missile:
 		GSSP F 8 A_FaceTarget
 		GSSP FG 2
-		GSSP HHH 5 A_CustomMissile("SummonedGuardianAttack")
+		GSSP H 5 A_CustomMissile("SummonedGuardianAttack")
 		Goto See
 	Pain:
 		GSSP F 2

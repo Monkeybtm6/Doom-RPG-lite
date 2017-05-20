@@ -52,7 +52,7 @@ Function Void MRPGinmenuTEXT (Int selected, Int Selections, Int Submenu)
 	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16);
 	SetHudSize(640,400, 1);
 	setfont("MenuBG");
-	Hudmessage(s:"A";HUDMSG_PLAIN,500,CR_UNTRANSLATED, 320.0, 200.0,0.2,10);	
+	Hudmessage(s:"A";HUDMSG_PLAIN,100,CR_UNTRANSLATED, 320.0, 200.0,0.2,10);	
 	setfont("BIGFONT");
 	Hudmessage(l:submenus[Submenu];HUDMSG_PLAIN,51,CR_UNTRANSLATED, 320.0, 50.0,0.2,10);	
 	setfont("SmallFONT");	
@@ -245,7 +245,7 @@ script "MRPGinmenu" (void)
 	}
 }
 
-script "SpellSelectDisplay" (void)
+script "ScriptedHudDisplay" (void)
 {
 	int SelectedSpell = Checkinventory("PlayerSpellSelector");
 	int Savemytid = ActivatorTID();
@@ -253,7 +253,7 @@ script "SpellSelectDisplay" (void)
 	int thisThingHealth;
 	int thisThingLevel;
 	SetHudSize(640,480, 1);
-	DrawSprite(SpellsList[SelectedSpell].Icon, 100, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIx") +.1, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIy") +.1, 1.0);
+	DrawSprite(SpellsList[SelectedSpell].Icon, 120, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIx") +.1, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIy") +.1, 1.0);
 	if(CheckInventory("SKscan") > 0)
 	{
 		if(SetActivator(0,AAPTR_PLAYER_GETTARGET))

@@ -22,3 +22,5 @@
 	-Buffed holy fire
 	-Buffed Health regen skill heavilly
 	-Fixed RNG with random stat allocation
+	-Nerfed guardians attacks.
+	-Guardians now scale if scaling monsters are enabled.

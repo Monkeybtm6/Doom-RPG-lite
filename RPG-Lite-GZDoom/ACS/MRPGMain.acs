@@ -69,7 +69,7 @@ script "MRPGEnter" ENTER
 	ACS_NamedExecuteAlways("UpdateStats",0);
 	ACS_NamedExecuteAlways("ConstSkillActivator",0);
 	ACS_NamedExecuteAlways("SkillActivator",0);
-	ACS_NamedExecuteAlways("SpellSelectDisplay",0);
+	ACS_NamedExecuteAlways("ScriptedHudDisplay",0);
 	Giveinventory("Nullspell",1);
 	delay(1);
 	
