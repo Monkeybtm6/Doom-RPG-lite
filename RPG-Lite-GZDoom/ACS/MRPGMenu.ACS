@@ -253,7 +253,11 @@ script "ScriptedHudDisplay" (void)
 	int thisThingHealth;
 	int thisThingLevel;
 	SetHudSize(640,480, 1);
-	DrawSprite(SpellsList[SelectedSpell].Icon, 120, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIx") +.1, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIy") +.1, 1.0);
+	DrawSprite(SpellsList[SelectedSpell].Icon, 120, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIx") +.0, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIy") +.0, 1.0);
+	if(CheckInventory("SpellActive") > 0)
+	{
+		DrawSprite("Cantspel", 119, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIx") +.0, GetUserCvar(PlayerNumber(),"MRPG_scrhudSIy") +.0, 1.0);
+	}
 	if(CheckInventory("SKscan") > 0)
 	{
 		if(SetActivator(0,AAPTR_PLAYER_GETTARGET))
@@ -279,7 +283,7 @@ script "ScriptedHudDisplay" (void)
 			}
 		}
 		SetActivator(Savemytid);
-	}
+	}	
 	Delay(5);
 	Restart;
 }
