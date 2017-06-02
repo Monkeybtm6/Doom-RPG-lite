@@ -96,15 +96,16 @@ Script "Levelupcheck" (int EXPA)
 	{ 
 		Terminate; 
 	}
+	Delay(1);
 	
-	int Lvl = CheckInventory("Playerlevel"),
-	EXPBase = GetCvar("MRPG_EXPBase"),
-	EXPMULT = GetCvar("MRPG_EXPMULT"),
-	Statincrease = GetCvar("MRPG_statsperlevel"),
-	RandStat,
-	Skillincrease = GetCvar("MRPG_skillsperlevel"),
-	Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16),
-	MaxLevel = GetCvar("MRPG_LevelCap");
+	int Lvl = CheckInventory("Playerlevel");
+	int EXPBase = GetCvar("MRPG_EXPBase");
+	int EXPMULT = GetCvar("MRPG_EXPMULT");
+	int Statincrease = GetCvar("MRPG_statsperlevel");
+	int RandStat;
+	int Skillincrease = GetCvar("MRPG_skillsperlevel");
+	int Nextlevel = EXPBASE * ((Lvl * EXPMULT) >> 16);
+	int MaxLevel = GetCvar("MRPG_LevelCap");
 
 	GiveInventory("Experience", EXPA);
  
@@ -225,7 +226,7 @@ script "MonsterLoop" (Void)
 	}
 	
 	SetActivatorToTarget(0);
-		ACS_NamedExecuteAlways("Levelupcheck",0,0);
+	ACS_NamedExecuteAlways("Levelupcheck",0,0);
 	GiveActorinventory(0,"Mana",random(1,10));
 	
 	if(CheckInventory("SKRefuel") >= 1)
