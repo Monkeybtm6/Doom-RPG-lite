@@ -1,0 +1,57 @@
+#library "MRPGSkills"
+#include "zcommon.acs"
+
+Script "SKNull" (void)
+{
+	Terminate;
+}
+
+Script "SKMenuExit" (void)
+{
+	TakeInventory("MenuOpen",1);
+	SetPlayerProperty(0, False, PROP_TOTALLYFROZEN);
+	Delay(5);
+}
+
+Script "ConstSkillActivator" (void)
+{
+	int Healthregenammount = 20;
+	
+	if (CheckInventory("SKHealthRegen") >= 1)
+	{
+		if(CheckInventory("Health") < (Healthregenammount * CheckInventory("SKHealthRegen")))
+		{
+			Giveinventory("Skillhealthgiver",1);
+		}
+	}
+	
+	if (CheckInventory("SKArmorRegen") >= 1)
+	{
+		if(CheckInventory("Armor") < (20 * CheckInventory("SKArmorRegen")))
+		{
+			Giveinventory("BasicArmoreffect",1);
+		}
+	}
+	Delay(35);
+	Restart;
+}
+
+Script "SKVitGiver" (void)
+{
+	Giveinventory("StatVit",1);
+	ACS_NamedExecuteAlways("UpdateStats",0);
+	Delay(1);
+	Giveinventory("Health",10);
+}
+
+Script "SKRefuelGiver" (void)
+{
+	Giveinventory("SKRefuel",1);
+}
+
+Script "SKDefGiver" (void)
+{
+	Giveinventory("StatDef",1);
+	ACS_NamedExecuteAlways("UpdateStats",0);
+	Giveinventory("BasicArmor",10);
+}

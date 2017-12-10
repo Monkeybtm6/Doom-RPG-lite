@@ -1,0 +1,90 @@
+#library "MRPGHud"
+#include "zcommon.acs"
+#define PLAYER_TID_START 1000
+
+Function Bool DrawSprite (Str Sprite, Int ID, Int X, Int Y, Int Alpha)
+{
+	SetFont(Sprite);
+	HUDMessage(s:"A"; HUDMSG_FADEINOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, 0.2, 0.025, Alpha);
+	Return True;
+}
+
+Function Bool DrawBar (Str Spritefrnt, Str SpriteBack, int Num1, int Num2, Int X, Int Y)
+{
+	Int a = Num1 << 16;
+	Int b = Num2 << 16;
+	Int c = FixedDiv(a, b); // This should give us a percentage of the value as a fixed point number between 0 and 1.0
+	
+	Return True;
+}
+
+script "MRPGEnter" (void)
+{
+	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
+	if(CheckInventory("Playerintdone") == 0)
+	{
+		SetActorProperty(0, APROP_SPAWNHEALTH,100);;
+	}
+	ACS_NamedExecuteAlways("HudLoop",0);
+}
+
+Script "HudLoop" (void) CLIENTSIDE
+{
+	int MyHP = GetActorProperty (0, APROP_HEALTH);
+	int MyMaxHP = GetActorProperty (0, APROP_SPAWNHEALTH);
+	int MyMaxArmor = 100 + (CheckInventory("StatDef") * 10);
+	int barHP = myHP << 16;
+	int barMaxHP = MyMaxHP << 16;
+	int WidthHP = MyMaxHP / 10;
+	int barArmor = CheckInventory("BasicArmor") << 16;
+	int WidthArmor = MyMaxArmor / 10;
+	int barMaxArmor = MyMaxArmor << 16;
+	
+	
+	SetHudSize(320,240,1);
+	
+	//DrawSprite("HPIcon", 97, 3.1, 455.1, 1.0);
+	//DrawSprite("APIcon", 96, 13.1, 464.1, 1.0);
+	
+	//Bars
+	SetHudClipRect(13 ,220 ,WidthHP*4, 16);
+	DrawSprite("barback", 195, 13.1, 220.1, 1.0);
+	SetHudClipRect(13 ,220 , ((FixedDiv(barHP, barmaxhp) * WidthHP) >> 16) * 4, 16);
+	DrawSprite("HbarFrnt", 194, 13.1, 220.1, 1.0);
+	SetHudClipRect(0,0,0,0);
+	
+	SetHudClipRect(13 ,229 ,WidthArmor*4, 16);
+	DrawSprite("barback", 192, 13.1, 229.1, 1.0);
+	SetHudClipRect(13 ,229 , ((FixedDiv(barArmor, barMaxArmor) * WidthArmor) >> 16) * 4, 16);
+	DrawSprite("AbarFrnt", 191, 13.1, 229.1, 1.0);
+	SetHudClipRect(0,0,0,0);
+	
+	if(GetCvar("MRPG_HUDNUMBERS") == True)
+	{
+		SetFont("MM2SFNTO");
+		Hudmessage(d:MyHP;HUDMSG_PLAIN,193,CR_WHITE, 14.1, 220.1,0.2,0.75);	
+		Hudmessage(d:CheckInventory("BasicArmor");HUDMSG_PLAIN,190,CR_WHITE, 14.1, 229.1,0.2,0.75);	
+	}
+	/*
+	//Keys
+	if(CheckInventory("BlueCard"))
+	{ DrawSprite("STKEYS0", 76, 434.1, 52.1, 1.0); }
+	
+	if(CheckInventory("YellowCard"))
+	{ DrawSprite("STKEYS1", 75, 443.1, 52.1, 1.0); }
+	
+	if(CheckInventory("RedCard"))
+	{ DrawSprite("STKEYS2", 74, 452.1, 52.1, 1.0); }
+	
+	if(CheckInventory("BlueSkull"))
+	{ DrawSprite("STKEYS3", 73, 461.1, 52.1, 1.0); }
+	
+	if(CheckInventory("YellowSkull"))
+	{ DrawSprite("STKEYS4", 72, 470.1, 52.1, 1.0); }
+	
+	if(CheckInventory("RedSkull"))
+	{ DrawSprite("STKEYS5", 71, 479.1, 52.1, 1.0); }
+	*/
+	Delay(3);
+	Restart;
+}

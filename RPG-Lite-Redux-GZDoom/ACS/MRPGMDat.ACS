@@ -1,0 +1,51 @@
+#library "MRPGMdat"
+#include "zcommon.acs"
+
+#libdefine TotalSkills 32
+
+struct Menustruct
+{
+	str name;
+	str item;
+	str desc;
+	int Cost;
+	int levelreq;
+	int maxrank;
+	str Scpt;
+}
+
+Menustruct Menuoptions[TotalSkills] =
+{
+	{"menuopt01","StatVIT","menuDesc01",1,1,20,"SKVitGiver"},
+	{"menuopt02","StatDEF","menuDesc02",1,1,20,"SKGiver"},
+	{"menuopt03","SKRefuel","menuDesc03",1,2,8,"SKGiver"},
+	{"menuopt04","SKVampirisim","menuDesc04",1,2,8,"SKGiver"},
+	{"menuopt05","SKIronHide","menuDesc05",2,5,10,"SKGiver"},
+	{"menuopt06","SKArmorRegen","menuDesc06",2,8,5,"SKGiver"},
+	{"menuopt07","SKHealthRegen","menuDesc07",2,10,5,"SKGiver"},
+	{"menuopt08","SKMarksman","menuDesc08",2,10,10,"SKGiver"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"},
+	{"menuopt00","SKNull","menuDesc00",0,0,0,"SKNull"}
+};

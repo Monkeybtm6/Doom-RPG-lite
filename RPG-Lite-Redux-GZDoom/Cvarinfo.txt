@@ -1,0 +1,15 @@
+Server Int MRPG_EXPBase = 40;
+Server Float MRPG_EXPMult = 0.5;
+Server Int MRPG_SkillsPerLevel = 1;
+Server Int MRPG_LevelCap = 200;
+Server bool MRPG_MonsterScaling = True;
+
+Server bool MRPG_SaveEnabled = False;
+
+User Bool MRPG_RandomStats = False;
+
+User Bool MRPG_HudNumbers = False;
+
+User int MRPG_StatLevel = 1;
+User int MRPG_StatEXP = 0;
+User int MRPG_SkillPoints = 0;

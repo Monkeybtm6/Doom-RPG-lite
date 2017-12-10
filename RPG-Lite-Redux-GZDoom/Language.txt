@@ -1,0 +1,23 @@
+[enu default]
+
+	Menuopt00 = "";
+	Menuopt01 = "Vitality ";
+	Menuopt02 = "Defense ";
+	Menuopt03 = "Refuel ";
+	Menuopt04 = "Vampirisim ";
+	Menuopt05 = "Iron Hide ";
+	Menuopt06 = "Armor Regen ";
+	Menuopt07 = "Health Regen ";
+	Menuopt08 = "Marksman ";
+	Menuopt99 = "Exit Menu";
+	
+	MenuDesc00 = "----";
+	MenuDesc01 = "Increases max health by an additional Bar. (Max 20)";
+	MenuDesc02 = "Increases max Armor by an additional Bar. (Max 20)";
+	MenuDesc03 = "Killing monsters grants a chance of finding ammo. \nHigher chances per rank (Max 8)";
+	MenuDesc04 = "Killing monsters gives you health. Higher ranks give more. (Max 8)";
+	MenuDesc05 = "Reduces damage taken by 5% per rank (Max 10)";
+	MenuDesc06 = "Regenerates Armor slowly to a max of 20 per rank. (max 5)";
+	MenuDesc07 = "Regenerates Health slowly to a max of 20 per rank. (max 5)";
+	MenuDesc08 = "Increases damage delt by 5% per rank (Max 10)";
+	MenuDesc99 = "Exits the menu.";

@@ -1,0 +1,207 @@
+#library "MRPGMain"
+#include "zcommon.acs"
+#define PLAYER_TID_START 1000
+
+Script "UpdateStats" (void)
+{
+	if(!(ClassifyActor(0) & ACTOR_PLAYER))
+	{ 
+		Terminate; 
+	}
+  
+	int StartHealth = 100,
+	Player_Max_Health_in = CheckInventory("StatVIT") * 10,
+	Player_Max_Health_Out = (PLAYER_MAX_HEALTH_in + StartHealth),
+	Damagereduction = 0.05 * CheckInventory("SKIronHide"),
+	DamageBoost = 0.05 * CheckInventory("SKMarksman");
+  
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_SPAWNHEALTH, Player_Max_Health_Out);
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageFactor, 1.0 - Damagereduction);
+	SetActorProperty(PLAYER_TID_START+PlayerNumber(), APROP_DamageMultiplier, 1.0 + DamageBoost);
+	
+}
+
+
+script "MRPGEnter" ENTER
+{
+	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
+	delay(2);
+	/*if(CheckInventory("Playerlevel") <= 0)
+	{
+		GiveInventory("Playerlevel",1);
+	}*/
+	
+	if(CheckInventory("Playerinitdone") == 0)
+	{
+		//SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
+		GiveInventory("Playerinitdone",1);
+	}
+	ACS_NamedExecuteAlways("UpdateStats",0);
+	ACS_NamedExecuteAlways("ConstSkillActivator",0);
+	ACS_NamedExecuteAlways("HudLoop",0);
+}
+
+script "MRPGRespawn" RESPAWN
+{
+	Thing_ChangeTID(PLAYER_TID_START+PlayerNumber(),0);
+	Thing_ChangeTID(0,PLAYER_TID_START+PlayerNumber());
+	delay(1);
+	ACS_NamedExecuteAlways("UpdateStats",0);
+	ACS_NamedExecuteAlways("ConstSkillActivator",0);
+	SetActorProperty(0, APROP_HEALTH,GetActorProperty(0,APROP_SPAWNHEALTH));
+}
+
+
+Script "Levelupcheck" (int EXPA)
+{
+	if(ClassifyActor(0) & ACTOR_MONSTER)
+	{ 
+		Terminate; 
+	}
+	Delay(1);
+	
+	int Lvl = CheckInventory("Playerlevel");
+	int EXPBase = GetCvar("MRPG_EXPBase");
+	int EXPMULT = GetCvar("MRPG_EXPMULT");
+	int Skillincrease = GetCvar("MRPG_skillsperlevel");
+	int Nextlevel = EXPBASE + (( EXPBASE * (Lvl * EXPMULT))>>16);
+	int MaxLevel = GetCvar("MRPG_LevelCap");
+
+	GiveInventory("Experience", EXPA);
+ 
+	While(CheckInventory("Experience") >= Nextlevel && LVL <= Maxlevel)
+	{
+		GiveInventory("Playerlevel", 1);
+		TakeInventory("Experience",Nextlevel);
+		ACS_NamedExecuteAlways("UpdateStats",0);
+		
+		setfont("SMALLFONT");
+		sethudsize (640,480, 1);
+		Hudmessage(s:"You have gained a level!";HUDMSG_PLAIN,10,CR_UNTRANSLATED, 340.0, 150.0,5.0,1.0);
+		Playsound(0,"misc/p_pkup");
+		GiveInventory("SkillPoints",Skillincrease);
+		
+		Lvl = CheckInventory("Playerlevel");
+		Nextlevel = EXPBASE + (( EXPBASE * (Lvl * EXPMULT))>>16);
+	}
+}
+
+
+/*script "LevelendGrowth" UNLOADING
+{
+	int ExpKillbonus = getlevelinfo(LEVELINFO_KILLED_MONSTERS),
+	ExpSecretBonus = getlevelinfo(LEVELINFO_FOUND_SECRETS);
+
+	for (int i = 0; i < playercount(); i++) 
+	{
+		GiveActorInventory(PLAYER_TID_START + i,"Experience",EXPKillBonus);
+		GiveActorInventory(PLAYER_TID_START + i,"Experience",EXPSecretBonus * 10);
+	}
+}*/
+
+//Leftover Zandronum code
+/*script "DAMAGESCR" (int indamage, int Isproj)
+{
+	if(Isproj == 1)
+	{ SetActivatorToTarget(0); }
+	int counter = ATKBase * CheckInventory("StatATK");
+    int outdamage = indamage * (1.0 + counter);
+	setresultvalue(outdamage >> 16);
+	//print(f: outdamage);
+	
+}*/
+
+script "MonsterInitializer" Open
+{
+	SpawnForced("Monsterinitgiver",0,0,0);
+	Log(s:"MonsterInitializer ran");
+}
+
+script "MonsterLoop" (Void)
+{
+	//Monster initialization
+	Delay(5);
+	if(ActivatorTID() == 0)
+		{
+			Thing_ChangeTID(0,UniqueTID());
+		}
+	int MonEXP = getactorproperty(0, APROP_SpawnHealth) / 20;
+	While (getactorproperty(0, APROP_Health) > 0)
+	{
+		Delay(10);
+	}
+	//Death
+	
+	for (int i = 0; i < playercount(); i++) 
+	{
+		GiveActorInventory(PLAYER_TID_START + i,"Experience",MonEXP);
+	}
+	
+	SetActivatorToTarget(0);
+	ACS_NamedExecuteAlways("Levelupcheck",0,0);
+	
+	if(CheckInventory("SKRefuel") >= 1)
+	{
+		DropItem(0,"AmmoSynthEffect",1,(32 * CheckInventory("SKRefuel")));
+	}
+	if(CheckInventory("SKVampirisim") >= 1)
+	{
+		GiveInventory("Health",CheckInventory("SKVampirisim"));
+	}
+}
+
+script "Healthbonuseffect" (int amount)
+{
+	int setMaxhealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+	
+	GiveInventory("HealthBonEffect",amount);
+	
+	If(GetActorProperty(0,APROP_HEALTH) > (setMaxhealth + 100))
+	{
+		SetActorProperty(0, APROP_Health, (setMaxhealth + 100));
+	}
+}
+
+script "BasicArmorCheck" (void)
+{
+	int setMaxArmor = 100 + (CheckInventory("statdef") * 10);
+	int CurrentArmor = checkinventory("BasicArmor");
+	If(CurrentArmor >= setMaxArmor)
+	{SetResultValue(1);}
+	else
+	{SetResultValue(0);}
+}
+
+script "BasicArmoreffect" (int amount)
+{
+	int setMaxArmor = 100 + (CheckInventory("statdef") * 10);
+	int CurrentArmor = checkinventory("BasicArmor");
+	int ArmortoGive = amount + Currentarmor;
+	if(ArmortoGive > setMaxArmor)
+	{
+		ArmortoGive = setMaxArmor - CurrentArmor;
+	}
+	GiveInventory("BasicArmoreffect",ArmortoGive);
+}
+
+script "BonusArmorCheck" (void)
+{
+	int setMaxArmor = 200 + (CheckInventory("statdef") * 10);
+	int CurrentArmor = checkinventory("BasicArmor");
+	If(CurrentArmor >= setMaxArmor)
+	{SetResultValue(1);}
+	else
+	{SetResultValue(0);}
+}
+
+script "BonusArmoreffect" (int amount)
+{
+	int setMaxArmor = 200 + (CheckInventory("statdef") * 10);
+	int CurrentArmor = checkinventory("BasicArmor");
+	int ArmortoGive = amount + Currentarmor;
+	if(ArmortoGive > setMaxArmor)
+	{
+		amount = setMaxArmor - CurrentArmor;
+	}
+	GiveInventory("BasicArmoreffect",amount);
+}

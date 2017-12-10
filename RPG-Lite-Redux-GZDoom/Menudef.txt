@@ -1,0 +1,26 @@
+AddOptionMenu "OptionsMenu"
+{
+
+	StaticText ""
+	Submenu "RPG Options",     "MRPGOpt"
+
+}
+
+OptionMenu "MRPGOpt"
+{
+	Title "RPG Options"
+	StaticText " "
+	StaticText "Player Growth Settings."
+	StaticText " "
+	Slider "Base Experience Rate", "MRPG_EXPBase", 010, 200, 5.0, 0
+	Slider "Experience Multiplier", "MRPG_EXPMult", 0.0, 2.0, 0.1, 1
+	Slider "Skill points per level", "MRPG_SkillsPerLevel", 1, 4, 1.0, 0
+	Slider "Level Cap", "MRPG_Levelcap", 10, 500, 1.0, 0
+	StaticText " "
+	StaticText "Character Saving"
+	StaticText " "
+	Option "Character autosave", "MRPG_Saveenabled", "OnOff"
+	SafeCommand "Clear Data", "pukename MRPGClearscript"
+	StaticText " "
+	Option "Hud Numbers", "MRPG_Hudnumbers", "OnOff"
+}

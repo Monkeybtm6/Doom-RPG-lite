@@ -1,0 +1,6 @@
+addkeysection "Lite RPG" MonkeysRPG
+
+addmenukey "Open Menu" RPG_OpenMenu
+alias RPG_OpenMenu "Pukename MRPGOpenMenu"
+Defaultbind X RPG_OpenMenu
+

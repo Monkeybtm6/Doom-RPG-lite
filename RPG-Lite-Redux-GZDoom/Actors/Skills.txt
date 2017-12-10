@@ -1,0 +1,46 @@
+Actor StatVit : Inventory
+{          
+  Inventory.Amount 1
+  Inventory.MaxAmount 30
+}
+
+Actor StatDef : Inventory
+{          
+  Inventory.Amount 1
+  Inventory.MaxAmount 30
+}
+
+Actor SKHealthregen : Inventory
+{
+  Inventory.Maxamount 10
+}
+
+Actor SkillHealthgiver : health
+{
+  Inventory.amount 1
+}
+
+Actor SKArmorregen : Inventory
+{
+  Inventory.Maxamount 10
+}
+
+Actor SKRefuel : Inventory
+{
+  Inventory.Maxamount 8
+}
+
+Actor SKVampirisim : Inventory
+{
+  Inventory.Maxamount 8
+}
+
+Actor SKIronHide : Inventory
+{
+  Inventory.Maxamount 10
+}
+
+Actor SKMarksman : Inventory
+{
+  Inventory.Maxamount 10
+}

@@ -1,0 +1,122 @@
+#library "MRPGMenu"
+#include "zcommon.acs"
+#import "MRPGMDat.acs"
+#define PLAYER_TID_START 1000
+
+Function Void MRPGinmenuTEXT (Int selected)
+{
+	int Lvl = CheckInventory("Playerlevel"),
+	EXPBase = GetCvar("MRPG_EXPBase"),
+	EXPMULT = GetCvar("MRPG_EXPMULT"),
+	Nextlevel = EXPBASE + (( EXPBASE * (Lvl * EXPMULT))>>16);;
+	int rank = CheckInventory(Menuoptions[selected].item);
+	SetHudSize(640,480, 0);
+	setfont("MenuBG");
+	Hudmessage(s:"A";HUDMSG_PLAIN,100,CR_UNTRANSLATED, 320.0, 240.0,0.3,10);	
+	setfont("MM2FONTO");
+	Hudmessage(s:"Skills";HUDMSG_PLAIN,51,CR_UNTRANSLATED, 320.0, 50.0,0.3,10);	
+	setfont("MM2SFNTO");	
+	Hudmessage(s:"Level: ",d:CheckInventory("PlayerLevel"),
+		s:"\nExperience: ",d:CheckInventory("Experience"),s:" / ",d:Nextlevel,
+		s:"\nHealth: ",d:getActorProperty(0,APROP_HEALTH),s:" / ",d:getActorProperty(0,APROP_SPAWNHEALTH),
+		s:"\nArmor: ",d:CheckInventory("BasicArmor"),s:" / ",d:100 + (CheckInventory("StatDef") * 10);
+		HUDMSG_PLAIN,52,CR_YELLOW, 100.4, 100.1,0.3,10);
+	Hudmessage(s:"Skill Points: ",d:CheckInventory("SkillPoints");HUDMSG_PLAIN,56,CR_YELLOW, 520.4, 100.1,0.3,10);
+	Hudmessage(s:"Move up: ",k: "+forward" ,
+	s:"\nMove Down: ",k: "+back" ,
+	s:"\nSelect: ",k: "+use",
+	s:"\nExit: ",k: "RPG_OpenMenu";
+		HUDMSG_PLAIN,60,CR_White, 250.4, 450.0,0.3,10);
+	
+	str Selectedstring;
+	for(int i = 0; i < 32; i++)
+	{
+		Selectedstring = (i == Selected) ? "\cf" : "\c-";
+		
+		If(CheckInventory(menuoptions[i].item) > 0)
+		{	
+			HudMessage (s:Selectedstring,l:menuoptions[i].name,d:CheckInventory(menuoptions[i].item);
+				HUDMSG_PLAIN,10+i,CR_Grey, 320.0, 80.0 + (10.0 * i),0.3,10);
+		}
+		else
+		{		
+			HudMessage (s:Selectedstring,l:menuoptions[i].name;
+				HUDMSG_PLAIN,10+i,CR_Grey, 320.0, 80.0 + (10.0 * i),0.3,10);
+		}
+				
+		Hudmessage(l:Menuoptions[selected].desc;
+				HUDMSG_PLAIN,40,CR_UNTRANSLATED, 320.0, 400.1,0.3,10);
+		
+		Hudmessage(s:"Cost: ",
+		d:Menuoptions[selected].Cost + (rank /2),
+		s:"\nLevel Required: ",
+		d:Menuoptions[selected].levelreq + rank;
+		HUDMSG_PLAIN,41,CR_UNTRANSLATED, 320.0, 380.1,0.3,10);
+	}
+}
+
+script "MRPGOpenMenu" (void)
+{
+	if(CheckInventory("MenuOpen")>=1)
+	{
+		TakeInventory("MenuOpen",99);
+		SetPlayerProperty(0, False, PROP_TOTALLYFROZEN);
+	}
+	else
+	{
+		GiveInventory("MenuOpen",1);
+		ACS_NamedExecuteAlways("MRPGinmenu",0);
+	}
+	Delay(10);
+}
+
+script "MRPGinmenu" (void)
+{
+	SetPlayerProperty(0, true, PROP_TOTALLYFROZEN);
+	int button,
+	Selection;
+	int rank;
+	while(CheckInventory("MenuOpen")==1)
+	{
+		button = GetPlayerInput(-1, INPUT_BUTTONS);
+		if (button & BT_FORWARD)
+		{
+			if(Selection>0)
+			{
+				Selection--;
+				Delay(5);
+			}
+		}
+	
+		else if (button & BT_back)
+		{
+			if(Selection<32)
+			{
+				if(!Menuoptions[Selection+1].cost == 0)
+					{Selection++;}
+				Delay(5);
+			}
+		}
+
+		else if (button & BT_USE)
+		{
+			rank = CheckInventory(Menuoptions[Selection].item);
+			if (CheckInventory("SkillPoints") >= Menuoptions[Selection].cost +(rank /2) && 
+			CheckInventory(Menuoptions[Selection].item) < Menuoptions[Selection].MaxRank &&
+			CheckInventory("PlayerLevel") >= Menuoptions[Selection].levelreq + rank)
+			{
+				TakeInventory("SkillPoints",Menuoptions[Selection].cost +(rank /2));
+				//GiveInventory(Menuoptions[Selection].item,1);
+				ACS_NamedExecuteAlways(Menuoptions[Selection].Scpt,0,selection);
+				Delay(7);
+			}
+		}
+		MRPGinmenuTEXT(Selection);
+		Delay(1);
+	}
+}
+
+Script "SKGiver" (int selection)
+{
+	Giveinventory(Menuoptions[Selection].item,1);
+}

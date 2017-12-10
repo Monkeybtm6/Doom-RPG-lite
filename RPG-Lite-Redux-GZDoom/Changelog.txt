@@ -1,0 +1,10 @@
+RPGLite Redux.
+
+Changes from the old RPGLite.
+
+-even more streamlined and less broken than the old RPGLite
+-Armor system entirely redone
+-Spell system removed, felt kinda useless and out of place anyway
+-Skills now replace the stat system entirely, remaining stats converted into skills.
+-Unfortunately a lot of compatibility was lost, will need to work on patches for many mods.
+-plus side is in compatibility patches i can add mod specific skills.

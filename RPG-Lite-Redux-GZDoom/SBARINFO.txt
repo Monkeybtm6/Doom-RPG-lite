@@ -1,0 +1,28 @@
+
+height 0;
+Resolution 320,240;
+InterpolateHealth true;
+
+statusbar fullscreen, forcescaled
+{
+Drawimage "AMICON", 4, 206;
+Drawimage "HPIcon3", 3, 220;
+Drawimage "APIcon3", 3, 229;
+drawnumber 3, MM2SFNTO, White, ammo1, drawshadow,alignment(Left), 14, 210;
+usessecondaryammo
+	{drawnumber 3, MM2SFNTO, White, Ammo2, drawshadow,alignment(Left), 44, 210;}
+
+drawkeybar 6, Horizontal, reverserows, auto, 5, 198, 0, 6, auto;
+}
+
+statusbar normal, forcescaled
+{
+Drawimage "AMICON", 308, 220;
+Drawimage "HPIcon3", 3, 220;
+Drawimage "APIcon3", 3, 229;
+drawnumber 3, MM2SFNTO, White, ammo1, drawshadow,alignment(right), 303, 224;
+usessecondaryammo
+	{drawnumber 3, MM2SFNTO, White, Ammo2, drawshadow,alignment(right), 272, 224;}
+
+drawkeybar 6, Horizontal, reverserows, auto, 5, 198, 0, 6, auto;
+}
